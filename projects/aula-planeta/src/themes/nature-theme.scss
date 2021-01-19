@@ -1,0 +1,9 @@
+$aula-planeta-nature-primary: mat-palette($mat-brown, 700, 300, 900);
+$aula-planeta-nature-accent: mat-palette($mat-deep-purple, 300);
+$aula-planeta-nature-warn: mat-palette($mat-red, 600);
+
+$aula-planeta-nature-theme: mat-light-theme(
+  $aula-planeta-nature-primary,
+  $aula-planeta-nature-accent,
+  $aula-planeta-nature-warn
+);

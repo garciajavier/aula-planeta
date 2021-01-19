@@ -1,0 +1,9 @@
+$aula-planeta-black-primary: mat-palette($mat-grey, 700, 300, 900);
+$aula-planeta-black-accent: mat-palette($mat-blue-grey, 400);
+$aula-planeta-black-warn: mat-palette($mat-red, 500);
+
+$aula-planeta-black-theme: mat-dark-theme(
+  $aula-planeta-black-primary,
+  $aula-planeta-black-accent,
+  $aula-planeta-black-warn
+);

@@ -1,0 +1,9 @@
+$aula-planeta-light-primary: mat-palette($mat-grey, 200, 500, 300);
+$aula-planeta-light-accent: mat-palette($mat-brown, 200);
+$aula-planeta-light-warn: mat-palette($mat-deep-orange, 200);
+
+$aula-planeta-light-theme: mat-light-theme(
+  $aula-planeta-light-primary,
+  $aula-planeta-light-accent,
+  $aula-planeta-light-warn
+);

@@ -1,0 +1,153 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "aula-planeta": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "changeDetection": "OnPush",
+                    "style": "scss"
+                }
+            },
+            "root": "projects/aula-planeta",
+            "sourceRoot": "projects/aula-planeta/src",
+            "prefix": "aula-planeta",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/aula-planeta",
+                        "index": "projects/aula-planeta/src/index.html",
+                        "main": "projects/aula-planeta/src/main.ts",
+                        "polyfills": "projects/aula-planeta/src/polyfills.ts",
+                        "tsConfig": "projects/aula-planeta/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "projects/aula-planeta/src/favicon.ico",
+                            "projects/aula-planeta/src/assets"
+                        ],
+                        "styles": [
+                            "projects/aula-planeta/src/styles-app-loading.scss",
+                            "projects/aula-planeta/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [{
+                                "replace": "projects/aula-planeta/src/environments/environment.ts",
+                                "with": "projects/aula-planeta/src/environments/environment.prod.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": false,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                    "type": "bundle",
+                                    "name": "polyfills",
+                                    "baseline": "150kb",
+                                    "maximumWarning": "50kb",
+                                    "maximumError": "100kb"
+                                },
+                                {
+                                    "type": "bundle",
+                                    "name": "styles",
+                                    "baseline": "280kb",
+                                    "maximumWarning": "50kb",
+                                    "maximumError": "100kb"
+                                },
+                                {
+                                    "type": "bundle",
+                                    "name": "main",
+                                    "baseline": "1024kb",
+                                    "maximumWarning": "100kb",
+                                    "maximumError": "200kb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "aula-planeta:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "aula-planeta:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "aula-planeta:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/aula-planeta/src/test.ts",
+                        "polyfills": "projects/aula-planeta/src/polyfills.ts",
+                        "tsConfig": "projects/aula-planeta/tsconfig.spec.json",
+                        "karmaConfig": "projects/aula-planeta/karma.conf.js",
+                        "assets": [
+                            "projects/aula-planeta/src/favicon.ico",
+                            "projects/aula-planeta/src/assets"
+                        ],
+                        "styles": [
+                            "projects/aula-planeta/src/styles-app-loading.scss",
+                            "projects/aula-planeta/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "test": {
+                            "fileReplacements": [{
+                                "replace": "projects/aula-planeta/src/environments/environment.ts",
+                                "with": "projects/aula-planeta/src/environments/environment.test.ts"
+                            }]
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/aula-planeta/tsconfig.app.json",
+                            "projects/aula-planeta/tsconfig.spec.json",
+                            "projects/aula-planeta/e2e/tsconfig.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/aula-planeta/e2e/protractor.conf.js",
+                        "devServerTarget": "aula-planeta:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "aula-planeta:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "aula-planeta",
+    "cli": {
+        "analytics": false
+    }
+}
