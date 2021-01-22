@@ -4,7 +4,7 @@
 
         <mat-sidenav #sidenav mode="push">
             <div class="branding"><img [src]="logo" [alt]="logo" />
-                <span>{{ 'aula-planeta.title.short' | translate}}</span></div>
+            </div>
             <mat-nav-list>
                 <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]" routerLinkActive="active">
                         {{item.label | translate}}
@@ -61,35 +61,23 @@
             <div class="footer">
                 <div class="row">
                     <div class="col-sm-12 links">
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
-                            <fa-icon [icon]="['fab','github']"></fa-icon>
-                            <span>Github</span>
-                        </a>
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
-                            <fa-icon [icon]="['fab','medium-m']"></fa-icon>
-                            <span>Medium</span>
-                        </a>
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
+                        <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
                             <fa-icon [icon]="['fab','twitter']"></fa-icon>
                             <span>Twitter</span>
                         </a>
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.youtube.com/channel/UCR_vBgIJw21LQoSadb16tvA" target="_blank" rel="noopener noreferrer">
                             <fa-icon [icon]="['fab','youtube']"></fa-icon>
                             <span>Youtube</span>
                         </a>
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/aulaplaneta/?hl=es" target="_blank" rel="noopener noreferrer">
                             <fa-icon [icon]="['fab','instagram']"></fa-icon>
                             <span>Instagram</span>
-                        </a>
-                        <a href="https://www.googles.es" target="_blank" rel="noopener noreferrer">
-                            <fa-icon icon="play-circle"></fa-icon>
-                            <span>Slides</span>
                         </a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 signature">
-                        &#169; <span class="year">{{year}}</span> - Tomas Trajan
+                        &#169; <span class="year">{{year}}</span> Planeta
                         <br class="d-block d-sm-none">
                         <a [matTooltip]="'aula-planeta.footer.changelog' | translate" matTooltipPosition="before" href="https://www.googles.es">
                             <fa-icon icon="rocket"></fa-icon>

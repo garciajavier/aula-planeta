@@ -17,6 +17,7 @@ import { TodosEffects } from './todos/todos.effects';
 import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { UserService } from './simple-state-management/user.service';
+import { TodosPipe } from '../../services/data/pipes/todos.pipe';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -49,7 +50,8 @@ export function httpLoaderFactory(http: HttpClient) {
   declarations: [
     ExamplesComponent,
     TodosContainerComponent,
-    UserComponent
+    UserComponent,
+    TodosPipe
   ],
   providers: [UserService]
 })
