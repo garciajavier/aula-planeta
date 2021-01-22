@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
 import { Injectable } from '@angular/core';
 import { Model, ModelFactory } from '@angular-extensions/model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { LocalStorageService } from '../../../core/core.module';
 
 const INITIAL_DATA: Todo[] = [
   { id: uuid(), name: 'rockets', done: true },
@@ -12,18 +13,27 @@ const INITIAL_DATA: Todo[] = [
 @Injectable()
 export class TodoService {
   todos$: Observable<Todo[]>;
+  filter$: Observable<string> = of('ALL');
 
   private model: Model<Todo[]>;
+  private modelFilter: Model<TodosFilter>;
 
-  constructor(private modelFactory: ModelFactory<Todo[]>) {
-    this.model = this.modelFactory.create([...INITIAL_DATA]);
+  constructor(private todoFactory: ModelFactory<Todo[]>, private filterFactory: ModelFactory<TodosFilter>, private localStorageService: LocalStorageService) {
+    
+    let todos = this.localStorageService.getItem('TODOS')
+    let filter = this.localStorageService.getItem('FILTER')
+
+    this.model = this.todoFactory.create(todos && todos.length ? todos : [ ...INITIAL_DATA]);
+    this.modelFilter = this.filterFactory.create(filter && filter.length ? filter: 'ALL');
     this.todos$ = this.model.data$;
+    this.filter$ = this.modelFilter.data$;
   }
 
-  addTodo(todo: Partial<Todo>) {
+  addTodo(todo: Todo) {
     const todos = this.model.get();
-    todos.push({ ...todo, id: uuid() } as Todo);
+    todos.push(todo);
     this.model.set(todos);
+    this.localStorageService.setItem('TODOS', todos);
   }
 
   updateTodo(todo: Todo) {
@@ -31,6 +41,7 @@ export class TodoService {
     const indexToUpdate = todos.findIndex((t) => t.id === todo.id);
     todos[indexToUpdate] = todo;
     this.model.set(todos);
+    this.localStorageService.setItem('TODOS', todos);
   }
 
   removeTodo(id: string) {
@@ -38,6 +49,18 @@ export class TodoService {
     const indexToRemove = todos.findIndex((todo) => todo.id === id);
     todos.splice(indexToRemove, 1);
     this.model.set(todos);
+    this.localStorageService.setItem('TODOS', todos);
+  }
+
+  removeDoneTodos() {
+    const todos = this.model.get();
+    this.model.set(todos.filter((todo) => !todo.done));
+    this.localStorageService.setItem('TODOS', todos);
+  }
+
+  updateFilter(filter) {
+    this.modelFilter.set(filter);
+    this.localStorageService.setItem('FILTER', filter);
   }
 }
 
@@ -46,3 +69,5 @@ export interface Todo {
   name: string;
   done: boolean;
 }
+
+export type TodosFilter = 'ALL' | 'DONE' | 'ACTIVE';

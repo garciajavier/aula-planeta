@@ -13,6 +13,8 @@ import { FEATURE_NAME, reducers } from './examples.state';
 import { ExamplesRoutingModule } from './examples-routing.module';
 import { ExamplesComponent } from './examples/examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
+import { TodoService } from './todos/todo.service';
+import { TodoFilterPipe } from './todos/todo-filter.pipe';
 import { TodosEffects } from './todos/todos.effects';
 import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
@@ -49,9 +51,10 @@ export function httpLoaderFactory(http: HttpClient) {
   declarations: [
     ExamplesComponent,
     TodosContainerComponent,
+    TodoFilterPipe,
     UserComponent
   ],
-  providers: [UserService]
+  providers: [TodoService, UserService]
 })
 export class ExamplesModule {
   constructor() {}

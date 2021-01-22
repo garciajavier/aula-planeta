@@ -8,14 +8,14 @@
           matTooltipPosition="before">
         </aula-planeta-big-input-action>
         <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn"
-          (action)="onRemoveDoneTodos()" [disabled]="removeDoneDisabled$ | async"
+          (action)="onRemoveDoneTodos()"
           [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate" matTooltipPosition="after">
         </aula-planeta-big-input-action>
       </aula-planeta-big-input>
     </div>
   </div>
   <div class="row">
-    <ng-container *ngIf="todos$ | async as todos">
+    <ng-container *ngIf="todoService.todos$ | async as todos">
       <div class="col-md-6">
         <h2 class="dotos-title" rtl>
           <span>{{ 'aula-planeta.examples.todos.list' | translate }}</span>
@@ -54,7 +54,7 @@
             </mat-chip>
           </mat-chip-list>
         </h2>
-        <mat-card *ngFor="let todo of todos" class="todo" [ngClass]="routeAnimationsElements">
+        <mat-card *ngFor="let todo of (todos | todoFilter: (todoService.filter$ | async))" class="todo" [ngClass]="routeAnimationsElements">
           <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)"></mat-checkbox>
           <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
             &nbsp;{{todo.name}}&nbsp;
