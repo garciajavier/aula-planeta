@@ -34,8 +34,6 @@ export class AppComponent implements OnInit {
   logo = require('../assets/logo.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [
-    { link: 'about', label: 'aula-planeta.menu.about' },
-    { link: 'feature-list', label: 'aula-planeta.menu.features' },
     { link: 'examples', label: 'aula-planeta.menu.examples' }
   ];
   navigationSideMenu = [

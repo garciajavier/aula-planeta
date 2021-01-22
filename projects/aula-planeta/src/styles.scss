@@ -11,24 +11,14 @@
 @import 'styles-reset.scss-theme';
 @import './app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/about/about/about.component.scss-theme';
-@import './app/features/examples/notifications/components/notifications.component.scss-theme';
 @import './app/features/examples/todos/components/todos-container.component.scss-theme';
-@import './app/features/examples/stock-market/components/stock-market-container.component.scss-theme';
-@import './app/features/examples/theming/parent/parent.component.scss-theme';
-@import './app/features/examples/theming/child/child.component.scss-theme';
 @import './app/features/examples/examples/examples.component.scss-theme';
 @mixin custom-components-theme($theme) {
-    @include aula-planeta-styles-reset-theme($theme);
-    @include aula-planeta-app-component-theme($theme);
-    @include aula-planeta-about-component-theme($theme);
-    @include aula-planeta-big-input-component-theme($theme);
-    @include aula-planeta-notifications-component-theme($theme);
-    @include aula-planeta-todos-container-component-theme($theme);
-    @include aula-planeta-stock-market-container-component-theme($theme);
-    @include aula-planeta-parent-component-theme($theme);
-    @include aula-planeta-child-component-theme($theme);
-    @include aula-planeta-examples-component-theme($theme);
+  @include aula-planeta-styles-reset-theme($theme);
+  @include aula-planeta-app-component-theme($theme);
+  @include aula-planeta-big-input-component-theme($theme);
+  @include aula-planeta-todos-container-component-theme($theme);
+  @include aula-planeta-examples-component-theme($theme);
 }
 
 .default-theme {
