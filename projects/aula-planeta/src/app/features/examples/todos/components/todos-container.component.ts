@@ -17,6 +17,7 @@ import { TodosManagementService } from '../services/todos-management.service';
   selector: 'aula-planeta-todos',
   templateUrl: './todos-container.component.html',
   styleUrls: [ './todos-container.component.scss' ],
+  providers: [ TodosManagementService ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosContainerComponent implements OnInit {
@@ -35,7 +36,7 @@ export class TodosContainerComponent implements OnInit {
   ngOnInit() {
     this.removeDoneDisabled = !this.todosManagementService.isSomeTodoDone();
   }
-  
+
   get isAddTodoDisabled() {
     return this.newTodo.length < 4;
   }
@@ -43,11 +44,11 @@ export class TodosContainerComponent implements OnInit {
   onNewTodoChange(newTodo: string) {
     this.newTodo = newTodo;
   }
-  
+
   onNewTodoClear() {
     this.newTodo = '';
   }
-  
+
   onAddTodo() {
     this.todosManagementService.addTodo(this.newTodo);
     const addedMessage = this.translateService.instant('aula-planeta.examples.todos.added.notification', {
@@ -56,14 +57,14 @@ export class TodosContainerComponent implements OnInit {
     this.notificationService.info(addedMessage);
     this.newTodo = '';
   }
-  
+
   onToggleTodo(todo: Todo) {
     this.todosManagementService.toggleTodo(todo.id);
     this.removeDoneDisabled = !this.todosManagementService.isSomeTodoDone();
     const newStatus = this.translateService.instant(
       `aula-planeta.examples.todos.filter.${todo.done ? 'active' : 'done'}`
-      );
-      const undo = this.translateService.instant('aula-planeta.examples.todos.undo');
+    );
+    const undo = this.translateService.instant('aula-planeta.examples.todos.undo');
     const toggledMessage = this.translateService.instant('aula-planeta.examples.todos.toggle.notification', {
       name: todo.name
     });
