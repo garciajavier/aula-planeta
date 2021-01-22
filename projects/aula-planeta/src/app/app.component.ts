@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { environment as env } from '../../environments/environment';
+import { environment as env } from '../environments/environment';
 
 import {
   authLogin,
@@ -14,41 +14,47 @@ import {
   selectSettingsStickyHeader,
   selectSettingsLanguage,
   selectEffectiveTheme
-} from '../core/core.module';
+} from './core/core.module';
 import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
-} from '../core/settings/settings.actions';
+} from './core/settings/settings.actions';
 
 @Component({
   selector: 'aula-planeta-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ],
-  animations: [ routeAnimations ]
+  styleUrls: ['./app.component.scss'],
+  animations: [routeAnimations]
 })
 export class AppComponent implements OnInit {
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  logo = require('../../assets/logo.png').default;
-  languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
+  logo = require('../assets/logo.png').default;
+  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [
     { link: 'about', label: 'aula-planeta.menu.about' },
     { link: 'feature-list', label: 'aula-planeta.menu.features' },
     { link: 'examples', label: 'aula-planeta.menu.examples' }
   ];
-  navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+  navigationSideMenu = [
+    ...this.navigation,
+    { link: 'settings', label: 'aula-planeta.menu.settings' }
+  ];
 
   isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
 
-  constructor(private store: Store, private storageService: LocalStorageService) {}
+  constructor(
+    private store: Store,
+    private storageService: LocalStorageService
+  ) {}
 
   private static isIEorEdgeOrSafari() {
-    return [ 'ie', 'edge', 'safari' ].includes(browser().name);
+    return ['ie', 'edge', 'safari'].includes(browser().name);
   }
 
   ngOnInit(): void {
