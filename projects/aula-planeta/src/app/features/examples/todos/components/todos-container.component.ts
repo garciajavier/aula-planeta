@@ -22,7 +22,6 @@ import { TodosManagementService } from '../services/todos-management.service';
 })
 export class TodosContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  filter: TodosFilter;
   newTodo = '';
 
   constructor(
@@ -82,8 +81,7 @@ export class TodosContainerComponent implements OnInit {
   }
 
   onFilterTodos(filter: TodosFilter) {
-    this.filter = filter;
-    this.todosManagementService.reload();
+    this.todosManagementService.updateFilter(filter);
     const filterToMessage = this.translateService.instant('aula-planeta.examples.todos.filter.notification');
     const filterMessage = this.translateService.instant(`aula-planeta.examples.todos.filter.${filter.toLowerCase()}`);
     this.notificationService.info(`${filterToMessage} ${filterMessage}`);

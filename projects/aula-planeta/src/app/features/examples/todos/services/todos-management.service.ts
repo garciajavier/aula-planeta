@@ -3,8 +3,12 @@ import { BehaviorSubject } from 'rxjs';
 import { Todo } from '../todo.service';
 import { v4 as uuid } from 'uuid';
 import { LocalStorageService } from '../../../../core/local-storage/local-storage.service';
+import { TodosFilter } from '../../../../shared/models/todos.model';
+import { filter } from 'rxjs/operators';
+
 
 export const TODOS_KEY = 'EXAMPLES.TODOS';
+export const TODOS_FILTER_KEY = 'EXAMPLES.TODOS.FILTER';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +26,17 @@ export class TodosManagementService {
   private removeDoneDisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   removeDoneDisabled$ = this.removeDoneDisabled.asObservable();
 
+  /**
+   * Contains remove Done boolean
+   */
+  private filter: BehaviorSubject<TodosFilter> = new BehaviorSubject<TodosFilter>('ALL');
+  filter$ = this.filter.asObservable();
+
   constructor(private localStorageService: LocalStorageService) {
     const todos = this.localStorageService.getItem(TODOS_KEY);
     this.todoNext(todos ? todos : []);
+    const todosFilter = this.localStorageService.getItem(TODOS_FILTER_KEY);
+    this.filter.next(todosFilter ? todosFilter : 'ALL');
   }
 
   /**
@@ -40,17 +52,6 @@ export class TodosManagementService {
       },
       ...this.todos.getValue()
     ]);
-  }
-
-  /**
-   * Update Todo
-   * @param todo 
-   */
-  updateTodo(todo: Todo) {
-    const todos = this.todos.getValue();
-    const indexToUpdate = todos.findIndex((t) => t.id === todo.id);
-    todos[indexToUpdate] = todo;
-    this.todoNext(todos);
   }
 
   /**
@@ -71,8 +72,8 @@ export class TodosManagementService {
   /**
    * emit the Todo observable
    */
-  reload() {
-    this.todoNext(this.todos.getValue());
+  updateFilter(filter: TodosFilter) {
+    this.filterNext(filter);
   }
 
   /**
@@ -90,5 +91,14 @@ export class TodosManagementService {
     this.localStorageService.setItem(TODOS_KEY, todos);
     this.todos.next(todos);
     this.isRemoveDoneDisabled();
+  }
+
+  /**
+   * Emit a Todo list
+   * @param todos
+   */
+  private filterNext(filter: TodosFilter) {
+    this.localStorageService.setItem(TODOS_FILTER_KEY, filter);
+    this.filter.next(filter);
   }
 }
