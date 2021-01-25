@@ -4,13 +4,11 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { environment as env } from '../environments/environment';
+import { AuthManagementService } from './core/auth/auth-management.service';
 
 import {
-  authLogin,
-  authLogout,
   routeAnimations,
   LocalStorageService,
-  selectIsAuthenticated,
   selectSettingsStickyHeader,
   selectSettingsLanguage,
   selectEffectiveTheme
@@ -23,8 +21,8 @@ import {
 @Component({
   selector: 'aula-planeta-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [routeAnimations]
+  styleUrls: [ './app.component.scss' ],
+  animations: [ routeAnimations ]
 })
 export class AppComponent implements OnInit {
   isProd = env.production;
@@ -32,27 +30,22 @@ export class AppComponent implements OnInit {
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../assets/logo.png').default;
-  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  navigation = [
-    { link: 'examples', label: 'aula-planeta.menu.examples' }
-  ];
-  navigationSideMenu = [
-    ...this.navigation,
-    { link: 'settings', label: 'aula-planeta.menu.settings' }
-  ];
+  languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
+  navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
+  navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
 
-  isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
 
   constructor(
+    public authManagementService: AuthManagementService,
     private store: Store,
     private storageService: LocalStorageService
   ) {}
 
   private static isIEorEdgeOrSafari() {
-    return ['ie', 'edge', 'safari'].includes(browser().name);
+    return [ 'ie', 'edge', 'safari' ].includes(browser().name);
   }
 
   ngOnInit(): void {
@@ -65,18 +58,17 @@ export class AppComponent implements OnInit {
       );
     }
 
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
   }
 
   onLoginClick() {
-    this.store.dispatch(authLogin());
+    this.authManagementService.authLogin();
   }
 
   onLogoutClick() {
-    this.store.dispatch(authLogout());
+    this.authManagementService.authLogout();
   }
 
   onLanguageSelect({ value: language }) {

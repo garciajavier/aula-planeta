@@ -36,9 +36,6 @@ import {
   metaReducers,
   selectRouterState
 } from './core.state';
-import { AuthEffects } from './auth/auth.effects';
-import { selectIsAuthenticated, selectAuth } from './auth/auth.selectors';
-import { authLogin, authLogout } from './auth/auth.actions';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { TitleService } from './title/title.service';
 import {
@@ -77,13 +74,9 @@ import {
 
 export {
   TitleService,
-  selectAuth,
-  authLogin,
-  authLogout,
   routeAnimations,
   AppState,
   LocalStorageService,
-  selectIsAuthenticated,
   ROUTE_ANIMATIONS_ELEMENTS,
   AnimationsService,
   AuthGuardService,
@@ -124,7 +117,6 @@ export function httpLoaderFactory(http: HttpClient) {
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
-      AuthEffects,
       SettingsEffects,
       GoogleAnalyticsEffects
     ]),

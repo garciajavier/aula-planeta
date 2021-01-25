@@ -5,8 +5,6 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '../core.state';
 
 import { AuthGuardService } from './auth-guard.service';
-import { AuthState } from './auth.models';
-import { selectIsAuthenticated } from './auth.selectors';
 
 describe('AuthGuardService', () => {
   let authGuardService: AuthGuardService;
@@ -18,7 +16,7 @@ describe('AuthGuardService', () => {
     });
     authGuardService = TestBed.inject<AuthGuardService>(AuthGuardService);
     store = TestBed.inject(MockStore);
-    store.overrideSelector(selectIsAuthenticated, true);
+    // store.overrideSelector(selectIsAuthenticated, true);
   });
 
   it('should be created', () => {
@@ -32,8 +30,3 @@ describe('AuthGuardService', () => {
   });
 });
 
-function createState(authState: AuthState) {
-  return {
-    auth: authState
-  } as AppState;
-}

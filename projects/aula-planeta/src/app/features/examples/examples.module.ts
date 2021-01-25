@@ -9,11 +9,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from '../../shared/shared.module';
 import { environment } from '../../../environments/environment';
 
-import { FEATURE_NAME, reducers } from './examples.state';
+// import { FEATURE_NAME, reducers } from './examples.state';
 import { ExamplesRoutingModule } from './examples-routing.module';
 import { ExamplesComponent } from './examples/examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
-import { TodosEffects } from './todos/todos.effects';
 import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { UserService } from './simple-state-management/user.service';
@@ -33,7 +32,7 @@ export function httpLoaderFactory(http: HttpClient) {
     LazyElementsModule,
     SharedModule,
     ExamplesRoutingModule,
-    StoreModule.forFeature(FEATURE_NAME, reducers),
+    // StoreModule.forFeature('examples', reducers),
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -43,8 +42,7 @@ export function httpLoaderFactory(http: HttpClient) {
       isolate: true
     }),
     EffectsModule.forFeature([
-      ExamplesEffects,
-      TodosEffects
+      ExamplesEffects
     ])
   ],
   declarations: [

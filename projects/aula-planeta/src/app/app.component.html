@@ -16,7 +16,7 @@
 
             <div class="toolbar" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'" [class.mat-elevation-z4]="(stickyHeader$ | async)">
                 <mat-toolbar color="primary">
-                    <button mat-icon-button *ngIf="(isAuthenticated$ | async)" (click)="sidenav.open()">
+                    <button mat-icon-button *ngIf="(authManagementService.isAuthenticated$ | async)" (click)="sidenav.open()">
                         <fa-icon icon="bars"></fa-icon>
                     </button>
 
@@ -29,15 +29,15 @@
                     </button>
 
                     <mat-menu #toolbarUserMenu="matMenu">
-                        <button mat-menu-item *ngIf="(isAuthenticated$ | async)" routerLink="settings">
+                        <button mat-menu-item *ngIf="(authManagementService.isAuthenticated$ | async)" routerLink="settings">
                             <mat-icon><fa-icon icon="cog"></fa-icon></mat-icon>
                             <span>{{ 'aula-planeta.menu.settings' | translate }}</span>
                         </button>
-                        <button mat-menu-item *ngIf="!(isAuthenticated$ | async)" (click)="onLoginClick()">
+                        <button mat-menu-item *ngIf="!(authManagementService.isAuthenticated$ | async)" (click)="onLoginClick()">
                             <mat-icon><fa-icon icon="power-off"></fa-icon></mat-icon>
                             <span>{{ 'aula-planeta.menu.login' | translate }}</span>
                         </button>
-                        <button mat-menu-item *ngIf="(isAuthenticated$ | async)" (click)="onLogoutClick()">
+                        <button mat-menu-item *ngIf="(authManagementService.isAuthenticated$ | async)" (click)="onLogoutClick()">
                             <mat-icon><fa-icon icon="power-off"></fa-icon></mat-icon>
                             <span>{{ 'aula-planeta.menu.logout' | translate }}</span>
                         </button>

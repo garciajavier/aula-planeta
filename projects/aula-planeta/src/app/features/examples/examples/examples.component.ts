@@ -1,13 +1,10 @@
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import {
   routeAnimations,
-  selectIsAuthenticated
 } from '../../../core/core.module';
-
-import { State } from '../examples.state';
 
 @Component({
   selector: 'aula-planeta-examples',
@@ -24,9 +21,10 @@ export class ExamplesComponent implements OnInit {
     { link: 'simple-state-management', label: 'aula-planeta.examples.menu.simple-state-management', auth: true },
   ];
 
-  constructor(private store: Store<State>) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+    // this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+    this.isAuthenticated$ = of(true);
   }
 }

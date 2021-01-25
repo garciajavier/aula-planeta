@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Todo } from '../todo.service';
 import { v4 as uuid } from 'uuid';
 import { LocalStorageService } from '../../../../core/local-storage/local-storage.service';
-import { TodosFilter } from '../../../../shared/models/todos.model';
+import { Todo, TodosFilter } from '../../../../shared/models/todos.model';
 import { filter } from 'rxjs/operators';
 
 

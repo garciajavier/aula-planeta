@@ -1,17 +1,13 @@
-import { selectTodosFilter } from './../todos.selectors';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { select, Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+
 
 import { ROUTE_ANIMATIONS_ELEMENTS, NotificationService } from '../../../../core/core.module';
 
-import * as todoActions from '../todos.actions';
-import { Todo, TodosFilter } from '../todos.model';
-import { selectTodos, selectRemoveDoneTodosDisabled } from '../todos.selectors';
 import { TodosManagementService } from '../services/todos-management.service';
+import { Todo, TodosFilter } from '../../../../shared/models/todos.model';
 
 @Component({
   selector: 'aula-planeta-todos',
