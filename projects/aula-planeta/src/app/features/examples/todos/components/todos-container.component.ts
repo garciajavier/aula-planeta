@@ -23,7 +23,6 @@ import { TodosManagementService } from '../services/todos-management.service';
 export class TodosContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   filter: TodosFilter;
-  removeDoneDisabled: boolean;
   newTodo = '';
 
   constructor(
@@ -33,9 +32,7 @@ export class TodosContainerComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit() {
-    this.removeDoneDisabled = !this.todosManagementService.isSomeTodoDone();
-  }
+  ngOnInit() {}
 
   get isAddTodoDisabled() {
     return this.newTodo.length < 4;
@@ -60,7 +57,6 @@ export class TodosContainerComponent implements OnInit {
 
   onToggleTodo(todo: Todo) {
     this.todosManagementService.toggleTodo(todo.id);
-    this.removeDoneDisabled = !this.todosManagementService.isSomeTodoDone();
     const newStatus = this.translateService.instant(
       `aula-planeta.examples.todos.filter.${todo.done ? 'active' : 'done'}`
     );

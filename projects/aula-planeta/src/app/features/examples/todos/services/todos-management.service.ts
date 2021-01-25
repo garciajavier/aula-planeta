@@ -16,10 +16,21 @@ export class TodosManagementService {
   private todos: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
   todos$ = this.todos.asObservable();
 
+  /**
+   * Contains remove Done boolean
+   */
+  private removeDoneDisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  removeDoneDisabled$ = this.removeDoneDisabled.asObservable();
+
   constructor(private localStorageService: LocalStorageService) {
-    this.todoNext(this.localStorageService.getItem(TODOS_KEY));
+    const todos = this.localStorageService.getItem(TODOS_KEY);
+    this.todoNext(todos ? todos : []);
   }
 
+  /**
+   * Add a new Todo
+   * @param todoName 
+   */
   addTodo(todoName: string) {
     this.todoNext([
       {
@@ -31,6 +42,10 @@ export class TodosManagementService {
     ]);
   }
 
+  /**
+   * Update Todo
+   * @param todo 
+   */
   updateTodo(todo: Todo) {
     const todos = this.todos.getValue();
     const indexToUpdate = todos.findIndex((t) => t.id === todo.id);
@@ -38,26 +53,42 @@ export class TodosManagementService {
     this.todoNext(todos);
   }
 
+  /**
+   * Toggle Todo done check
+   * @param id 
+   */
   toggleTodo(id: string) {
-    this.todoNext(
-      this.todos.getValue().map((item: Todo) => (item.id === id ? { ...item, done: !item.done } : item))
-    );
+    this.todoNext(this.todos.getValue().map((item: Todo) => (item.id === id ? { ...item, done: !item.done } : item)));
   }
 
-  removeDone(){
+  /**
+   * Remove Todo
+   */
+  removeDone() {
     this.todoNext(this.todos.getValue().filter((item: Todo) => !item.done));
   }
 
+  /**
+   * emit the Todo observable
+   */
   reload() {
     this.todoNext(this.todos.getValue());
   }
-  
-  isSomeTodoDone(): boolean{
-    return this.todos.getValue().some((item: Todo) => item.done)
+
+  /**
+   * Emit if can enable remove botton
+   */
+  private isRemoveDoneDisabled() {
+    this.removeDoneDisabled.next(!this.todos.getValue().some((item: Todo) => item.done));
   }
 
+  /**
+   * Emit a Todo list
+   * @param todos
+   */
   private todoNext(todos: Todo[]) {
     this.localStorageService.setItem(TODOS_KEY, todos);
     this.todos.next(todos);
+    this.isRemoveDoneDisabled();
   }
 }

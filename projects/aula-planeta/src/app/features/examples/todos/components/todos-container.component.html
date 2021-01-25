@@ -4,7 +4,8 @@
             <aula-planeta-big-input rtl [placeholder]="'aula-planeta.examples.todos.input' | translate" [value]="newTodo" (keyup)="onNewTodoChange($event.target.value)" (keyup.enter)="!isAddTodoDisabled && onAddTodo()" (keyup.escape)="onNewTodoClear()">
                 <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.add' | translate" matTooltipPosition="before">
                 </aula-planeta-big-input-action>
-                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="removeDoneDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate" matTooltipPosition="after">
+                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="todosManagementService.removeDoneDisabled$ | async" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate"
+                    matTooltipPosition="after">
                 </aula-planeta-big-input-action>
             </aula-planeta-big-input>
         </div>
