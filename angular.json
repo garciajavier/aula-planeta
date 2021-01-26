@@ -26,7 +26,8 @@
                         "aot": true,
                         "assets": [
                             "projects/aula-planeta/src/favicon.ico",
-                            "projects/aula-planeta/src/assets"
+                            "projects/aula-planeta/src/assets",
+                            "projects/aula-planeta/src/manifest.webmanifest"
                         ],
                         "styles": [
                             "projects/aula-planeta/src/styles-app-loading.scss",
@@ -73,7 +74,9 @@
                                     "type": "anyComponentStyle",
                                     "maximumWarning": "6kb"
                                 }
-                            ]
+                            ],
+                            "serviceWorker": true,
+                            "ngswConfigPath": "projects/aula-planeta/ngsw-config.json"
                         }
                     }
                 },
@@ -103,7 +106,8 @@
                         "karmaConfig": "projects/aula-planeta/karma.conf.js",
                         "assets": [
                             "projects/aula-planeta/src/favicon.ico",
-                            "projects/aula-planeta/src/assets"
+                            "projects/aula-planeta/src/assets",
+                            "projects/aula-planeta/src/manifest.webmanifest"
                         ],
                         "styles": [
                             "projects/aula-planeta/src/styles-app-loading.scss",
