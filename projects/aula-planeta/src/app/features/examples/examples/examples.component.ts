@@ -24,7 +24,6 @@ export class ExamplesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.isAuthenticated$ = of(true);
   }
 }

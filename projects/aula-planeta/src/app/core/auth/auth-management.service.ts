@@ -19,8 +19,8 @@ export class AuthManagementService {
   isAuthenticated$ = this.isAuthenticated.asObservable();
 
   constructor(private localStorageService: LocalStorageService) {
-    const {isAuthenticated} = this.localStorageService.getItem(AUTH_KEY);
-    this.isAuthenticatedNext(isAuthenticated);
+    const auth = this.localStorageService.getItem(AUTH_KEY);
+    this.isAuthenticatedNext(auth ? auth.isAuthenticated : false);
   }
 
   /**

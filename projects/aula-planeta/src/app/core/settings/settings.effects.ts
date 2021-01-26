@@ -121,15 +121,15 @@ export class SettingsEffects {
     { dispatch: false }
   );
 
-  setTranslateServiceLanguage = createEffect(
-    () =>
-      this.store.pipe(
-        select(selectSettingsLanguage),
-        distinctUntilChanged(),
-        tap((language) => this.translateService.use(language))
-      ),
-    { dispatch: false }
-  );
+  // setTranslateServiceLanguage = createEffect(
+  //   () =>
+  //     this.store.pipe(
+  //       select(selectSettingsLanguage),
+  //       distinctUntilChanged(),
+  //       tap((language) => this.translateService.use(language))
+  //     ),
+  //   { dispatch: false }
+  // );
 
   setTitle = createEffect(
     () =>

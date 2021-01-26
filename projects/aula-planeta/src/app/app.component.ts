@@ -1,10 +1,11 @@
 import browser from 'browser-detect';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 import { environment as env } from '../environments/environment';
 import { AuthManagementService } from './core/auth/auth-management.service';
+import { SettingsService } from './core/settings/settings.service';
 
 import {
   routeAnimations,
@@ -17,11 +18,13 @@ import {
   actionSettingsChangeAnimationsPageDisabled,
   actionSettingsChangeLanguage
 } from './core/settings/settings.actions';
+import { settings } from 'cluster';
 
 @Component({
   selector: 'aula-planeta-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [ routeAnimations ]
 })
 export class AppComponent implements OnInit {
@@ -35,11 +38,11 @@ export class AppComponent implements OnInit {
   navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
 
   stickyHeader$: Observable<boolean>;
-  language$: Observable<string>;
   theme$: Observable<string>;
 
   constructor(
     public authManagementService: AuthManagementService,
+    public settingsService: SettingsService,
     private store: Store,
     private storageService: LocalStorageService
   ) {}
@@ -49,6 +52,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.theme$ = this.settingsService.settings$.pipe(map((settings) =>{
+      return  settings.theme
+    }));
     this.storageService.testLocalStorage();
     if (AppComponent.isIEorEdgeOrSafari()) {
       this.store.dispatch(
@@ -57,10 +63,6 @@ export class AppComponent implements OnInit {
         })
       );
     }
-
-    this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
-    this.language$ = this.store.pipe(select(selectSettingsLanguage));
-    this.theme$ = this.store.pipe(select(selectEffectiveTheme));
   }
 
   onLoginClick() {
@@ -72,6 +74,6 @@ export class AppComponent implements OnInit {
   }
 
   onLanguageSelect({ value: language }) {
-    this.store.dispatch(actionSettingsChangeLanguage({ language }));
+    this.settingsService.changeSetting('language', language);
   }
 }

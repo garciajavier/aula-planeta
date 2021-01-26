@@ -14,22 +14,22 @@ import {
 } from '../../../core/settings/settings.actions';
 import { SettingsState, State } from '../../../core/settings/settings.model';
 import { selectSettings } from '../../../core/settings/settings.selectors';
+import { SettingsService } from '../../../core/settings/settings.service';
 
 @Component({
   selector: 'aula-planeta-settings',
   templateUrl: './settings-container.component.html',
-  styleUrls: ['./settings-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: [ './settings-container.component.scss' ]
 })
 export class SettingsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<SettingsState>;
 
   themes = [
-    { value: 'DEFAULT-THEME', label: 'blue' },
-    { value: 'LIGHT-THEME', label: 'light' },
-    { value: 'NATURE-THEME', label: 'nature' },
-    { value: 'BLACK-THEME', label: 'dark' }
+    { value: 'default-theme', label: 'blue' },
+    { value: 'light-theme', label: 'light' },
+    { value: 'nature-theme', label: 'nature' },
+    { value: 'black-theme', label: 'dark' }
   ];
 
   languages = [
@@ -43,35 +43,31 @@ export class SettingsContainerComponent implements OnInit {
     { value: 'he', label: 'עברית' }
   ];
 
-  constructor(private store: Store<State>) {}
+  constructor(public settingsService: SettingsService) {}
 
-  ngOnInit() {
-    this.settings$ = this.store.pipe(select(selectSettings));
-  }
+  ngOnInit() {}
 
   onLanguageSelect({ value: language }) {
-    this.store.dispatch(actionSettingsChangeLanguage({ language }));
+    this.settingsService.changeSetting('language', language);
   }
 
   onThemeSelect({ value: theme }) {
-    this.store.dispatch(actionSettingsChangeTheme({ theme }));
+    this.settingsService.changeSetting('theme', theme);
   }
 
   onAutoNightModeToggle({ checked: autoNightMode }) {
-    this.store.dispatch(actionSettingsChangeAutoNightMode({ autoNightMode }));
+    this.settingsService.changeSetting('autoNightMode', autoNightMode);
   }
 
   onStickyHeaderToggle({ checked: stickyHeader }) {
-    this.store.dispatch(actionSettingsChangeStickyHeader({ stickyHeader }));
+    this.settingsService.changeSetting('stickyHeader', stickyHeader);
   }
 
   onPageAnimationsToggle({ checked: pageAnimations }) {
-    this.store.dispatch(actionSettingsChangeAnimationsPage({ pageAnimations }));
+    this.settingsService.changeSetting('pageAnimations', pageAnimations);
   }
 
   onElementsAnimationsToggle({ checked: elementsAnimations }) {
-    this.store.dispatch(
-      actionSettingsChangeAnimationsElements({ elementsAnimations })
-    );
+    this.settingsService.changeSetting('elementsAnimations', elementsAnimations);
   }
 }
