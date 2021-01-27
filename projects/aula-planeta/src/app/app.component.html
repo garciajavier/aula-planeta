@@ -45,7 +45,7 @@
 
 
                     <span *ngIf="settingsService.settings$ | async as language ">
-                        <mat-select [ngModel]="language " (selectionChange)="onLanguageSelect($event)">
+                        <mat-select [ngModel]="language | settings : 'language'" (selectionChange)="onLanguageSelect($event)">
                             <mat-option *ngFor="let l of languages" [value]="l">
                                  {{ l.toUpperCase() }}
                             </mat-option>
