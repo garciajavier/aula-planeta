@@ -24,10 +24,7 @@ export class ExamplesComponent implements OnInit {
   constructor(private translateService: TranslateService, private settingsService: SettingsService) {}
 
   ngOnInit(): void {
-    this.settingsService.settings$.subscribe(({language}) => {
-      console.log(language);
-      this.translateService.use(language)
-    });
+    this.settingsService.settings$.subscribe(({language}) =>  this.translateService.use(language));
     this.isAuthenticated$ = of(true);
   }
 }
