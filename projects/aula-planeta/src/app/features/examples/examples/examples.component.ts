@@ -3,6 +3,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
 import { routeAnimations } from '../../../core/core.module';
+import { Settings } from '../../../shared/models/settings.model';
+import { SettingsService } from '../../../core/settings/settings.service';
 
 @Component({
   selector: 'aula-planeta-examples',
@@ -19,10 +21,13 @@ export class ExamplesComponent implements OnInit {
     { link: 'simple-state-management', label: 'aula-planeta.examples.menu.simple-state-management', auth: true }
   ];
 
-  constructor(private translateService: TranslateService) {}
+  constructor(private translateService: TranslateService, private settingsService: SettingsService) {}
 
   ngOnInit(): void {
-    this.translateService.use
+    this.settingsService.settings$.subscribe(({language}) => {
+      console.log(language);
+      this.translateService.use(language)
+    });
     this.isAuthenticated$ = of(true);
   }
 }
