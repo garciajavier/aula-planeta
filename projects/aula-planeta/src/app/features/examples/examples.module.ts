@@ -13,7 +13,6 @@ import { environment } from '../../../environments/environment';
 import { ExamplesRoutingModule } from './examples-routing.module';
 import { ExamplesComponent } from './examples/examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
-import { ExamplesEffects } from './examples.effects';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { UserService } from './simple-state-management/user.service';
 import { TodosPipe } from '../../services/data/pipes/todos.pipe';
@@ -32,7 +31,6 @@ export function httpLoaderFactory(http: HttpClient) {
     LazyElementsModule,
     SharedModule,
     ExamplesRoutingModule,
-    // StoreModule.forFeature('examples', reducers),
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -40,10 +38,7 @@ export function httpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       },
       isolate: true
-    }),
-    EffectsModule.forFeature([
-      ExamplesEffects
-    ])
+    })
   ],
   declarations: [
     ExamplesComponent,

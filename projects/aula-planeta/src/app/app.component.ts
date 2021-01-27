@@ -1,25 +1,17 @@
 import browser from 'browser-detect';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment as env } from '../environments/environment';
 import { AuthManagementService } from './core/auth/auth-management.service';
 import { SettingsService } from './core/settings/settings.service';
+import { Settings } from './shared/models/settings.model';
+import { TranslateService } from '@ngx-translate/core';
 
 import {
   routeAnimations,
-  LocalStorageService,
-  selectSettingsStickyHeader,
-  selectSettingsLanguage,
-  selectEffectiveTheme
+  LocalStorageService
 } from './core/core.module';
-import {
-  actionSettingsChangeAnimationsPageDisabled,
-  actionSettingsChangeLanguage
-} from './core/settings/settings.actions';
-import { settings } from 'cluster';
-
 @Component({
   selector: 'aula-planeta-root',
   templateUrl: './app.component.html',
@@ -37,31 +29,25 @@ export class AppComponent implements OnInit {
   navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
   navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
 
-  stickyHeader$: Observable<boolean>;
-  theme$: Observable<string>;
+  settings$: Observable<Settings>;
 
   constructor(
     public authManagementService: AuthManagementService,
     public settingsService: SettingsService,
-    private store: Store,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private translateService: TranslateService
   ) {}
 
   private static isIEorEdgeOrSafari() {
+    console.log('browser name:', browser().name);
     return [ 'ie', 'edge', 'safari' ].includes(browser().name);
   }
 
   ngOnInit(): void {
-    this.theme$ = this.settingsService.settings$.pipe(map((settings) =>{
-      return  settings.theme
-    }));
     this.storageService.testLocalStorage();
+    this.translateService.use('es');
     if (AppComponent.isIEorEdgeOrSafari()) {
-      this.store.dispatch(
-        actionSettingsChangeAnimationsPageDisabled({
-          pageAnimationsDisabled: true
-        })
-      );
+      this.settingsService.changeSetting('pageAnimationsDisabled', true);
     }
   }
 

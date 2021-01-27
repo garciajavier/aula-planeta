@@ -1,20 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
-
-import {
-  actionSettingsChangeAnimationsElements,
-  actionSettingsChangeAnimationsPage,
-  actionSettingsChangeAutoNightMode,
-  actionSettingsChangeLanguage,
-  actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader
-} from '../../../core/settings/settings.actions';
-import { SettingsState, State } from '../../../core/settings/settings.model';
-import { selectSettings } from '../../../core/settings/settings.selectors';
 import { SettingsService } from '../../../core/settings/settings.service';
+import { Settings } from '../../../shared/models/settings.model';
 
 @Component({
   selector: 'aula-planeta-settings',
@@ -23,7 +11,7 @@ import { SettingsService } from '../../../core/settings/settings.service';
 })
 export class SettingsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  settings$: Observable<SettingsState>;
+  settings$: Observable<Settings>;
 
   themes = [
     { value: 'default-theme', label: 'blue' },

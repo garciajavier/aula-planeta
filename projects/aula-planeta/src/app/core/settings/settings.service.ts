@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Settings } from '../../shared/models/settings.model';
-import { NIGHT_MODE_THEME } from './settings.model';
+import { Injectable, NgZone, OnDestroy } from '@angular/core';
+import { BehaviorSubject, timer, Observable, Subject, Subscription, interval } from 'rxjs';
+import { NIGHT_MODE_THEME, Settings } from '../../shared/models/settings.model';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { Router } from '@angular/router';
+import { TitleService } from '../title/title.service';
+import { AnimationsService } from '../core.module';
 
 export const initial: Settings = {
   language: 'en',
@@ -23,18 +25,51 @@ export const SETTINGS_KEY = 'SETTINGS';
 @Injectable({
   providedIn: 'root'
 })
-export class SettingsService {
+export class SettingsService implements OnDestroy {
+  private subscription: Subscription;
+  hour = new Date().getHours();
   /**
    * Contains the SomeThink list
    */
   private settings: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   settings$ = this.settings.asObservable();
 
-  constructor(private localStorageService: LocalStorageService, private translateService: TranslateService, private overlayContainer: OverlayContainer) {
+  constructor(
+    private router: Router,
+    private overlayContainer: OverlayContainer,
+    private localStorageService: LocalStorageService,
+    private titleService: TitleService,
+    private animationsService: AnimationsService,
+    private translateService: TranslateService,
+    private ngZone: NgZone
+  ) {
     let settings = this.localStorageService.getItem(SETTINGS_KEY);
     settings = settings ? settings : initial;
-    this.translateService.setDefaultLang(settings.language);
+    this.setTranslateServiceLanguage(settings.language);
+    this.updateTheme(settings.theme);
+    this.updateRouteAnimationType(settings.pageAnimations, settings.elementsAnimations);
+    this.modeNight();
     this.settingsNext(settings);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  modeNight() {
+    this.ngZone.runOutsideAngular(() => {
+      this.subscription = interval(60000).subscribe(() => {
+        const hour = new Date().getHours();
+        if (hour !== this.hour) {
+          this.hour = hour;
+          this.ngZone.run(() => {
+            if (this.settings.getValue().autoNightMode && (hour >= 21 || hour <= 7)) {
+              this.settingsNext({ ...this.settings.getValue() });
+            }
+          });
+        }
+      });
+    });
   }
 
   /**
@@ -43,12 +78,18 @@ export class SettingsService {
    * @param value Value os atribute
    */
   changeSetting(key: string, value: any) {
+    const { pageAnimations, elementsAnimations } = this.settings.getValue();
     switch (key) {
       case 'theme':
         this.updateTheme(value);
         break;
       case 'language':
         this.setTranslateServiceLanguage(value);
+        break;
+      case 'pageAnimations':
+        this.updateRouteAnimationType(!pageAnimations, elementsAnimations);
+      case 'elementsAnimations':
+        this.updateRouteAnimationType(pageAnimations, !elementsAnimations);
         break;
     }
     this.settingsNext({ ...this.settings.getValue(), [key]: value });
@@ -63,8 +104,13 @@ export class SettingsService {
     classList.add(effectiveTheme);
   }
 
+  private updateRouteAnimationType(pageAnimations, elementsAnimations) {
+    this.animationsService.updateRouteAnimationType(pageAnimations, elementsAnimations);
+  }
+
   private setTranslateServiceLanguage(lang: string) {
     this.translateService.use(lang);
+    this.titleService.setTitle(this.router.routerState.snapshot.root, this.translateService);
   }
 
   /**

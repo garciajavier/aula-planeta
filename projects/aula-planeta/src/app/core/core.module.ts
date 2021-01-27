@@ -30,12 +30,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { environment } from '../../environments/environment';
 
-import {
-  AppState,
-  reducers,
-  metaReducers,
-  selectRouterState
-} from './core.state';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { TitleService } from './title/title.service';
 import {
@@ -47,14 +41,7 @@ import { AppErrorHandler } from './error-handler/app-error-handler.service';
 import { CustomSerializer } from './router/custom-serializer';
 import { LocalStorageService } from './local-storage/local-storage.service';
 import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
-import { GoogleAnalyticsEffects } from './google-analytics/google-analytics.effects';
 import { NotificationService } from './notifications/notification.service';
-import { SettingsEffects } from './settings/settings.effects';
-import {
-  selectSettingsLanguage,
-  selectEffectiveTheme,
-  selectSettingsStickyHeader
-} from './settings/settings.selectors';
 import { MatButtonModule } from '@angular/material/button';
 import {
   faCog,
@@ -75,16 +62,11 @@ import {
 export {
   TitleService,
   routeAnimations,
-  AppState,
   LocalStorageService,
   ROUTE_ANIMATIONS_ELEMENTS,
   AnimationsService,
   AuthGuardService,
-  selectRouterState,
-  NotificationService,
-  selectEffectiveTheme,
-  selectSettingsLanguage,
-  selectSettingsStickyHeader
+  NotificationService
 };
 
 export function httpLoaderFactory(http: HttpClient) {
@@ -112,19 +94,6 @@ export function httpLoaderFactory(http: HttpClient) {
     MatTooltipModule,
     MatSnackBarModule,
     MatButtonModule,
-
-    // ngrx
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([
-      SettingsEffects,
-      GoogleAnalyticsEffects
-    ]),
-    environment.production
-      ? []
-      : StoreDevtoolsModule.instrument({
-          name: 'Angular NgRx Material Starter'
-        }),
 
     // 3rd party
     FontAwesomeModule,
@@ -162,6 +131,7 @@ export function httpLoaderFactory(http: HttpClient) {
     TranslateModule
   ]
 })
+
 export class CoreModule {
   constructor(
     @Optional()
