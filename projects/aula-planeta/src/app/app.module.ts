@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsPipe } from './services/data/pipes/settings.pipe';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { SettingsPipe } from './services/data/pipes/settings.pipe';
     CoreModule,
 
     // app
-    AppRoutingModule
+    AppRoutingModule,
+
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [AppComponent, SettingsPipe],
   bootstrap: [AppComponent]
