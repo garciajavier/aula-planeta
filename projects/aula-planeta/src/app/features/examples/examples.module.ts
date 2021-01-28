@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 
 // import { FEATURE_NAME, reducers } from './examples.state';
 import { ExamplesRoutingModule } from './examples-routing.module';
-import { ExamplesComponent } from './examples/examples.component';
+import { ExamplesComponent } from './examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { UserComponent } from './simple-state-management/components/user.component';
 import { TodosPipe } from '../../services/data/pipes/todos.pipe';

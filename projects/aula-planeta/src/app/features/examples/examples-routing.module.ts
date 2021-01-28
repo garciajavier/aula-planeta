@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from '../../core/core.module';
 
-import { ExamplesComponent } from './examples/examples.component';
+import { ExamplesComponent } from './examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { UserComponent } from './simple-state-management/components/user.component';
 
