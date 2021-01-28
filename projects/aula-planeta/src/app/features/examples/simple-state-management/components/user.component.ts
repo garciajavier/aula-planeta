@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/animations/route.animations';
-
-import {  UserService } from '../user.service';
+import { UserManagementService } from '../user-management.service';
 import { User } from '../../../../shared/models/user.model';
+
+
 
 @Component({
   selector: 'aula-planeta-user',
@@ -19,7 +20,7 @@ export class UserComponent implements OnInit {
   userForm: FormGroup;
   isEdit$: Observable<{ value: boolean }>;
 
-  constructor(public userService: UserService, private fb: FormBuilder) {}
+  constructor(public userManagementService: UserManagementService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -35,7 +36,7 @@ export class UserComponent implements OnInit {
   }
 
   removeUser(id: string) {
-    this.userService.removeUser(id);
+    this.userManagementService.removeUser(id);
   }
 
   editUser(user: User) {
@@ -46,9 +47,9 @@ export class UserComponent implements OnInit {
     if (this.userForm.valid) {
       const data = this.userForm.getRawValue();
       if (data.id && data.id.length) {
-        this.userService.updateUser(data);
+        this.userManagementService.updateUser(data);
       } else {
-        this.userService.addUser({ ...data });
+        this.userManagementService.addUser({ ...data });
       }
       userFormRef.resetForm();
       this.userForm.reset();

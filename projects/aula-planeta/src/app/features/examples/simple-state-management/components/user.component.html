@@ -8,7 +8,7 @@
     </div>
     <div class="row" [ngClass]="routeAnimationsElements" rtl>
         <div class="col-md-12 col-lg-6">
-            <ng-container *ngIf="userService.users$ | async as users">
+            <ng-container *ngIf="userManagementService.users$ | async as users">
                 <mat-card *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
                     <mat-card-header>
                         <img mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" />

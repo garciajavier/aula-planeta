@@ -11,7 +11,7 @@ const INITIAL_DATA: User[] = [
 ];
 
 @Injectable()
-export class UserService {
+export class UserManagementService {
   private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   users$ = this._users.asObservable();
 

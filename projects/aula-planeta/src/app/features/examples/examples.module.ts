@@ -12,8 +12,8 @@ import { ExamplesRoutingModule } from './examples-routing.module';
 import { ExamplesComponent } from './examples/examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { UserComponent } from './simple-state-management/components/user.component';
-import { UserService } from './simple-state-management/user.service';
 import { TodosPipe } from '../../services/data/pipes/todos.pipe';
+import { UserManagementService } from './simple-state-management/user-management.service';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -44,7 +44,7 @@ export function httpLoaderFactory(http: HttpClient) {
     UserComponent,
     TodosPipe
   ],
-  providers: [UserService]
+  providers: [UserManagementService]
 })
 export class ExamplesModule {
   constructor() {}
