@@ -1,5 +1,5 @@
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
-import { BehaviorSubject, timer, Observable, Subject, Subscription, interval } from 'rxjs';
+import { BehaviorSubject, Subscription, interval } from 'rxjs';
 import { NIGHT_MODE_THEME, Settings } from '../../shared/models/settings.model';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,8 +31,8 @@ export class SettingsService implements OnDestroy {
   /**
    * Contains the SomeThink list
    */
-  private settings: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  settings$ = this.settings.asObservable();
+  private _settings: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  settings$ = this._settings.asObservable();
 
   constructor(
     private router: Router,
@@ -56,6 +56,10 @@ export class SettingsService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  get settings() {
+    return this._settings.getValue();
+  }
+
   modeNight() {
     this.ngZone.runOutsideAngular(() => {
       this.subscription = interval(60000).subscribe(() => {
@@ -63,8 +67,8 @@ export class SettingsService implements OnDestroy {
         if (hour !== this.hour) {
           this.hour = hour;
           this.ngZone.run(() => {
-            if (this.settings.getValue().autoNightMode && (hour >= 21 || hour <= 7)) {
-              this.settingsNext({ ...this.settings.getValue() });
+            if (this.settings.autoNightMode && (hour >= 21 || hour <= 7)) {
+              this.settingsNext({ ...this.settings });
             }
           });
         }
@@ -78,7 +82,7 @@ export class SettingsService implements OnDestroy {
    * @param value Value os atribute
    */
   changeSetting(key: string, value: any) {
-    const { pageAnimations, elementsAnimations } = this.settings.getValue();
+    const { pageAnimations, elementsAnimations } = this.settings;
     switch (key) {
       case 'theme':
         this.updateTheme(value);
@@ -92,7 +96,7 @@ export class SettingsService implements OnDestroy {
         this.updateRouteAnimationType(pageAnimations, !elementsAnimations);
         break;
     }
-    this.settingsNext({ ...this.settings.getValue(), [key]: value });
+    this.settingsNext({ ...this.settings, [key]: value });
   }
 
   private updateTheme(effectiveTheme: string) {
@@ -119,6 +123,6 @@ export class SettingsService implements OnDestroy {
    */
   private settingsNext(settings: Settings) {
     this.localStorageService.setItem(SETTINGS_KEY, settings);
-    this.settings.next(settings);
+    this._settings.next(settings);
   }
 }

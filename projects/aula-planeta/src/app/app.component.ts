@@ -1,7 +1,6 @@
 import browser from 'browser-detect';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { environment as env } from '../environments/environment';
 import { AuthManagementService } from './core/auth/auth-management.service';
 import { SettingsService } from './core/settings/settings.service';

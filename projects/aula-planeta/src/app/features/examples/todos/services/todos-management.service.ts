@@ -3,8 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { LocalStorageService } from '../../../../core/local-storage/local-storage.service';
 import { Todo, TodosFilter } from '../../../../shared/models/todos.model';
-import { filter } from 'rxjs/operators';
-
 
 export const TODOS_KEY = 'EXAMPLES.TODOS';
 export const TODOS_FILTER_KEY = 'EXAMPLES.TODOS.FILTER';
@@ -16,26 +14,38 @@ export class TodosManagementService {
   /**
    * Contains the todos list
    */
-  private todos: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
-  todos$ = this.todos.asObservable();
+  private _todos: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
+  todos$ = this._todos.asObservable();
 
   /**
    * Contains remove Done boolean
    */
-  private removeDoneDisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  removeDoneDisabled$ = this.removeDoneDisabled.asObservable();
+  private _removeDoneDisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  removeDoneDisabled$ = this._removeDoneDisabled.asObservable();
 
   /**
    * Contains remove Done boolean
    */
-  private filter: BehaviorSubject<TodosFilter> = new BehaviorSubject<TodosFilter>('ALL');
-  filter$ = this.filter.asObservable();
+  private _filter: BehaviorSubject<TodosFilter> = new BehaviorSubject<TodosFilter>('ALL');
+  filter$ = this._filter.asObservable();
 
   constructor(private localStorageService: LocalStorageService) {
     const todos = this.localStorageService.getItem(TODOS_KEY);
     this.todoNext(todos ? todos : []);
     const todosFilter = this.localStorageService.getItem(TODOS_FILTER_KEY);
-    this.filter.next(todosFilter ? todosFilter : 'ALL');
+    this._filter.next(todosFilter ? todosFilter : 'ALL');
+  }
+
+  get todos() {
+    return this._todos.getValue();
+  }
+
+  get removeDoneDisabled() {
+    return this._removeDoneDisabled.getValue();
+  }
+
+  get filter() {
+    return this.filter.getValue();
   }
 
   /**
@@ -49,7 +59,7 @@ export class TodosManagementService {
         name: todoName,
         done: false
       },
-      ...this.todos.getValue()
+      ...this.todos
     ]);
   }
 
@@ -58,14 +68,14 @@ export class TodosManagementService {
    * @param id 
    */
   toggleTodo(id: string) {
-    this.todoNext(this.todos.getValue().map((item: Todo) => (item.id === id ? { ...item, done: !item.done } : item)));
+    this.todoNext(this.todos.map((item: Todo) => (item.id === id ? { ...item, done: !item.done } : item)));
   }
 
   /**
    * Remove Todo
    */
   removeDone() {
-    this.todoNext(this.todos.getValue().filter((item: Todo) => !item.done));
+    this.todoNext(this.todos.filter((item: Todo) => !item.done));
   }
 
   /**
@@ -79,7 +89,7 @@ export class TodosManagementService {
    * Emit if can enable remove botton
    */
   private isRemoveDoneDisabled() {
-    this.removeDoneDisabled.next(!this.todos.getValue().some((item: Todo) => item.done));
+    this._removeDoneDisabled.next(!this.todos.some((item: Todo) => item.done));
   }
 
   /**
@@ -88,7 +98,7 @@ export class TodosManagementService {
    */
   private todoNext(todos: Todo[]) {
     this.localStorageService.setItem(TODOS_KEY, todos);
-    this.todos.next(todos);
+    this._todos.next(todos);
     this.isRemoveDoneDisabled();
   }
 
@@ -98,6 +108,6 @@ export class TodosManagementService {
    */
   private filterNext(filter: TodosFilter) {
     this.localStorageService.setItem(TODOS_FILTER_KEY, filter);
-    this.filter.next(filter);
+    this._filter.next(filter);
   }
 }

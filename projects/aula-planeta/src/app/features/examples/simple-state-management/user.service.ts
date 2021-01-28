@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
 import { Injectable } from '@angular/core';
-import { Model, ModelFactory } from '@angular-extensions/model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from '../../../core/local-storage/local-storage.service';
+import { User } from '../../../shared/models/user.model';
 
 const INITIAL_DATA: User[] = [
   { id: uuid(), username: 'rockets', name: 'Elon', surname: 'Musk' },
@@ -11,45 +12,37 @@ const INITIAL_DATA: User[] = [
 
 @Injectable()
 export class UserService {
-  users$: Observable<User[]>;
+  private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  users$ = this._users.asObservable();
 
-  private model: Model<User[]>;
-
-  constructor(private modelFactory: ModelFactory<User[]>) {
-    this.model = this.modelFactory.create([...INITIAL_DATA]);
-    this.users$ = this.model.data$;
+  constructor(private localStorageService: LocalStorageService) {
+    const users = this.localStorageService.getItem('EXAMPLES.USERS');
+    this.usersNext(users ? users : INITIAL_DATA);
   }
 
-  addUser(user: Partial<User>) {
-    const users = this.model.get();
+  get users() {
+    return this._users.getValue();
+  }
 
-    users.push({ ...user, id: uuid() } as User);
-
-    this.model.set(users);
+  addUser(user: User) {
+    this.users.push({ ...user, id: uuid() } as User);
+    this.usersNext(this.users);
   }
 
   updateUser(user: User) {
-    const users = this.model.get();
-
-    const indexToUpdate = users.findIndex((u) => u.id === user.id);
-    users[indexToUpdate] = user;
-
-    this.model.set(users);
+    const indexToUpdate = this.users.findIndex((u) => u.id === user.id);
+    this.users[indexToUpdate] = user;
+    this.usersNext(this.users);
   }
 
   removeUser(id: string) {
-    const users = this.model.get();
+    const indexToRemove = this.users.findIndex((user) => user.id === id);
+    this.users.splice(indexToRemove, 1);
+    this.usersNext(this.users);
+  }
 
-    const indexToRemove = users.findIndex((user) => user.id === id);
-    users.splice(indexToRemove, 1);
-
-    this.model.set(users);
+  private usersNext(users: User[]) {
+    this._users.next(users);
   }
 }
 
-export interface User {
-  id: string;
-  username: string;
-  name: string;
-  surname: string;
-}

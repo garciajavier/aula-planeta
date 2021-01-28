@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
 import { routeAnimations } from '../../../core/core.module';
-import { Settings } from '../../../shared/models/settings.model';
 import { SettingsService } from '../../../core/settings/settings.service';
 
 @Component({
