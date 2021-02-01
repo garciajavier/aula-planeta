@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
-import { routeAnimations } from '../../../core/core.module';
-import { SettingsService } from '../../../core/settings/settings.service';
+import { routeAnimations } from '../../core/core.module';
+import { SettingsService } from '../../core/settings/settings.service';
 
 @Component({
   selector: 'aula-planeta-examples',
