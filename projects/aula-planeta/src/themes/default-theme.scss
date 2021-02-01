@@ -1,5 +1,38 @@
-$aula-planeta-primary: mat-palette($mat-indigo, 800, 300, 900);
-$aula-planeta-accent: mat-palette($mat-light-blue);
-$aula-planeta-warn: mat-palette($mat-pink, 600);
+$ap-primary: (
+    50: #eceff1,
+    100: #cfd8dc,
+    200: #b0bec5,
+    300: #90a4ae,
+    400: #78909c,
+    500: #607d8b,
+    600: #546e7a,
+    700: #455a64,
+    800: #37474f,
+    900: #263238,
+    A100: #b9cfe2,
+    A200: #a5b8c9,
+    A400: #90a1b0,
+    A700: #7c8a97,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $dark-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $dark-primary-text,
+        A700: $dark-primary-text,
+    )
+);
+
+$aula-planeta-primary: mat-palette($ap-primary, 50);
+$aula-planeta-accent: mat-palette($ap-primary, 900);
+$aula-planeta-warn: mat-palette($ap-primary, 400);
 
 $aula-planeta-theme: mat-light-theme($aula-planeta-primary, $aula-planeta-accent, $aula-planeta-warn);

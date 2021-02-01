@@ -20,13 +20,28 @@
     {
       "name": "assets",
       "installMode": "lazy",
-      "updateMode": "prefetch",
+      "updateMode": "lazy",
       "resources": {
         "files": [
           "/assets/**.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
+          "/assets/icons/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "analytics",
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "3d",
+        "timeout": "5m",
+        "strategy": "performance"
+      },
+      "urls": [
+        "https://www.google-analytics.com/analytics.js"
+      ]
     }
   ]
 }
