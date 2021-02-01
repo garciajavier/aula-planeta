@@ -11,14 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SharedModule } from '../../../../shared/shared.module';
 
-import * as todoActions from '../todos.actions';
-import { Todo, TodosFilter } from '../todos.model';
 import { TodosContainerComponent } from './todos-container.component';
-import {
-  selectRemoveDoneTodosDisabled,
-  selectTodos,
-  selectTodosFilter
-} from '../todos.selectors';
+import { TodosFilter, Todo } from '../../../../shared/models/todos.model';
+
 
 describe('TodosComponent', () => {
   let store: MockStore;
@@ -67,13 +62,7 @@ describe('TodosComponent', () => {
       providers: [provideMockStore()]
     });
 
-    store = TestBed.inject(MockStore);
-    mockSelectTodos = store.overrideSelector(selectTodos, []);
-    mockSelectTodosFilter = store.overrideSelector(selectTodosFilter, 'ACTIVE');
-    mockSelectRemoveDoneTodosDisabled = store.overrideSelector(
-      selectRemoveDoneTodosDisabled,
-      true
-    );
+
     fixture = TestBed.createComponent(TodosContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -113,7 +102,6 @@ describe('TodosComponent', () => {
 
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
     expect(dispatchSpy).toHaveBeenCalledWith(
-      todoActions.actionTodosRemoveDone()
     );
   });
 
@@ -150,7 +138,6 @@ describe('TodosComponent', () => {
 
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
     expect(dispatchSpy).toHaveBeenCalledWith(
-      todoActions.actionTodosFilter({ filter: 'ACTIVE' })
     );
   });
 
@@ -165,7 +152,6 @@ describe('TodosComponent', () => {
 
     expect(dispatchSpy).toHaveBeenCalledTimes(1);
     expect(dispatchSpy).toHaveBeenCalledWith(
-      todoActions.actionTodosToggle({ id: '1' })
     );
   });
 
