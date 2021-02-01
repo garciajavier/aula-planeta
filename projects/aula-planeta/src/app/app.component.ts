@@ -23,10 +23,15 @@ export class AppComponent implements OnInit {
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
-  logo = require('../assets/logo.png').default;
+  logo = require('../assets/logo_PLANETA72x72.png').default;
   languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
   navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
   navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+
+  sideconf = {
+    fixed: false,
+    open: true
+  };
 
   settings$: Observable<Settings>;
 

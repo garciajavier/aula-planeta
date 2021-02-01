@@ -1,48 +1,53 @@
-@import '~@angular/material/theming';
-
 @mixin aula-planeta-app-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  mat-sidenav-container {
-    mat-toolbar {
-      button {
-        &.active {
-          color: mat-color($accent, default-contrast);
-          background-color: mat-color($accent);
-        }
-      }
-
-      .link {
-        color: mat-color($primary, default-contrast);
+  mat-toolbar {
+    button {
+      &.active {
+        color: mat-color($accent, default-contrast);
+        background-color: mat-color($accent);
       }
     }
 
-    mat-sidenav {
-      .mat-list-item {
-        &.active {
-          color: mat-color($accent, default-contrast);
-          background-color: mat-color($accent) !important;
+    .link {
+      color: mat-color($primary, default-contrast);
+    }
+  }
 
-          &:hover {
-            background-color: mat-color($accent, darker) !important;
-          }
-        }
-      }
+  mat-sidenav {
+
+    &.mat-drawer {
+      background-color: mat-color($accent);
+      border-right: 0;
     }
 
-    .footer {
-      color: mat-color($primary, lighter);
-      background-color: mat-color($primary, darker);
+    .mat-list-item {
+      color: mat-color($primary) !important;
+      font-weight: bold;
 
-      .links,
-      .signature {
-        a {
-          color: mat-color($primary, lighter);
-          &:hover {
-            color: mat-color($accent);
-          }
+      &:hover {
+        background-color: mat-color($warn) !important;
+      }
+
+      &.active {
+        background-color: mat-color($primary, 800) !important;
+        border-right: 4px solid mat-color($primary);
+      }
+    }
+  }
+
+  .footer {
+    color: mat-color($primary, lighter);
+    background-color: mat-color($primary, darker);
+
+    .links,
+    .signature {
+      a {
+        color: mat-color($primary, lighter);
+        &:hover {
+          color: mat-color($accent);
         }
       }
     }

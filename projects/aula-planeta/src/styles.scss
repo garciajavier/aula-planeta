@@ -8,17 +8,16 @@
 @import './themes/light-theme';
 @import './themes/black-theme';
 @import './themes/nature-theme';
-@import 'styles-reset.scss-theme';
 @import './app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
 @import './app/features/examples/todos/components/todos-container.component.scss-theme';
-@import './app/features/examples/examples.component.scss-theme';
+@import './app/features/examples/examples/examples.component.scss-theme';
+
 @mixin custom-components-theme($theme) {
-    @include aula-planeta-styles-reset-theme($theme);
-    @include aula-planeta-app-component-theme($theme);
-    @include aula-planeta-big-input-component-theme($theme);
-    @include aula-planeta-todos-container-component-theme($theme);
-    @include aula-planeta-examples-component-theme($theme);
+  @include aula-planeta-app-component-theme($theme);
+  @include aula-planeta-big-input-component-theme($theme);
+  @include aula-planeta-todos-container-component-theme($theme);
+  @include aula-planeta-examples-component-theme($theme);
 }
 
 .default-theme {
@@ -40,3 +39,6 @@
     @include angular-material-theme($aula-planeta-nature-theme);
     @include custom-components-theme($aula-planeta-nature-theme);
 }
+
+// Override typography for all Angular Material
+@include angular-material-typography($custom-typography);
