@@ -10,6 +10,7 @@ import { SettingsPipe } from './services/data/pipes/settings.pipe';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,8 @@ import { environment } from '../environments/environment';
 
     // core
     CoreModule,
+
+    MaterialModule,
 
     // app
     AppRoutingModule,

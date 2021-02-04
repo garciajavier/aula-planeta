@@ -12,7 +12,7 @@
                 <mat-card *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
                     <mat-card-header>
                         <img mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" />
-                        <mat-card-title>{{ user.name }} {{ user.surname }}</mat-card-title>
+                        <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
                         <mat-card-subtitle>@{{ user.username }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-actions>
@@ -26,9 +26,7 @@
                 <h2 *ngIf="isEdit.value">{{'aula-planeta.examples.simple-state-management.form.edit.title' | translate}}</h2>
                 <form [formGroup]="userForm" #userFormRef="ngForm" (ngSubmit)="onSubmit(userFormRef)">
                     <mat-form-field>
-                        <input matInput [placeholder]="
-              ('aula-planeta.examples.simple-state-management.username' | translate) + '*'
-            " formControlName="username" />
+                        <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.username' | translate) + '*'" formControlName="username" />
                         <mat-error *ngIf="userForm.get('username').hasError('minlength')">
                             {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('username').errors.minlength.requiredLength} }}
                         </mat-error>
@@ -37,9 +35,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput [placeholder]="
-              ('aula-planeta.examples.simple-state-management.name' | translate) + '*'
-            " formControlName="name" />
+                        <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="name" />
                         <mat-error *ngIf="userForm.get('name').hasError('minlength')">
                             {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('name').errors.minlength.requiredLength} }}
                         </mat-error>
@@ -48,9 +44,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput [placeholder]="
-              ('aula-planeta.examples.simple-state-management.surname' | translate) + '*'
-            " formControlName="surname" />
+                        <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="surname" />
                         <mat-error *ngIf="userForm.get('surname').hasError('minlength')">
                             {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('surname').errors.minlength.requiredLength} }}
                         </mat-error>
@@ -60,8 +54,8 @@
                     </mat-form-field>
                     <div>
                         <button *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
-            {{'aula-planeta.examples.simple-state-management.form.add.submit' | translate}}
-          </button>
+                                {{'aula-planeta.examples.simple-state-management.form.add.submit' | translate}}
+                        </button>
                         <button *ngIf="isEdit.value" type="submit" mat-raised-button color="primary">
                             {{'aula-planeta.examples.simple-state-management.form.edit.submit' | translate}}
                           </button>
@@ -80,9 +74,7 @@
             <p>{{ 'aula-planeta.examples.simple-state-management.text4' | translate }}</p>
             <p>
                 {{ 'aula-planeta.examples.simple-state-management.text5' | translate }}
-                <a href="https://github.com/angular-extensions/model" rel="noopener noreferrer" target="_blank">{{
-          'aula-planeta.examples.simple-state-management.text6' | translate
-        }}</a>
+                <a href="https://github.com/angular-extensions/model" rel="noopener noreferrer" target="_blank">{{'aula-planeta.examples.simple-state-management.text6' | translate }}</a>
             </p>
             <p>
                 {{ 'aula-planeta.examples.simple-state-management.text7' | translate }}

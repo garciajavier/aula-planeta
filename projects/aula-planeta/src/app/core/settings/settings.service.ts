@@ -14,9 +14,9 @@ export const initial: Settings = {
   autoNightMode: false,
   nightTheme: NIGHT_MODE_THEME,
   stickyHeader: true,
-  pageAnimations: true,
+  pageAnimations: false,
   pageAnimationsDisabled: false,
-  elementsAnimations: true,
+  elementsAnimations: false,
   hour: 0
 };
 

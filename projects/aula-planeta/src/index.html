@@ -11,11 +11,11 @@
     <meta property="og:description" content="Aula Planeta - Angular-NgRx-Material seed with the best practices, features and examples">
     <meta property="og:image" content="/aula-planeta/intro.3e2d7713f2cb475efa85.jpg">
     <meta property="og:url" content="https://javgarjim.github.io/aula-planeta">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
-    
+
     <style type="text/css">
         body,
         html {
@@ -73,8 +73,8 @@
             }
         }
     </style>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#263238">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#263238">
 </head>
 
 <body>
@@ -103,26 +103,26 @@
 
         ga('create', 'UA-53234284-5', 'auto');
     </script>
-    
+
     <script>
         if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/ngsw-worker.js').then(function (reg) {
+            navigator.serviceWorker.register('/ngsw-worker.js').then(function(reg) {
 
-            if (reg.installing) {
-                console.log('Service worker installing');
-            } else if (reg.waiting) {
-                console.log('Service worker installed');
-            } else if (reg.active) {
-                console.log('Service worker active');
-            }
+                if (reg.installing) {
+                    console.log('Service worker installing');
+                } else if (reg.waiting) {
+                    console.log('Service worker installed');
+                } else if (reg.active) {
+                    console.log('Service worker active');
+                }
 
-        }).catch(function (error) {
-            // registration failed
-            console.log('Registration failed with ' + error);
-        });
+            }).catch(function(error) {
+                // registration failed
+                console.log('Registration failed with ' + error);
+            });
         }
     </script>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 
 </html>
