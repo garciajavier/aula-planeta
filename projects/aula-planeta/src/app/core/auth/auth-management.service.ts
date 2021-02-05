@@ -97,7 +97,6 @@ export class AuthManagementService {
    */
   authLogout() {
     this.currentUser = null;
-    this.roles = null;
     this.isAuthenticated = false;
   }
 
