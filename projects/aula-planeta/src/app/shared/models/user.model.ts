@@ -1,7 +1,7 @@
 import { Role } from './role.model';
 
 export class User {
-  id: number;
+  id: string;
   token?: string;
   firstName?: string;
   lastName?: string;
@@ -11,7 +11,7 @@ export class User {
 
   constructor(params: User = {} as User) {
     let {
-      id = new Date().getMilliseconds(),
+      id = new Date().getMilliseconds().toString(),
       token = '',
       firstName = '',
       lastName = '',

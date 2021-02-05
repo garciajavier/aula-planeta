@@ -6,12 +6,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import {
-  selectEffectiveTheme,
-  selectIsAuthenticated,
-  selectSettingsLanguage,
-  selectSettingsStickyHeader
-} from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -34,10 +28,6 @@ describe('AppComponent', () => {
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
-    store.overrideSelector(selectIsAuthenticated, false);
-    store.overrideSelector(selectSettingsStickyHeader, true);
-    store.overrideSelector(selectSettingsLanguage, 'en');
-    store.overrideSelector(selectEffectiveTheme, 'default');
   }));
 
   it('should create the app', async(() => {

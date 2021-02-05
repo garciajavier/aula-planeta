@@ -1,0 +1,75 @@
+<div [class]="'theme-wrapper ' + (settingsService.settings$  | async | settings: 'theme')">
+    <div class="wrapper">
+
+        <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" [class.mat-elevation-z0]="(settingsService.settings$  | async | settings: 'stickyHeader')">
+            <mat-toolbar color="primary">
+
+                <button mat-icon-button aria-label="Menú" (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+
+                <span class="spacer d-inline">aulaPlaneta</span>
+
+                <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+
+                <mat-menu #toolbarUserMenu="matMenu">
+                    <button mat-menu-item routerLink="settings">
+                        <mat-icon>settings</mat-icon>
+                        <span>{{ 'aula-planeta.menu.settings' | translate }}</span>
+                    </button>
+                    <button mat-menu-item (click)="onLogoutClick()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>{{ 'aula-planeta.menu.logout' | translate }}</span>
+                    </button>
+                </mat-menu>
+
+            </mat-toolbar>
+        </div>
+
+        <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+            <mat-sidenav-container role="main">
+                <mat-sidenav #sidenav mode="side" role="navigation">
+                    <mat-nav-list>
+                        <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]" routerLinkActive="active">
+                            {{item.label | translate}}
+                        </a>
+                    </mat-nav-list>
+                </mat-sidenav>
+
+                <router-outlet #o="outlet"></router-outlet>
+
+                <div class="footer">
+                    <div class="row">
+                        <div class="col-sm-12 links">
+                            <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
+                                <fa-icon [icon]="['fab','twitter']"></fa-icon>
+                                <span>Twitter</span>
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCR_vBgIJw21LQoSadb16tvA" target="_blank" rel="noopener noreferrer">
+                                <fa-icon [icon]="['fab','youtube']"></fa-icon>
+                                <span>Youtube</span>
+                            </a>
+                            <a href="https://www.instagram.com/aulaplaneta/?hl=es" target="_blank" rel="noopener noreferrer">
+                                <fa-icon [icon]="['fab','instagram']"></fa-icon>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 signature">
+                            &#169; <span class="year">{{year}}</span> Planeta
+                            <br class="d-block d-sm-none">
+                            <a [matTooltip]="'aula-planeta.footer.changelog' | translate" matTooltipPosition="before" href="https://www.googles.es">
+                                <fa-icon icon="rocket"></fa-icon>
+                                {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-sidenav-container>
+        </div>
+    </div>
+</div>

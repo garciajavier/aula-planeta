@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 /** Passes HttpErrorResponse to application-wide error handler */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
 

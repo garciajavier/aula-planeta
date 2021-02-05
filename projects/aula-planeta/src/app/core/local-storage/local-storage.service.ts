@@ -43,7 +43,7 @@ export class LocalStorageService {
     if (value) {
       localStorage.setItem(`${APP_PREFIX}${key}`, JSON.stringify(value));
     } else {
-      localStorage.removeItem(key);
+      localStorage.removeItem(`${APP_PREFIX}${key}`);
     }
   }
 

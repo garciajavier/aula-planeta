@@ -1,4 +1,4 @@
-import { CoreModule } from './../../core/core.module';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,7 @@ import { MaterialModule } from '../../material/material.module';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    MaterialModule,
-    CoreModule
+    MaterialModule
   ]
 })
 export class LoginModule { }

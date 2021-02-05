@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { MainComponent } from './features/main/main.component';
+import { AuthGuardService } from './core/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -8,16 +10,29 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'settings',
-    loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule)
+    path: 'login',
+    loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
-    path: 'examples',
-    loadChildren: () => import('./features/examples/examples.module').then((m) => m.ExamplesModule)
+    path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: 'settings',
+        loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'examples',
+        loadChildren: () => import('./features/examples/examples.module').then((m) => m.ExamplesModule),
+        canActivate: [AuthGuardService],
+      }
+    ]
   },
+
   {
     path: '**',
-    redirectTo: 'examples'
+    redirectTo: ''
   }
 ];
 
@@ -25,7 +40,7 @@ const routes: Routes = [
   // useHash supports github.io demo page, remove in your app
   imports: [
     RouterModule.forRoot(routes, {
-      useHash: true,
+      useHash: false,
       scrollPositionRestoration: 'enabled',
       preloadingStrategy: PreloadAllModules
     })

@@ -14,4 +14,12 @@ export class AuthDataService {
   public authenticate(username: string, password: string): Observable<User> {
     return this.http.post<any>(`${environment.api_url}/users/authenticate`, { username, password })
   }
+
+    /**
+   * Get user
+   * @param User User to register
+   */
+  public register(user: User): Observable<User> {
+    return this.http.post<any>(`${environment.api_url}/users/register`, user);
+  }
 }

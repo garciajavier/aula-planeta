@@ -11,6 +11,7 @@ import { SettingsPipe } from './services/data/pipes/settings.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material/material.module';
+import { MainComponent } from './features/main/main.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { MaterialModule } from './material/material.module';
 
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  declarations: [AppComponent, SettingsPipe],
+  declarations: [AppComponent, SettingsPipe, MainComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

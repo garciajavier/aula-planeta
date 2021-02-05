@@ -2,13 +2,11 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
-import { AuthenticationService } from '@/core/services/authentication.service';
 import { Subject } from 'rxjs';
-
+import { AuthManagementService } from '../../../core/auth/auth-management.service';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit, OnDestroy {
-
   /**
    * Use to destroy and prevent memory leaks
    */
@@ -22,18 +20,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthManagementService
   ) {
     // redirect to starship if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
+      this.router.navigate([ '/' ]);
     }
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: [ '', Validators.required ],
+      password: [ '', Validators.required ]
     });
 
     // get return url from route parameters or default to '/'
@@ -47,7 +45,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   /**
    * Submit login
@@ -60,12 +60,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(take(1),
-        takeUntil(this.destroy$))
-      .subscribe(
-        () => {
-          this.router.navigate([this.returnUrl]);
-        });
+    this.authenticationService
+      .authLogin(this.f.username.value, this.f.password.value)
+      .pipe(take(1), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.router.navigateByUrl(this.returnUrl);
+      });
   }
 }

@@ -5,9 +5,9 @@ import { LocalStorageService } from '../../../core/local-storage/local-storage.s
 import { User } from '../../../shared/models/user.model';
 
 const INITIAL_DATA: User[] = [
-  { id: uuid(), username: 'rockets', name: 'Elon', surname: 'Musk' },
-  { id: uuid(), username: 'investing', name: 'Nassim', surname: 'Taleb' },
-  { id: uuid(), username: 'philosophy', name: 'Yuval', surname: 'Harari' }
+  { id: uuid(), username: 'rockets', firstName: 'Elon', lastName: 'Musk' },
+  { id: uuid(), username: 'investing', firstName: 'Nassim', lastName: 'Taleb' },
+  { id: uuid(), username: 'philosophy', firstName: 'Yuval', lastName: 'Harari' }
 ];
 
 @Injectable()

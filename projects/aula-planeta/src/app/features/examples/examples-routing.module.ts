@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuardService } from '../../core/core.module';
 
 import { ExamplesComponent } from './examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { UserComponent } from './simple-state-management/components/user.component';
+import { AuthGuardService } from '../../core/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -20,6 +20,7 @@ const routes: Routes = [
       {
         path: 'todos',
         component: TodosContainerComponent,
+        canActivate: [AuthGuardService],
         data: { title: 'aula-planeta.examples.menu.todos' }
       },
       {

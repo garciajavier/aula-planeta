@@ -26,8 +26,8 @@ export class UserComponent implements OnInit {
     this.userForm = this.fb.group({
       id: '',
       username: [ '', [ Validators.required, Validators.minLength(5) ] ],
-      firstname: [ '', [ Validators.required, Validators.minLength(5) ] ],
-      lastname: [ '', [ Validators.required, Validators.minLength(5) ] ]
+      firstName: [ '', [ Validators.required, Validators.minLength(5) ] ],
+      lastName: [ '', [ Validators.required, Validators.minLength(5) ] ]
     });
 
     this.isEdit$ = this.userForm
@@ -56,7 +56,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-  trackByUserId(index: number, user: User): number {
+  trackByUserId(index: number, user: User): string {
     return user.id;
   }
 }

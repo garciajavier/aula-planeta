@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { Role } from '../../shared/models/role.model';
@@ -29,6 +29,7 @@ export class AuthManagementService {
    */
   private _currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
   public currentUser$ = this._currentUser.asObservable();
+  public currentUserValue: User;
 
   /**
    * Contains the isAuthenticated 
@@ -41,7 +42,21 @@ export class AuthManagementService {
     this.currentUser = currentUser;
 
     const roles: Role[] = this.localStorageService.getItem(ROLES);
-    this.roles = roles ? roles : [];
+    this.roles =
+      (roles && roles.length > 0)
+        ? roles
+        : [
+            {
+              id: 0,
+              description: 'Alumno',
+              code: 'ALUMNO'
+            },
+            {
+              id: 1,
+              description: 'Profesor',
+              code: 'PROFESOR'
+            }
+          ];
   }
 
   /**
@@ -82,7 +97,15 @@ export class AuthManagementService {
    */
   authLogout() {
     this.currentUser = null;
+    this.roles = null;
     this.isAuthenticated = false;
+  }
+
+  /**
+   * Register
+   */
+  register(user: User): Observable<User> {
+    return this.authDataService.register(user);
   }
 
   /**
@@ -112,6 +135,7 @@ export class AuthManagementService {
    */
   private set currentUser(user: User) {
     this._currentUser.next(user);
+    this.currentUserValue = this._currentUser.getValue();
     this.localStorageService.setItem(CURRENT_USER, user);
   }
 
