@@ -27,9 +27,12 @@ import { MainComponent } from './features/main/main.component';
     // app
     AppRoutingModule,
 
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    })
   ],
-  declarations: [AppComponent, SettingsPipe, MainComponent],
-  bootstrap: [AppComponent]
+  declarations: [ AppComponent, SettingsPipe, MainComponent ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {}

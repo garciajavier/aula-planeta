@@ -14,14 +14,16 @@ export class AppErrorHandler extends ErrorHandler {
     super();
   }
 
-  handleError(error: Error | HttpErrorResponse) {
-    let displayMessage = 'An error occurred.';
+  handleError(error: Error | HttpErrorResponse | any) {
+    // let displayMessage = 'An error occurred.';
 
-    if (!environment.production) {
-      displayMessage += ' See console for details.';
-    }
+    // if (!environment.production) {
+    //   displayMessage += ' See console for details.';
+    // }
 
-    this.notificationsService.error(displayMessage);
+    // this.notificationsService.error(displayMessage);
+    const err = (error && error.error && error.error.message) || error.statusText;
+    this.notificationsService.error(err);
 
     super.handleError(error);
   }

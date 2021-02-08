@@ -8,18 +8,25 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthDataService {
-
   constructor(private http: HttpClient) {}
 
   public authenticate(username: string, password: string): Observable<User> {
-    return this.http.post<any>(`${environment.api_url}/users/authenticate`, { username, password })
+    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password });
   }
 
-    /**
+  public logout(): Observable<User> {
+    return this.http.post<any>(`${environment.apiUrl}/users/revoke-token`, {}, { withCredentials: true });
+  }
+
+  public refreshToken() {
+    return this.http.post<any>(`${environment.apiUrl}/users/refresh-token`, {}, { withCredentials: true });
+  }
+
+  /**
    * Get user
    * @param User User to register
    */
   public register(user: User): Observable<User> {
-    return this.http.post<any>(`${environment.api_url}/users/register`, user);
+    return this.http.post<any>(`${environment.apiUrl}/users/register`, user);
   }
 }

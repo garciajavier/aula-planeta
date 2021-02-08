@@ -9,7 +9,7 @@ import { TitleService } from '../title/title.service';
 import { AnimationsService } from '../core.module';
 
 export const initial: Settings = {
-  language: 'en',
+  language: 'es',
   theme: 'default-theme',
   autoNightMode: false,
   nightTheme: NIGHT_MODE_THEME,

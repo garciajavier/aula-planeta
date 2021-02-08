@@ -43,7 +43,7 @@ export class AuthManagementService {
 
     const roles: Role[] = this.localStorageService.getItem(ROLES);
     this.roles =
-      (roles && roles.length > 0)
+      roles && roles.length > 0
         ? roles
         : [
             {
@@ -81,6 +81,13 @@ export class AuthManagementService {
   }
 
   /**
+   * Register
+   */
+  register(user: User): Observable<User> {
+    return this.authDataService.register(user);
+  }
+
+  /**
    * Login
    */
   authLogin(username: string, password: string) {
@@ -88,6 +95,7 @@ export class AuthManagementService {
       map((user) => {
         this.currentUser = user;
         this.isAuthenticated = true;
+        this.startRefreshTokenTimer();
       })
     );
   }
@@ -98,13 +106,18 @@ export class AuthManagementService {
   authLogout() {
     this.currentUser = null;
     this.isAuthenticated = false;
+    this.stopRefreshTokenTimer();
+    return this.authDataService.logout();
   }
 
-  /**
-   * Register
-   */
-  register(user: User): Observable<User> {
-    return this.authDataService.register(user);
+  refreshToken() {
+    return this.authDataService.refreshToken().pipe(
+      map((user) => {
+        this.currentUser = user;
+        this.startRefreshTokenTimer();
+        return user;
+      })
+    );
   }
 
   /**
@@ -145,5 +158,21 @@ export class AuthManagementService {
   private set roles(roles: Role[]) {
     this._roles.next(roles);
     this.localStorageService.setItem(ROLES, roles);
+  }
+
+  private refreshTokenTimeout;
+
+  private startRefreshTokenTimer() {
+    // parse json object from base64 encoded jwt token
+    const jwtToken = JSON.parse(atob(this.currentUserValue.jwtToken.split('.')[1]));
+
+    // set a timeout to refresh the token a minute before it expires
+    const expires = new Date(jwtToken.exp * 1000);
+    const timeout = expires.getTime() - Date.now() - 60 * 1000;
+    this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
   }
 }

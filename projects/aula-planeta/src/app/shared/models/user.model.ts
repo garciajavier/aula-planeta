@@ -2,7 +2,8 @@ import { Role } from './role.model';
 
 export class User {
   id: string;
-  token?: string;
+  jwtToken?: string;
+  refreshTokens?: any[];
   firstName?: string;
   lastName?: string;
   username?: string;
@@ -12,7 +13,7 @@ export class User {
   constructor(params: User = {} as User) {
     let {
       id = new Date().getMilliseconds().toString(),
-      token = '',
+      jwtToken = '',
       firstName = '',
       lastName = '',
       username = '',
@@ -21,11 +22,12 @@ export class User {
     } = params;
 
     this.id = id;
-    this.token = token;
+    this.jwtToken = jwtToken;
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
     this.password = password;
     this.roles = roles;
+    this.refreshTokens = []
   }
 }

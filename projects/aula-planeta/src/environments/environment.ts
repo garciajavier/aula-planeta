@@ -9,7 +9,7 @@ export const environment = {
   appName: 'Aula Planeta',
   envName: 'DEV',
   production: false,
-  api_url: 'http://aula-planeta/api',
+  apiUrl: 'http://aula-planeta/api',
   test: false,
   i18nPrefix: '',
   versions: {
