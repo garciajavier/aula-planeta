@@ -1,0 +1,30 @@
+@mixin ap-login-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  button {
+    color: mat-color($accent, light-contrast);
+    font-weight: 500;
+  }
+
+  a {
+    color: #0000EE;
+  }
+
+  mat-form-field {
+    &.mat-form-field-invalid {
+      mat-error {
+        color: mat-color($error-colors);
+      }
+    }
+
+    // mat-select {
+    //   background-color: red;
+
+    //   mat-option {
+    //     background-color: red;
+    //   }
+    // }
+  }
+}

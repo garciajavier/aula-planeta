@@ -5,7 +5,10 @@ import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthManagementService } from '../../../core/auth/auth-management.service';
 
-@Component({ templateUrl: 'login.component.html' })
+@Component({
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss']
+})
 export class LoginComponent implements OnInit, OnDestroy {
   /**
    * Use to destroy and prevent memory leaks
