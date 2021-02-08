@@ -1,0 +1,16 @@
+$login-primary: (
+    500: #607d8b,
+    800: #37474f,
+    A700: #5e5f60,
+    contrast: (
+        500: $light-primary-text,
+        800: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$ap-login-primary: mat-palette($login-primary, 500);
+$ap-login-accent: mat-palette($login-primary, A700);
+$ap-login-warn: mat-palette($login-primary, 800);
+
+$ap-login-theme: mat-light-theme($ap-login-primary, $ap-login-accent, $ap-login-warn);

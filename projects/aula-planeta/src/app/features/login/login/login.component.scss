@@ -1,0 +1,27 @@
+.login-theme {
+  width: 100vw;
+  height: 100vh;
+
+  mat-card {
+    width: 390px;
+
+    form * {
+          margin: 0.75em 0;
+    }
+
+    a {
+        text-align: right;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+  }
+
+  .mat-mini-fab {
+      position: fixed;
+      top: 2em;
+      right: 2em;
+  }
+}
+

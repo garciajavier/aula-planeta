@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthManagementService } from '../../../core/auth/auth-management.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-register',
@@ -25,9 +26,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
+    private overlayContainer: OverlayContainer,
     public authManagementService: AuthManagementService
   ) 
   {
+    this.overlayContainer.getContainerElement().classList.add('login-theme');
+
     // redirect to starship if already logged in
     if (this.authManagementService.currentUserValue) {
       this.router.navigate([ '/' ]);
