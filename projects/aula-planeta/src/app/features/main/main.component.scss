@@ -5,12 +5,17 @@
 }
 
 mat-sidenav-container {
-    height: 100%;
+    min-height: calc(100vh - 213px);
     width: 100%;
 
     ::ng-deep .ng-trigger-routeAnimations {
-        min-height: calc(100vh - 282px);
         overflow: hidden;
+    }
+
+    mat-sidenav {
+        position: fixed;
+        height: calc(100vh - 64px);
+        top: 64px;
     }
 }
 
@@ -19,17 +24,22 @@ mat-sidenav-container {
     width: 100%;
     display: flex;
     z-index: 10;
+    transition: all .3s ease-in-out;
+
     .nav-button {
         margin: 0 10px 0 0;
     }
+
     .spacer {
         flex: 1 1 auto;
     }
+
     mat-select {
         margin: 0 0 0 20px;
         width: 40px;
         font-size: 14px;
     }
+
     @media (max-width: map-get($grid-breakpoints, lg)) {
         .nav-button {
             min-width: 0;
@@ -50,16 +60,18 @@ mat-sidenav {
     bottom: 0;
     display: flex;
     flex-direction: column;
+
     .content {
         flex: 1 0 auto;
         margin-top: 64px;
-        overflow: hidden;
+        
         @media screen and (max-width: map-get($grid-breakpoints, md)) {
              ::ng-deep .mat-sidenav-content {
                 margin-left: 0 !important;
             }
         }
     }
+
     .footer {
         flex: 0 0 auto;
         padding: 0 15px;
@@ -67,20 +79,25 @@ mat-sidenav {
         position: relative;
         bottom: 0;
         width: 100%;
+
         .row {
             padding: 10px 0;
+
             .links {
                 a {
                     transition: padding 0.5s;
                     display: inline-block;
                     padding: 20px 5px;
+
                     &:hover {
                         text-decoration: none;
                     }
+
                     fa-icon {
                         font-size: 30px;
                         width: 35px;
                     }
+
                     span {
                         display: inline-block;
                         width: 75px;
@@ -91,11 +108,13 @@ mat-sidenav {
                         transition: width 0.5s;
                     }
                 }
+
                 @media (min-width: map-get($grid-breakpoints, lg)) {
                     a {
                         padding: 20px 10px;
                     }
                 }
+                
                 @media (max-width: map-get($grid-breakpoints, md)) {
                     a {
                         padding: 20px;
@@ -105,12 +124,14 @@ mat-sidenav {
                         }
                     }
                 }
+
                 @media (max-width: map-get($grid-breakpoints, sm)) {
                     a {
                         padding: 20px 5px;
                     }
                 }
             }
+
             @media (min-width: map-get($grid-breakpoints, sm)) {
                 .signature {
                     position: relative;

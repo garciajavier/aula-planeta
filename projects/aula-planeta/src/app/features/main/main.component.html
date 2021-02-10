@@ -1,7 +1,9 @@
 <div [class]="'theme-wrapper ' + (settingsService.settings$  | async | settings: 'theme')">
     <div class="wrapper">
 
-        <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" [class.mat-elevation-z0]="(settingsService.settings$  | async | settings: 'stickyHeader')">
+        <!-- <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" [class.mat-elevation-z3]="(settingsService.settings$  | async | settings: 'stickyHeader')"> -->
+        <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" (window.scroll)="eventoScroll($event)" [class.mat-elevation-z3]="isScrolling">
+
             <mat-toolbar color="primary">
 
                 <button mat-icon-button aria-label="Menú" (click)="sidenav.toggle()">
@@ -13,6 +15,7 @@
                 <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
                     <mat-icon>account_circle</mat-icon>
                 </button>
+                
 
                 <mat-menu #toolbarUserMenu="matMenu">
                     <button mat-menu-item routerLink="settings">
@@ -40,7 +43,10 @@
 
                 <router-outlet #o="outlet"></router-outlet>
 
-                <div class="footer">
+
+
+            </mat-sidenav-container>
+                            <div class="footer">
                     <div class="row">
                         <div class="col-sm-12 links">
                             <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
@@ -68,8 +74,6 @@
                         </div>
                     </div>
                 </div>
-
-            </mat-sidenav-container>
         </div>
     </div>
 </div>
