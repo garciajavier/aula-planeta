@@ -6,7 +6,6 @@
             "installMode": "prefetch",
             "resources": {
                 "files": [
-                    "/",
                     "/favicon.ico",
                     "/index.html",
                     "/manifest.webmanifest",
@@ -19,8 +18,8 @@
         },
         {
             "name": "assets",
-            "installMode": "prefetch",
-            "updateMode": "prefetch",
+            "installMode": "lazy",
+            "updateMode": "lazy",
             "resources": {
                 "files": [
                     "/assets/**.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)",
@@ -31,27 +30,15 @@
         }
     ],
     "dataGroups": [{
-            "name": "analytics",
-            "cacheConfig": {
-                "maxSize": 100,
-                "maxAge": "3d",
-                "timeout": "5m",
-                "strategy": "performance"
-            },
-            "urls": [
-                "https://www.google-analytics.com/analytics.js"
-            ]
+        "name": "analytics",
+        "cacheConfig": {
+            "maxSize": 100,
+            "maxAge": "3d",
+            "timeout": "5m",
+            "strategy": "performance"
         },
-        {
-            "name": "rutas",
-            "cacheConfig": {
-                "maxSize": 100,
-                "maxAge": "3d",
-                "strategy": "freshness"
-            },
-            "urls": [
-                "/**"
-            ]
-        }
-    ]
+        "urls": [
+            "https://www.google-analytics.com/analytics.js"
+        ]
+    }]
 }
