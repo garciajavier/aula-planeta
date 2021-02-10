@@ -1,7 +1,8 @@
 {
     "$schema": "../../node_modules/@angular/service-worker/config/schema.json",
     "index": "/index.html",
-    "assetGroups": [{
+    "assetGroups": [
+        {
             "name": "app",
             "installMode": "prefetch",
             "resources": {
@@ -12,7 +13,8 @@
                     "/*.css",
                     "/*.js",
                     "/assets/i18n/*.json",
-                    "/assets/i18n/examples/*.json"
+                    "/assets/i18n/examples/*.json",
+                    "/assets/logo_PLANETA200x200.png"
                 ]
             }
         },
@@ -29,16 +31,18 @@
             }
         }
     ],
-    "dataGroups": [{
-        "name": "analytics",
-        "cacheConfig": {
-            "maxSize": 100,
-            "maxAge": "3d",
-            "timeout": "5m",
-            "strategy": "performance"
-        },
-        "urls": [
-            "https://www.google-analytics.com/analytics.js"
-        ]
-    }]
+    "dataGroups": [
+        {
+            "name": "analytics",
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "3d",
+                "timeout": "5m",
+                "strategy": "performance"
+            },
+            "urls": [
+                "https://www.google-analytics.com/analytics.js"
+            ]
+        }
+    ]
 }

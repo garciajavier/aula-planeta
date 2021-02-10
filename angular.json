@@ -37,10 +37,12 @@
                     },
                     "configurations": {
                         "production": {
-                            "fileReplacements": [{
-                                "replace": "projects/aula-planeta/src/environments/environment.ts",
-                                "with": "projects/aula-planeta/src/environments/environment.prod.ts"
-                            }],
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/aula-planeta/src/environments/environment.ts",
+                                    "with": "projects/aula-planeta/src/environments/environment.prod.ts"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -49,7 +51,8 @@
                             "extractLicenses": false,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "budgets": [{
+                            "budgets": [
+                                {
                                     "type": "bundle",
                                     "name": "polyfills",
                                     "baseline": "150kb",
@@ -60,8 +63,8 @@
                                     "type": "bundle",
                                     "name": "styles",
                                     "baseline": "280kb",
-                                    "maximumWarning": "50kb",
-                                    "maximumError": "100kb"
+                                    "maximumWarning": "150kb",
+                                    "maximumError": "200kb"
                                 },
                                 {
                                     "type": "bundle",
@@ -117,10 +120,12 @@
                     },
                     "configurations": {
                         "test": {
-                            "fileReplacements": [{
-                                "replace": "projects/aula-planeta/src/environments/environment.ts",
-                                "with": "projects/aula-planeta/src/environments/environment.test.ts"
-                            }]
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/aula-planeta/src/environments/environment.ts",
+                                    "with": "projects/aula-planeta/src/environments/environment.test.ts"
+                                }
+                            ]
                         }
                     }
                 },
@@ -132,7 +137,9 @@
                             "projects/aula-planeta/tsconfig.spec.json",
                             "projects/aula-planeta/e2e/tsconfig.json"
                         ],
-                        "exclude": ["**/node_modules/**"]
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
                     }
                 },
                 "e2e": {
