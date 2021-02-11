@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" role="region">
     <div class="row">
         <div class="col-sm-12">
             <h1>{{ 'aula-planeta.settings.title' | translate }}</h1>
@@ -11,10 +11,10 @@
                 <h2>{{ 'aula-planeta.settings.general.title' | translate }}</h2>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <fa-icon icon="language" color="accent"></fa-icon>
+                        <fa-icon aria-label="Idiomas" icon="language" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
-                        <mat-select [placeholder]="'aula-planeta.settings.general.placeholder' | translate" [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language">
+                        <mat-select [aria-label]="'aula-planeta.settings.general.placeholder' | translate" [placeholder]="'aula-planeta.settings.general.placeholder' | translate" [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language">
                             <ng-container *ngFor="let l of languages">
                                 <!-- ngFor hack of missing ngLet of Angular -->
                                 <mat-option *ngFor="let title of ['aula-planeta.settings.general.language.' + l.value | translate]" [value]="l.value" [title]="title !== l.label
@@ -28,11 +28,11 @@
                 </div>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <fa-icon icon="bars" color="accent"></fa-icon>
+                        <fa-icon aria-label="Menu" icon="bars" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.themes.sticky-header' | translate }}
                     </mat-placeholder>
-                    <mat-slide-toggle [checked]="settings.stickyHeader" (change)="onStickyHeaderToggle($event)">
+                    <mat-slide-toggle [aria-label]="'aula-planeta.settings.themes.sticky-header' | translate" [checked]="settings.stickyHeader" (change)="onStickyHeaderToggle($event)">
                     </mat-slide-toggle>
                 </div>
             </div>
@@ -42,10 +42,10 @@
                 <h2>{{ 'aula-planeta.settings.themes.title' | translate }}</h2>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <fa-icon icon="paint-brush" color="accent"></fa-icon>
+                        <fa-icon arial-label="Temas" icon="paint-brush" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
-                        <mat-select [placeholder]="'aula-planeta.settings.themes.placeholder' | translate" [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes">
+                        <mat-select [aria-label]="'aula-planeta.settings.themes.placeholder' | translate" [placeholder]="'aula-planeta.settings.themes.placeholder' | translate" [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes">
                             <mat-option *ngFor="let t of themes" [value]="t.value">
                                 {{ 'aula-planeta.settings.themes.' + t.label | translate }}
                             </mat-option>
@@ -54,11 +54,11 @@
                 </div>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <fa-icon icon="lightbulb" color="accent"></fa-icon>
+                        <fa-icon arial-label="Modo noche" icon="lightbulb" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.themes.night-mode' | translate }}
                     </mat-placeholder>
-                    <mat-slide-toggle [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
+                    <mat-slide-toggle [aria-label]="'aula-planeta.settings.themes.night-mode' | translate" [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
                     </mat-slide-toggle>
                 </div>
             </div>
@@ -67,23 +67,23 @@
                 <div class="icon-form-field">
                     <mat-icon color="accent">
                         <mat-icon color="accent">
-                            <fa-icon icon="window-maximize"></fa-icon>
+                            <fa-icon arial-label="Animación a pantalla completa" icon="window-maximize"></fa-icon>
                         </mat-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.animations.page' | translate }}
                     </mat-placeholder>
-                    <mat-slide-toggle matTooltip="Sorry, this feature is disabled in IE, EDGE and Safari" matTooltipPosition="before" *ngIf="settings.pageAnimationsDisabled" disabled>
+                    <mat-slide-toggle aria-label="Sorry, this feature is disabled in IE, EDGE and Safari" matTooltip="Sorry, this feature is disabled in IE, EDGE and Safari" matTooltipPosition="before" *ngIf="settings.pageAnimationsDisabled" disabled>
                     </mat-slide-toggle>
-                    <mat-slide-toggle *ngIf="!settings.pageAnimationsDisabled" [checked]="settings.pageAnimations" (change)="onPageAnimationsToggle($event)">
+                    <mat-slide-toggle [aria-label]="'aula-planeta.settings.animations.page' | translate" *ngIf="!settings.pageAnimationsDisabled" [checked]="settings.pageAnimations" (change)="onPageAnimationsToggle($event)">
                     </mat-slide-toggle>
                 </div>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <fa-icon icon="stream" color="accent"></fa-icon>
+                        <fa-icon arial-label="Paginación deslizante" icon="stream" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.animations.elements' | translate }}
                     </mat-placeholder>
-                    <mat-slide-toggle [checked]="settings.elementsAnimations" (change)="onElementsAnimationsToggle($event)">
+                    <mat-slide-toggle [aria-label]="'aula-planeta.settings.animations.elements' | translate" [checked]="settings.elementsAnimations" (change)="onElementsAnimationsToggle($event)">
                     </mat-slide-toggle>
                 </div>
             </div>
