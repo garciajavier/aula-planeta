@@ -41,10 +41,10 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       useHash: true,
-      scrollPositionRestoration: 'enabled',
+      scrollPositionRestoration: 'disabled',
       preloadingStrategy: PreloadAllModules
     })
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -31,6 +31,8 @@ import { FakeBackendInterceptor } from './http-interceptors/fake-backend.interce
 import { AuthManagementService } from './auth/auth-management.service';
 import { MaterialModule } from '../material/material.module';
 import { DirectivesModule } from './directives/directives.module';
+import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseService } from './router-reuse/router-reuse.service';
 
 export {
   TitleService,
@@ -64,7 +66,7 @@ export function httpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [ HttpClient ]
+        deps: [HttpClient]
       }
     })
   ],
@@ -73,7 +75,8 @@ export function httpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],
   exports: [
     // angular

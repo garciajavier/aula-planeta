@@ -43,6 +43,18 @@
             "urls": [
                 "https://www.google-analytics.com/analytics.js"
             ]
+        },
+        {
+            "name": "photos",
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "3d",
+                "timeout": "5m",
+                "strategy": "performance"
+            },
+            "urls": [
+                "https://source.unsplash.com/**"
+            ]
         }
     ]
 }
