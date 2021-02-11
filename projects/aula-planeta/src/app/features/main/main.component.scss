@@ -1,22 +1,9 @@
 @import '../../../styles-variables';
+@import '../../../functions';
+
 .theme-wrapper {
     height: 100%;
     width: 100%;
-}
-
-mat-sidenav-container {
-    min-height: calc(100vh - 213px);
-    width: 100%;
-
-    ::ng-deep .ng-trigger-routeAnimations {
-        overflow: hidden;
-    }
-
-    mat-sidenav {
-        position: fixed;
-        height: calc(100vh - 64px);
-        top: 64px;
-    }
 }
 
 .toolbar {
@@ -26,30 +13,15 @@ mat-sidenav-container {
     z-index: 10;
     transition: all .3s ease-in-out;
 
-    .nav-button {
-        margin: 0 10px 0 0;
-    }
-
     .spacer {
         flex: 1 1 auto;
     }
 
     mat-select {
-        margin: 0 0 0 20px;
-        width: 40px;
-        font-size: 14px;
+        margin: 0 0 0 em(20);
+        width: em(40);
+        font-size: em(14);
     }
-
-    @media (max-width: map-get($grid-breakpoints, lg)) {
-        .nav-button {
-            min-width: 0;
-            padding: 0 10px;
-        }
-    }
-}
-
-mat-sidenav {
-    width: 200px;
 }
 
 .wrapper {
@@ -63,8 +35,8 @@ mat-sidenav {
 
     .content {
         flex: 1 0 auto;
-        margin-top: 64px;
-        
+        margin-top: em(64);
+
         @media screen and (max-width: map-get($grid-breakpoints, md)) {
              ::ng-deep .mat-sidenav-content {
                 margin-left: 0 !important;
@@ -74,34 +46,34 @@ mat-sidenav {
 
     .footer {
         flex: 0 0 auto;
-        padding: 0 15px;
+        padding: 0 em(15);
         text-align: center;
         position: relative;
         bottom: 0;
         width: 100%;
 
         .row {
-            padding: 10px 0;
+            padding: em(10) 0;
 
             .links {
                 a {
                     transition: padding 0.5s;
                     display: inline-block;
-                    padding: 20px 5px;
+                    padding: em(20) em(5);
 
                     &:hover {
                         text-decoration: none;
                     }
 
                     fa-icon {
-                        font-size: 30px;
-                        width: 35px;
+                        font-size: em(30);
+                        width: em(35);
                     }
 
                     span {
                         display: inline-block;
-                        width: 75px;
-                        padding: 0 0 0 3px;
+                        width: em(75);
+                        padding: 0 0 0 em(3);
                         overflow: hidden;
                         text-align: left;
                         white-space: nowrap;
@@ -111,13 +83,13 @@ mat-sidenav {
 
                 @media (min-width: map-get($grid-breakpoints, lg)) {
                     a {
-                        padding: 20px 10px;
+                        padding: em(20) em(10);
                     }
                 }
                 
                 @media (max-width: map-get($grid-breakpoints, md)) {
                     a {
-                        padding: 20px;
+                        padding: em(20);
                         span {
                             width: 0;
                             padding: 0;
@@ -127,7 +99,7 @@ mat-sidenav {
 
                 @media (max-width: map-get($grid-breakpoints, sm)) {
                     a {
-                        padding: 20px 5px;
+                        padding: em(20) em(5);
                     }
                 }
             }
@@ -137,7 +109,7 @@ mat-sidenav {
                     position: relative;
                     a {
                         position: absolute;
-                        right: 15px;
+                        right: em(15);
                     }
                 }
             }
@@ -147,6 +119,22 @@ mat-sidenav {
 
 @media (max-width: $toolbar-breakpoint) {
     .content {
-        margin-top: 56px !important;
+        margin-top: em(56) !important;
+    }
+}
+
+mat-sidenav-container {
+    min-height: calc(100vh - #{em(213)});
+    width: 100%;
+
+    ::ng-deep .ng-trigger-routeAnimations {
+        overflow: hidden;
+    }
+
+    mat-sidenav {
+        position: fixed;
+        height: calc(100vh - #{em(64)});
+        top: em(64);
+        width: em(200);
     }
 }

@@ -24,7 +24,7 @@
       align-items: center;
 
       button {
-        border-radius: 2px;
+        border-radius: em(2);
         background-color: mat-color($accent);
         color: mat-color($accent, default-contrast);
       }
