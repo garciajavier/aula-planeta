@@ -1,9 +1,11 @@
+@import '../../../../functions';
+
 .login-theme {
   width: 100vw;
   height: 100vh;
 
   mat-card {
-    width: 390px;
+    width: em(390);
 
     form * {
           margin: 0.75em 0;

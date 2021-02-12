@@ -1,15 +1,17 @@
+@import '../../../../functions';
+
 button {
   padding: 0;
-  min-width: 36px;
-  margin-left: 10px;
+  min-width: em(36);
+  margin-left: em(10);
 
   mat-icon {
     position: relative;
-    top: 2px;
-    font-size: 18px;
+    top: em(2);
+    font-size: em(18);
   }
   fa-icon {
     position: relative;
-    font-size: 18px;
+    font-size: em(18);
   }
 }

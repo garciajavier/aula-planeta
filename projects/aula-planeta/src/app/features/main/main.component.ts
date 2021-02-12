@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { AuthManagementService } from '../../core/auth/auth-management.service';
 import { Observable } from 'rxjs';
 import { SettingsService } from '../../core/settings/settings.service';
@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
   languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
   navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
   navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+  isScrolling = false;
 
   sideconf = {
     fixed: false,
@@ -44,6 +45,12 @@ export class MainComponent implements OnInit {
   onLogoutClick() {
     this.router.navigate(['/login']);
     this.authManagementService.authLogout();
+  }
+
+  @HostListener("window:scroll", ['$event'])
+  eventoScroll($event) {
+    let scrollOffset = $event.srcElement.children[0].scrollTop;
+    this.isScrolling = (scrollOffset > 0 ) ? true : false;
   }
 
 }

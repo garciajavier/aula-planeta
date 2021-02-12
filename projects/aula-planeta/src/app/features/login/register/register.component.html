@@ -5,41 +5,42 @@
         </mat-card-title-group>
 
         <mat-card-content>
-            <form class="d-flex flex-column" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                <mat-form-field class="w-100">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput name="firstName" type="text" formControlName="firstName">
-                    <mat-error>Campo requerido</mat-error>
-                </mat-form-field>
+            <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <fieldset class="d-flex flex-column">
+                    <mat-form-field class="w-100">
+                        <mat-label aria-label="Nombre">Nombre</mat-label>
+                        <input matInput name="firstName" type="text" formControlName="firstName">
+                        <mat-error>Campo requerido</mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="w-100">
-                    <mat-label>Apellido</mat-label>
-                    <input matInput name="lastName" type="text" formControlName="lastName">
-                    <mat-error>Campo requerido</mat-error>
-                </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label aria-label="Apellido">Apellido</mat-label>
+                        <input matInput name="lastName" type="text" formControlName="lastName">
+                        <mat-error>Campo requerido</mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="w-100">
-                    <mat-label>Usuario</mat-label>
-                    <input matInput name="username" type="text" formControlName="username">
-                    <mat-error>Campo requerido</mat-error>
-                </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label aria-label="Usuario">Usuario</mat-label>
+                        <input matInput name="username" type="text" formControlName="username">
+                        <mat-error>Campo requerido</mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="w-100">
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput name="password" type="text" formControlName="password">
-                    <mat-error>Campo requerido</mat-error>
-                </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label aria-label="Contraseña">Contraseña</mat-label>
+                        <input matInput name="password" type="text" formControlName="password">
+                        <mat-error>Campo requerido</mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="w-100">
-                    <mat-label>Roles</mat-label>
-                    <mat-select formControlName="roles" multiple >
-                        <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role">{{role.description}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label aria-label="Roles">Roles</mat-label>
+                        <mat-select formControlName="roles" multiple >
+                            <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role">{{role.description}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-                <button (click)="onSubmit()" type="submit" mat-raised-button color="primary" class="w-100" [disabled]="registerForm.invalid">Crear</button>
-                <button mat-raised-button color="accent" class="w-100" routerLink="/login">Iniciar Sesión</button>
-
+                    <button role="button" (click)="onSubmit()" type="submit" mat-raised-button color="primary" class="w-100" [disabled]="registerForm.invalid">Crear</button>
+                    <button role="button" mat-raised-button color="accent" class="w-100" routerLink="/login">Iniciar Sesión</button>
+                </fieldset>
             </form>
         </mat-card-content>
     </mat-card>
