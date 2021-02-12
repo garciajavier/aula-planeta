@@ -10,8 +10,8 @@
             <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
                 <h2>{{ 'aula-planeta.settings.general.title' | translate }}</h2>
                 <div class="icon-form-field">
-                    <mat-icon color="accent">
-                        <fa-icon aria-label="Idiomas" icon="language" color="accent"></fa-icon>
+                    <mat-icon color="accent" aria-label="Idiomas">
+                        <fa-icon icon="language" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
                         <mat-select [aria-label]="'aula-planeta.settings.general.placeholder' | translate" [placeholder]="'aula-planeta.settings.general.placeholder' | translate" [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language">
@@ -27,8 +27,8 @@
                     </mat-form-field>
                 </div>
                 <div class="icon-form-field">
-                    <mat-icon color="accent">
-                        <fa-icon aria-label="Menu" icon="bars" color="accent"></fa-icon>
+                    <mat-icon color="accent" aria-label="Menu">
+                        <fa-icon icon="bars" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.themes.sticky-header' | translate }}
                     </mat-placeholder>
@@ -41,8 +41,8 @@
             <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
                 <h2>{{ 'aula-planeta.settings.themes.title' | translate }}</h2>
                 <div class="icon-form-field">
-                    <mat-icon color="accent">
-                        <fa-icon arial-label="Temas" icon="paint-brush" color="accent"></fa-icon>
+                    <mat-icon color="accent" aria-label="Temas">
+                        <fa-icon icon="paint-brush" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
                         <mat-select [aria-label]="'aula-planeta.settings.themes.placeholder' | translate" [placeholder]="'aula-planeta.settings.themes.placeholder' | translate" [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes">
@@ -53,8 +53,8 @@
                     </mat-form-field>
                 </div>
                 <div class="icon-form-field">
-                    <mat-icon color="accent">
-                        <fa-icon arial-label="Modo noche" icon="lightbulb" color="accent"></fa-icon>
+                    <mat-icon color="accent" aria-label="Modo noche">
+                        <fa-icon icon="lightbulb" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.themes.night-mode' | translate }}
                     </mat-placeholder>
@@ -66,8 +66,8 @@
                 <h2>{{ 'aula-planeta.settings.animations.title' | translate }}</h2>
                 <div class="icon-form-field">
                     <mat-icon color="accent">
-                        <mat-icon color="accent">
-                            <fa-icon arial-label="Animación a pantalla completa" icon="window-maximize"></fa-icon>
+                        <mat-icon color="accent" aria-label="Animación a pantalla completa">
+                            <fa-icon icon="window-maximize"></fa-icon>
                         </mat-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.animations.page' | translate }}
@@ -78,8 +78,8 @@
                     </mat-slide-toggle>
                 </div>
                 <div class="icon-form-field">
-                    <mat-icon color="accent">
-                        <fa-icon arial-label="Paginación deslizante" icon="stream" color="accent"></fa-icon>
+                    <mat-icon color="accent" aria-label="Paginación deslizante">
+                        <fa-icon icon="stream" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-placeholder>{{ 'aula-planeta.settings.animations.elements' | translate }}
                     </mat-placeholder>

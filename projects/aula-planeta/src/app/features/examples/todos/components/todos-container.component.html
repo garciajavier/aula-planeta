@@ -2,11 +2,8 @@
     <div class="row">
         <div class="offset-md-2 col-md-8 entry">
             <aula-planeta-big-input rtl [placeholder]="'aula-planeta.examples.todos.input' | translate" [value]="newTodo" (keyup)="onNewTodoChange($event.target.value)" (keyup.enter)="!isAddTodoDisabled && onAddTodo()" (keyup.escape)="onNewTodoClear()">
-                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.add' | translate" matTooltipPosition="before">
-                </aula-planeta-big-input-action>
-                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="todosManagementService.removeDoneDisabled$ | async" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate"
-                    matTooltipPosition="after">
-                </aula-planeta-big-input-action>
+              <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.add' | translate" matTooltipPosition="before"></aula-planeta-big-input-action>
+              <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="todosManagementService.removeDoneDisabled$ | async" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate" matTooltipPosition="after"></aula-planeta-big-input-action>
             </aula-planeta-big-input>
         </div>
     </div>
@@ -15,7 +12,7 @@
             <div class="col-md-6">
               <h2 class="dotos-title" rtl>
                 <span>{{ 'aula-planeta.examples.todos.list' | translate }}</span>
-                <button role="button" class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
+                <button role="button" aria-label="Filtrar" class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
                   <fa-icon icon="filter"></fa-icon>
                 </button>
 
@@ -51,14 +48,16 @@
                     </mat-chip>
                 </mat-chip-list>
               </h2>
+
               <mat-card role="listitem" *ngFor="let todo of todos | todos : (todosManagementService.filter$ | async)" class="todo" [ngClass]="routeAnimationsElements">
-                <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)"></mat-checkbox>
-                <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
-                  &nbsp;{{todo.name}}&nbsp;
-                </span>
+                <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)">
+                  <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
+                    &nbsp;{{todo.name}}&nbsp;
+                  </span>
+                </mat-checkbox>
+
               </mat-card>
-              <br>
-              <br>
+
             </div>
         </ng-container>
         <div class="offset-md-1 col-md-5" [ngClass]="routeAnimationsElements" rtl>

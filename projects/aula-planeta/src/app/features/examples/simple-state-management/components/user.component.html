@@ -8,10 +8,11 @@
     </div>
     <div class="row" [ngClass]="routeAnimationsElements" rtl>
         <div class="col-md-12 col-lg-6">
+
             <ng-container role="list" *ngIf="userManagementService.users$ | async as users">
                 <mat-card role="listitem" *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
                     <mat-card-header>
-                        <img role="img" mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" [alt]="user.username"/> 
+                        <img role="img" aria-label="Avatar" mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" [alt]="user.username"/> 
                         <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
                         <mat-card-subtitle>@{{ user.username }}</mat-card-subtitle>
                     </mat-card-header>
@@ -21,11 +22,14 @@
                     </mat-card-actions>
                 </mat-card>
             </ng-container>
+
             <ng-container *ngIf="isEdit$ | async as isEdit">
                 <h2 *ngIf="!isEdit.value">{{'aula-planeta.examples.simple-state-management.form.add.title' | translate}}</h2>
                 <h2 *ngIf="isEdit.value">{{'aula-planeta.examples.simple-state-management.form.edit.title' | translate}}</h2>
+
                 <form role="form" [formGroup]="userForm" #userFormRef="ngForm" (ngSubmit)="onSubmit(userFormRef)">
                     <fieldset>
+                        
                         <mat-form-field>
                             <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.username' | translate) + '*'" formControlName="username" />
                             <mat-error *ngIf="userForm.get('username').hasError('minlength')">
@@ -35,6 +39,7 @@
                                 {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
                             </mat-error>
                         </mat-form-field>
+
                         <mat-form-field>
                             <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
                             <mat-error *ngIf="userForm.get('firstName').hasError('minlength')">
@@ -44,6 +49,7 @@
                                 {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
                             </mat-error>
                         </mat-form-field>
+
                         <mat-form-field>
                             <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
                             <mat-error *ngIf="userForm.get('lastName').hasError('minlength')">
@@ -53,6 +59,7 @@
                                 {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
                             </mat-error>
                         </mat-form-field>
+
                         <div>
                             <button role="button" *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
                                     {{'aula-planeta.examples.simple-state-management.form.add.submit' | translate}}

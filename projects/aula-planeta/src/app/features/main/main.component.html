@@ -1,7 +1,6 @@
 <div [class]="'theme-wrapper ' + (settingsService.settings$  | async | settings: 'theme')">
     <div class="wrapper">
 
-        <!-- <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" [class.mat-elevation-z3]="(settingsService.settings$  | async | settings: 'stickyHeader')"> -->
         <header role="heading" class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" (window.scroll)="eventoScroll($event)" [class.mat-elevation-z3]="isScrolling">
 
             <mat-toolbar color="primary">
@@ -12,7 +11,7 @@
 
                 <span class="spacer d-inline">aulaPlaneta</span>
 
-                <button role="button" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
+                <button role="button" aria-label="Menú de usuario" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
                     <mat-icon>account_circle</mat-icon>
                 </button>
                 
@@ -32,6 +31,7 @@
         </header>
 
         <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+            
             <mat-sidenav-container role="main">
                 <mat-sidenav #sidenav mode="side" role="navigation">
                     <mat-nav-list>
@@ -42,10 +42,8 @@
                 </mat-sidenav>
 
                 <router-outlet #o="outlet"></router-outlet>
-
-
-
             </mat-sidenav-container>
+
             <div class="footer" role="region">
                     <div class="row">
                         <div class="col-sm-12 links">

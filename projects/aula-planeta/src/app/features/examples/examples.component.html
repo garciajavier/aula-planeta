@@ -1,4 +1,4 @@
-<nav mat-tab-nav-bar class="d-none d-sm-flex">
+<nav mat-tab-nav-bar class="d-none d-sm-flex" role="tab">
     <a mat-tab-link *ngFor="let e of examples" [routerLink]="e.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="e.auth">
     {{e.label | translate}}
   </a>
