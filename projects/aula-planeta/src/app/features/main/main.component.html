@@ -1,35 +1,38 @@
 <div [class]="'theme-wrapper ' + (settingsService.settings$  | async | settings: 'theme')">
     <div class="wrapper">
 
-        <div class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" [class.mat-elevation-z0]="(settingsService.settings$  | async | settings: 'stickyHeader')">
+        <header role="heading" class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" (window.scroll)="eventoScroll($event)" [class.mat-elevation-z3]="isScrolling">
+
             <mat-toolbar color="primary">
 
-                <button mat-icon-button aria-label="Menú" (click)="sidenav.toggle()">
+                <button role="button" mat-icon-button aria-label="Menú" (click)="sidenav.toggle()">
                     <mat-icon>menu</mat-icon>
                 </button>
 
                 <span class="spacer d-inline">aulaPlaneta</span>
 
-                <button mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
+                <button role="button" aria-label="Menú de usuario" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
                     <mat-icon>account_circle</mat-icon>
                     <!-- <span *ngIf="user"> Hola, {{user.firstName}} {{user.lastName}}</span> -->
                 </button>
+                
 
                 <mat-menu #toolbarUserMenu="matMenu">
-                    <button mat-menu-item routerLink="settings">
+                    <button role="button" mat-menu-item routerLink="settings">
                         <mat-icon>settings</mat-icon>
                         <span>{{ 'aula-planeta.menu.settings' | translate }}</span>
                     </button>
-                    <button mat-menu-item (click)="onLogoutClick()">
+                    <button role="button" mat-menu-item (click)="onLogoutClick()">
                         <mat-icon>exit_to_app</mat-icon>
                         <span>{{ 'aula-planeta.menu.logout' | translate }}</span>
                     </button>
                 </mat-menu>
 
             </mat-toolbar>
-        </div>
+        </header>
 
         <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+            
             <mat-sidenav-container role="main">
                 <mat-sidenav #sidenav mode="side" role="navigation">
                     <mat-nav-list>
@@ -40,8 +43,9 @@
                 </mat-sidenav>
 
                 <router-outlet #o="outlet"></router-outlet>
+            </mat-sidenav-container>
 
-                <div class="footer">
+            <div class="footer" role="region">
                     <div class="row">
                         <div class="col-sm-12 links">
                             <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
@@ -69,8 +73,6 @@
                         </div>
                     </div>
                 </div>
-
-            </mat-sidenav-container>
         </div>
     </div>
 </div>

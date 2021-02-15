@@ -3,6 +3,8 @@
 @import '~bootstrap/scss/bootstrap-grid';
 @import 'styles-reset';
 @import '~@angular/material/theming';
+@import 'functions';
+
 @include mat-core();
 
 /** THEMES **/

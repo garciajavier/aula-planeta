@@ -1,10 +1,12 @@
+@import '../../../../../functions';
+
 .main-heading {
   text-transform: uppercase;
-  margin: 0 0 20px 0;
+  margin: 0 0 em(20) 0;
 }
 
 mat-card {
-  margin: 0 0 20px 0;
+  margin: 0 0 em(20) 0;
   display: flex;
 
   mat-card-header {
@@ -13,13 +15,13 @@ mat-card {
 }
 
 form {
-  margin: 20px 0;
+  margin: em(20) 0;
 
   mat-form-field {
     width: 100%;
   }
 
   button {
-    margin: 20px 10px 0 0;
+    margin: em(20) em(10) 0 0;
   }
 }

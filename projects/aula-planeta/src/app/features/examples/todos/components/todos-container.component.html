@@ -2,59 +2,62 @@
     <div class="row">
         <div class="offset-md-2 col-md-8 entry">
             <aula-planeta-big-input rtl [placeholder]="'aula-planeta.examples.todos.input' | translate" [value]="newTodo" (keyup)="onNewTodoChange($event.target.value)" (keyup.enter)="!isAddTodoDisabled && onAddTodo()" (keyup.escape)="onNewTodoClear()">
-                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.add' | translate" matTooltipPosition="before">
-                </aula-planeta-big-input-action>
-                <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="todosManagementService.removeDoneDisabled$ | async" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate"
-                    matTooltipPosition="after">
-                </aula-planeta-big-input-action>
+              <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-plus" faIcon="plus" color="accent" (action)="onAddTodo()" [disabled]="isAddTodoDisabled" [matTooltip]="'aula-planeta.examples.todos.tooltip.add' | translate" matTooltipPosition="before"></aula-planeta-big-input-action>
+              <aula-planeta-big-input-action fontSet="fas" fontIcon="fa-trash" faIcon="trash" color="warn" (action)="onRemoveDoneTodos()" [disabled]="todosManagementService.removeDoneDisabled$ | async" [matTooltip]="'aula-planeta.examples.todos.tooltip.remove' | translate" matTooltipPosition="after"></aula-planeta-big-input-action>
             </aula-planeta-big-input>
         </div>
     </div>
     <div class="row">
-        <ng-container *ngIf="todosManagementService.todos$ | async as todos">
+        <ng-container role="list" *ngIf="todosManagementService.todos$ | async as todos">
             <div class="col-md-6">
-                <h2 class="dotos-title" rtl>
-                    <span>{{ 'aula-planeta.examples.todos.list' | translate }}</span>
-                    <button class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
-            <fa-icon icon="filter"></fa-icon>
-          </button>
-                    <mat-menu class="todos-filter-menu-overlay" #todosFilter="matMenu" xPosition="before">
-                        <button mat-menu-item (click)="onFilterTodos('ALL')" [class.active]="(todosManagementService.filter$ | async) === 'ALL'" rtl>
-              <mat-icon>
-                <fa-icon icon="tasks"></fa-icon>
-              </mat-icon>
-              <span>{{ 'aula-planeta.examples.todos.filter.all' | translate }}</span>
-            </button>
-                        <button mat-menu-item (click)="onFilterTodos('DONE')" [class.active]="(todosManagementService.filter$ | async) === 'DONE'">
-              <mat-icon>
-                <fa-icon icon="check"></fa-icon>
-              </mat-icon>
-              <span>{{ 'aula-planeta.examples.todos.filter.done' | translate }}</span>
-            </button>
-                        <button mat-menu-item (click)="onFilterTodos('ACTIVE')" [class.active]="(todosManagementService.filter$ | async) === 'ACTIVE'">
-              <mat-icon>
-                <fa-icon icon="square"></fa-icon>
-              </mat-icon>
-              <span>{{ 'aula-planeta.examples.todos.filter.active' | translate }}</span>
-            </button>
-                    </mat-menu>
-                    <mat-chip-list class="todos-filter-info d-none d-sm-block d-md-none d-lg-block">
-                        <mat-chip [disabled]=true [ngPlural]="todos.length">
-                            {{ 'aula-planeta.examples.todos.filter.description' | translate }}
-                            <ng-template ngPluralCase="other">{{ todos.length }} {{ 'aula-planeta.examples.todos.filter.items' | translate }}</ng-template>
-                            <ng-template ngPluralCase="=1">{{ 'aula-planeta.examples.todos.filter.one' | translate }} {{ 'aula-planeta.examples.todos.filter.item' | translate }}</ng-template>
-                            <ng-template ngPluralCase="=0">{{ 'aula-planeta.examples.todos.filter.none' | translate }} {{ 'aula-planeta.examples.todos.filter.items' | translate }}</ng-template>
-                        </mat-chip>
-                    </mat-chip-list>
-                </h2>
-                <mat-card *ngFor="let todo of todos | todos : (todosManagementService.filter$ | async)" class="todo" [ngClass]="routeAnimationsElements">
-                    <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)"></mat-checkbox>
-                    <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
-                      &nbsp;{{todo.name}}&nbsp;
-                    </span>
-                </mat-card>
-                <br>
-                <br>
+              <h2 class="dotos-title" rtl>
+                <span>{{ 'aula-planeta.examples.todos.list' | translate }}</span>
+                <button role="button" aria-label="Filtrar" class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">
+                  <fa-icon icon="filter"></fa-icon>
+                </button>
+
+                <mat-menu class="todos-filter-menu-overlay" #todosFilter="matMenu" xPosition="before">
+                  <button role="button" mat-menu-item (click)="onFilterTodos('ALL')" [class.active]="(todosManagementService.filter$ | async) === 'ALL'" rtl>
+                    <mat-icon>
+                      <fa-icon icon="tasks"></fa-icon>
+                    </mat-icon>
+                    <span>{{ 'aula-planeta.examples.todos.filter.all' | translate }}</span>
+                  </button>
+
+                  <button role="button"mat-menu-item (click)="onFilterTodos('DONE')" [class.active]="(todosManagementService.filter$ | async) === 'DONE'">
+                    <mat-icon>
+                      <fa-icon icon="check"></fa-icon>
+                    </mat-icon>
+                    <span>{{ 'aula-planeta.examples.todos.filter.done' | translate }}</span>
+                  </button>
+
+                  <button role="button" mat-menu-item (click)="onFilterTodos('ACTIVE')" [class.active]="(todosManagementService.filter$ | async) === 'ACTIVE'">
+                    <mat-icon>
+                      <fa-icon icon="square"></fa-icon>
+                    </mat-icon>
+                    <span>{{ 'aula-planeta.examples.todos.filter.active' | translate }}</span>
+                  </button>
+                </mat-menu>
+
+                <mat-chip-list class="todos-filter-info d-none d-sm-block d-md-none d-lg-block">
+                    <mat-chip [disabled]=true [ngPlural]="todos.length">
+                        {{ 'aula-planeta.examples.todos.filter.description' | translate }}
+                        <ng-template ngPluralCase="other">{{ todos.length }} {{ 'aula-planeta.examples.todos.filter.items' | translate }}</ng-template>
+                        <ng-template ngPluralCase="=1">{{ 'aula-planeta.examples.todos.filter.one' | translate }} {{ 'aula-planeta.examples.todos.filter.item' | translate }}</ng-template>
+                        <ng-template ngPluralCase="=0">{{ 'aula-planeta.examples.todos.filter.none' | translate }} {{ 'aula-planeta.examples.todos.filter.items' | translate }}</ng-template>
+                    </mat-chip>
+                </mat-chip-list>
+              </h2>
+
+              <mat-card role="listitem" *ngFor="let todo of todos | todos : (todosManagementService.filter$ | async)" class="todo" [ngClass]="routeAnimationsElements">
+                <mat-checkbox class="todo-done" [checked]="todo.done" (change)="onToggleTodo(todo)">
+                  <span class="todo-label" [ngClass]="{ 'todo-label-done': todo.done }" (click)="onToggleTodo(todo)">
+                    &nbsp;{{todo.name}}&nbsp;
+                  </span>
+                </mat-checkbox>
+
+              </mat-card>
+
             </div>
         </ng-container>
         <div class="offset-md-1 col-md-5" [ngClass]="routeAnimationsElements" rtl>

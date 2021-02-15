@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, HostListener } from '@angular/core';
 import { AuthManagementService } from '../../core/auth/auth-management.service';
 import { Observable, Subject } from 'rxjs';
 import { SettingsService } from '../../core/settings/settings.service';
@@ -12,20 +12,20 @@ import { take, takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'aula-planeta-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  styleUrls: [ './main.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [routeAnimations]
+  animations: [ routeAnimations ]
 })
 export class MainComponent implements OnInit, OnDestroy {
-
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
-  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
-  navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
+  languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
+  navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
+  navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+  isScrolling = false;
 
   sideconf = {
     fixed: false,
@@ -42,18 +42,16 @@ export class MainComponent implements OnInit, OnDestroy {
     public authManagementService: AuthManagementService,
     public settingsService: SettingsService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.authManagementService.currentUser$
-      .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(user => {
-        this.user = user;
-      })
+    this.authManagementService.currentUser$.pipe(take(1), takeUntil(this.destroy$)).subscribe((user) => {
+      this.user = user;
+    });
   }
 
   onLogoutClick() {
-    this.router.navigate(['/login']);
+    this.router.navigate([ '/login' ]);
     this.authManagementService.authLogout();
   }
 
@@ -62,4 +60,9 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  @HostListener('window:scroll', [ '$event' ])
+  eventoScroll($event) {
+    let scrollOffset = $event.srcElement.children[0].scrollTop;
+    this.isScrolling = scrollOffset > 0 ? true : false;
+  }
 }
