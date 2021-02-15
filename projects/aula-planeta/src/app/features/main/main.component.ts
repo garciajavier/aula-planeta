@@ -1,29 +1,31 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { AuthManagementService } from '../../core/auth/auth-management.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SettingsService } from '../../core/settings/settings.service';
 import { environment as env } from '../../../environments/environment';
 import { Settings } from '../../shared/models/settings.model';
 import { routeAnimations } from '../../core/animations/route.animations';
 import { Router } from '@angular/router';
+import { User } from '../../shared/models/user.model';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'aula-planeta-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [ routeAnimations ]
+  animations: [routeAnimations]
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
-  languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
-  navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
-  navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
+  navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
+  navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
 
   sideconf = {
     fixed: false,
@@ -32,6 +34,10 @@ export class MainComponent implements OnInit {
 
   settings$: Observable<Settings>;
 
+  private destroy$: Subject<void> = new Subject<void>();
+
+  user: User;
+
   constructor(
     public authManagementService: AuthManagementService,
     public settingsService: SettingsService,
@@ -39,11 +45,21 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authManagementService.currentUser$
+      .pipe(take(1), takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.user = user;
+      })
   }
 
   onLogoutClick() {
     this.router.navigate(['/login']);
     this.authManagementService.authLogout();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -33,7 +33,10 @@
                             "projects/aula-planeta/src/styles-app-loading.scss",
                             "projects/aula-planeta/src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "projects/aula-planeta/src/libs/html5shiv.js",
+                            "projects/aula-planeta/src/libs/core-js-bundle.js"
+                        ]
                     },
                     "configurations": {
                         "production": {

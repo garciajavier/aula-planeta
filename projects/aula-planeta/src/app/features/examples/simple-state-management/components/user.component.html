@@ -11,7 +11,7 @@
             <ng-container *ngIf="userManagementService.users$ | async as users">
                 <mat-card *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
                     <mat-card-header>
-                        <img mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" />
+                        <img mat-card-avatar src="https://source.unsplash.com/200x200/?{{ user.username }}" crossorigin="anonymous"/>
                         <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
                         <mat-card-subtitle>@{{ user.username }}</mat-card-subtitle>
                     </mat-card-header>
@@ -37,7 +37,7 @@
                     <mat-form-field>
                         <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
                         <mat-error *ngIf="userForm.get('firstName').hasError('minlength')">
-                            {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('name').errors.minlength.requiredLength} }}
+                            {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('firstName').errors.minlength.requiredLength} }}
                         </mat-error>
                         <mat-error *ngIf="userForm.get('firstName').hasError('required')">
                             {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
@@ -46,7 +46,7 @@
                     <mat-form-field>
                         <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
                         <mat-error *ngIf="userForm.get('lastName').hasError('minlength')">
-                            {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('surname').errors.minlength.requiredLength} }}
+                            {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('lastName').errors.minlength.requiredLength} }}
                         </mat-error>
                         <mat-error *ngIf="userForm.get('lastName').hasError('required')">
                             {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}

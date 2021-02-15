@@ -14,13 +14,14 @@
                     "/*.js",
                     "/assets/i18n/*.json",
                     "/assets/i18n/examples/*.json",
-                    "/assets/logo_PLANETA200x200.png"
+                    "/assets/logo_PLANETA200x200.png",
+                    "/libs/*.js"
                 ]
             }
         },
         {
             "name": "assets",
-            "installMode": "lazy",
+            "installMode": "prefetch",
             "updateMode": "prefetch",
             "resources": {
                 "files": [
@@ -35,9 +36,9 @@
         {
             "name": "analytics",
             "cacheConfig": {
-                "maxSize": 100,
-                "maxAge": "3d",
-                "timeout": "5m",
+                "maxSize": 1000,
+                "maxAge": "180d",
+                "timeout": "5s",
                 "strategy": "performance"
             },
             "urls": [
@@ -45,15 +46,20 @@
             ]
         },
         {
-            "name": "photos",
+            "name": "dynamicResources",
             "cacheConfig": {
-                "maxSize": 100,
-                "maxAge": "3d",
-                "timeout": "5m",
+                "maxSize": 1000,
+                "maxAge": "180d",
+                "timeout": "5s",
                 "strategy": "performance"
             },
             "urls": [
-                "https://source.unsplash.com/**"
+                "**/images.unsplash.com/**",
+                "**/source.unsplash.com/**",
+                "**/cdnjs.cloudflare.com/**",
+                "**/core-js-bundle/**",
+                "https://fonts.googleapis.com/**",
+                "https://fonts.gstatic.com/**"
             ]
         }
     ]

@@ -7,7 +7,7 @@ import { AuthManagementService } from '../../../core/auth/auth-management.servic
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: [ './login.component.scss' ]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   /**
@@ -67,7 +67,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       .authLogin(this.f.username.value, this.f.password.value)
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe(() => {
-        this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl('/');
       });
+  }
+
+  register() {
+    this.router.navigateByUrl('/login/register');
   }
 }

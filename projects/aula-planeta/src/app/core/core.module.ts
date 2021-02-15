@@ -75,8 +75,8 @@ export function httpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: RouteReuseStrategy, useClass: RouteReuseService }
+    { provide: ErrorHandler, useClass: AppErrorHandler }
+    // { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],
   exports: [
     // angular
