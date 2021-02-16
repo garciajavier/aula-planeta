@@ -93,7 +93,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       if (!refreshToken) return unauthorized();
 
-      const user = users.find((x) => x.refreshTokens.includes(refreshToken));
+      const user: User = users.find((x) => x.refreshTokens.includes(refreshToken));
 
       if (!user) return unauthorized();
 
@@ -107,6 +107,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
+        roles: user.roles,
         jwtToken: generateJwtToken()
       });
     }
@@ -159,6 +160,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function generateJwtToken() {
       // create token that expires in 15 minutes
       const tokenPayload = { exp: Math.round(new Date(Date.now() + 2 * 60 * 1000).getTime() / 1000) };
+      console.log('generateJwtToken:  ', `fake-jwt-token.${btoa(JSON.stringify(tokenPayload))}`);
       return `fake-jwt-token.${btoa(JSON.stringify(tokenPayload))}`;
     }
 
@@ -168,12 +170,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       // add token cookie that expires in 7 days
       const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString();
       document.cookie = `fakeRefreshToken=${token}; expires=${expires}; path=/`;
+      console.log('generateRefreshToken:  ', token);
 
       return token;
     }
 
     function getRefreshToken() {
       // get refresh token from cookie
+      console.log(
+        'getRefreshToken:  ',
+        (document.cookie.split(';').find((x) => x.includes('fakeRefreshToken')) || '=').split('=')[1]
+      );
+
       return (document.cookie.split(';').find((x) => x.includes('fakeRefreshToken')) || '=').split('=')[1];
     }
   }

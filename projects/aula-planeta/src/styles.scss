@@ -1,9 +1,13 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
 @import 'styles-variables';
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import 'styles-reset';
 @import '~@angular/material/theming';
 @import 'functions';
+
 
 @include mat-core();
 
@@ -50,7 +54,7 @@
 
 .login-theme {
     @include angular-material-theme($ap-login-theme);
-    @include ap-login-component-theme($ap-login-theme); 
+    @include ap-login-component-theme($ap-login-theme);
 }
 
 // Override typography for all Angular Material

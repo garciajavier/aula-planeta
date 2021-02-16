@@ -31,11 +31,12 @@
                         ],
                         "styles": [
                             "projects/aula-planeta/src/styles-app-loading.scss",
-                            "projects/aula-planeta/src/styles.scss"
+                            "projects/aula-planeta/src/styles.scss",
                         ],
                         "scripts": [
                             "projects/aula-planeta/src/libs/html5shiv.js",
-                            "projects/aula-planeta/src/libs/core-js-bundle.js"
+                            "projects/aula-planeta/src/libs/core-js-bundle.js",
+                            "projects/aula-planeta/src/libs/google-analytics.js"
                         ]
                     },
                     "configurations": {
