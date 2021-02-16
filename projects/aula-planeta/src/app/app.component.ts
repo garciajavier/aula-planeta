@@ -1,5 +1,8 @@
 import browser from 'browser-detect';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+
 import { SettingsService } from './core/settings/settings.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwUpdate } from '@angular/service-worker'
@@ -15,6 +18,7 @@ import {
 } from '@angular/router';
 
 import { routeAnimations, LocalStorageService } from './core/core.module';
+import { ProgressSpinnerService } from './shared/progress-spinner/progress-spinner.service';
 
 @Component({
   selector: 'aula-planeta-root',
@@ -29,9 +33,15 @@ export class AppComponent implements OnInit {
    * Use to destroy and prevent memory leaks
    */
   private destroy$: Subject<void> = new Subject<void>();
-  public showOverlay = true;
+
   
-  constructor(public settingsService: SettingsService, private translateService: TranslateService, private router: Router, private swUpdate: SwUpdate) {
+  constructor(
+    public settingsService: SettingsService,
+    private translateService: TranslateService,
+    private router: Router,
+    private swUpdate: SwUpdate,
+    private progressSpinnerService: ProgressSpinnerService
+  ) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })
@@ -68,11 +78,11 @@ export class AppComponent implements OnInit {
   // Shows and hides the loading spinner during RouterEvent changes
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
-      this.showOverlay = true;
+      this.progressSpinnerService.spin$.next(true);
     }
     
     if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-      this.showOverlay = false;
+      this.progressSpinnerService.spin$.next(false);
     }
   }
 }
