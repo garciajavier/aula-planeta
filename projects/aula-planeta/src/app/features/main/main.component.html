@@ -11,9 +11,9 @@
 
                 <span class="spacer d-inline">aulaPlaneta</span>
 
-                <button role="button" aria-label="Menú de usuario" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
-                    <mat-icon>account_circle</mat-icon>
-                    <!-- <span *ngIf="user"> Hola, {{user.firstName}} {{user.lastName}}</span> -->
+                <button id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu">
+                    <mat-icon class="mr-0 mr-sm-2">account_circle</mat-icon>
+                    <span *ngIf="user" class="d-none d-sm-inline">Hola, {{user.firstName}} {{user.lastName}}</span>
                 </button>
                 
 
