@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthDataService {
   constructor(private http: HttpClient) {}
-
+  
   public authenticate(username: string, password: string): Observable<User> {
     return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password });
   }

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 
 import { CoreModule } from './core/core.module';
 
@@ -18,6 +20,8 @@ import { MainComponent } from './features/main/main.component';
     // angular
     BrowserAnimationsModule,
     BrowserModule,
+    OverlayModule,
+    PortalModule,
 
     // core
     CoreModule,
