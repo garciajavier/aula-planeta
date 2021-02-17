@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1613571305995,
+  "timestamp": 1613571437664,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -21,15 +21,15 @@
         "https://garciajavier.github.io/aula-planeta/8-es5.c3f119ff7b568f496fd0.js",
         "https://garciajavier.github.io/aula-planeta/favicon.ico",
         "https://garciajavier.github.io/aula-planeta/index.html",
-        "https://garciajavier.github.io/aula-planeta/main-es2015.b6338473e6bb856199a7.js",
-        "https://garciajavier.github.io/aula-planeta/main-es5.b6338473e6bb856199a7.js",
+        "https://garciajavier.github.io/aula-planeta/main-es2015.591bcd231feb5e30f668.js",
+        "https://garciajavier.github.io/aula-planeta/main-es5.591bcd231feb5e30f668.js",
         "https://garciajavier.github.io/aula-planeta/manifest.webmanifest",
         "https://garciajavier.github.io/aula-planeta/polyfills-es2015.4eed069ac6afd56882b8.js",
         "https://garciajavier.github.io/aula-planeta/polyfills-es5.bf46cd8cd6a27d1a0c6e.js",
         "https://garciajavier.github.io/aula-planeta/runtime-es2015.cb50335241f628b8e5e3.js",
         "https://garciajavier.github.io/aula-planeta/runtime-es5.cb50335241f628b8e5e3.js",
         "https://garciajavier.github.io/aula-planeta/scripts.740cd9b796ca84815764.js",
-        "https://garciajavier.github.io/aula-planeta/styles.59897671a7a708a54b5e.css"
+        "https://garciajavier.github.io/aula-planeta/styles.b8bf366ab15c8012cb63.css"
       ],
       "patterns": []
     },
@@ -47,13 +47,14 @@
         "https://garciajavier.github.io/aula-planeta/assets/icons/icon-192x192.png",
         "https://garciajavier.github.io/aula-planeta/assets/icons/icon-384x384.png",
         "https://garciajavier.github.io/aula-planeta/assets/icons/icon-512x512.png",
+        "https://garciajavier.github.io/aula-planeta/assets/icons/icon-72x72.png",
         "https://garciajavier.github.io/aula-planeta/assets/icons/icon-96x96.png",
         "https://garciajavier.github.io/aula-planeta/assets/ios-add-btn.png",
         "https://garciajavier.github.io/aula-planeta/assets/ios-menu-btn.png",
         "https://garciajavier.github.io/aula-planeta/assets/logo.png",
         "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA200x200.png",
         "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA72x72.png",
-        "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.67a0d284b30854204c92.png"
+        "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.1544e45b56169dd5ea03.png"
       ],
       "patterns": []
     }
@@ -108,24 +109,25 @@
     "https://garciajavier.github.io/aula-planeta/assets/icons/icon-192x192.png": "8f5355c3cc71280281412ea537199d0afbb4964a",
     "https://garciajavier.github.io/aula-planeta/assets/icons/icon-384x384.png": "f8c86c911fbbfff2cb124aeeda63f0ab2c7b0af1",
     "https://garciajavier.github.io/aula-planeta/assets/icons/icon-512x512.png": "6cf1082577ffa6079435d36a4d1e1a9a2948033b",
+    "https://garciajavier.github.io/aula-planeta/assets/icons/icon-72x72.png": "66f1b241a1c8c82d459665f738d24d6434a1670c",
     "https://garciajavier.github.io/aula-planeta/assets/icons/icon-96x96.png": "96d250d246f8bdadf4ee27fdcef40a4a5ab6ff21",
     "https://garciajavier.github.io/aula-planeta/assets/ios-add-btn.png": "b04f8aff472620d61612217ef4b2cd94f07b914b",
     "https://garciajavier.github.io/aula-planeta/assets/ios-menu-btn.png": "85935a3142fbdca3ebd69db254792588e3c48b13",
     "https://garciajavier.github.io/aula-planeta/assets/logo.png": "a55e86f8596a04dba17d6c1d6f9505723d671e2e",
-    "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA200x200.png": "c647f3472e67c1c315400ef18276c07e3bde3ff4",
+    "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA200x200.png": "8f5355c3cc71280281412ea537199d0afbb4964a",
     "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA72x72.png": "66f1b241a1c8c82d459665f738d24d6434a1670c",
     "https://garciajavier.github.io/aula-planeta/favicon.ico": "0bece49ba101405b68ab1078dd0fa713bb32a3ad",
-    "https://garciajavier.github.io/aula-planeta/index.html": "afd3e1f97286116db7858e1cc61b2c24c47f8c19",
-    "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.67a0d284b30854204c92.png": "b842de9c89983fb5e17b117283dbef82f7ae893e",
-    "https://garciajavier.github.io/aula-planeta/main-es2015.b6338473e6bb856199a7.js": "bdb872e1549c673b0b3c65a69594c5fd7e25b9d5",
-    "https://garciajavier.github.io/aula-planeta/main-es5.b6338473e6bb856199a7.js": "6f1390d0b5df303a975ea033e2fba1fae0d850fb",
+    "https://garciajavier.github.io/aula-planeta/index.html": "2503798bbb85e80894cdc1922ef4726aeb65f760",
+    "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.1544e45b56169dd5ea03.png": "66f1b241a1c8c82d459665f738d24d6434a1670c",
+    "https://garciajavier.github.io/aula-planeta/main-es2015.591bcd231feb5e30f668.js": "0b2e7f3a503cc28baea6e0b52063e62d0c1af330",
+    "https://garciajavier.github.io/aula-planeta/main-es5.591bcd231feb5e30f668.js": "4f8f85f14d273beb1fe022919372e0a2e77cb470",
     "https://garciajavier.github.io/aula-planeta/manifest.webmanifest": "a9145513600444949a70d3bde39af9bb61760ac1",
     "https://garciajavier.github.io/aula-planeta/polyfills-es2015.4eed069ac6afd56882b8.js": "9b70b605674812d5d904143897d89b6c01ba5c4e",
     "https://garciajavier.github.io/aula-planeta/polyfills-es5.bf46cd8cd6a27d1a0c6e.js": "3a191abacbde1fc0ce1d8f9bb22daf4ee662bdf8",
     "https://garciajavier.github.io/aula-planeta/runtime-es2015.cb50335241f628b8e5e3.js": "f6c987e53e559991e8bdcdfb33b214442ce35fa5",
     "https://garciajavier.github.io/aula-planeta/runtime-es5.cb50335241f628b8e5e3.js": "fa49fb960e8b4ade920431e93acb2de56cee4ed1",
     "https://garciajavier.github.io/aula-planeta/scripts.740cd9b796ca84815764.js": "ef782c730833317de796945d5664d4154604223f",
-    "https://garciajavier.github.io/aula-planeta/styles.59897671a7a708a54b5e.css": "58f06707bf3ce508021882ff030b71f1d7560b09"
+    "https://garciajavier.github.io/aula-planeta/styles.b8bf366ab15c8012cb63.css": "5b582cc13fd2dd8c4a9ac8466111366e46c352ab"
   },
   "navigationUrls": [
     {
