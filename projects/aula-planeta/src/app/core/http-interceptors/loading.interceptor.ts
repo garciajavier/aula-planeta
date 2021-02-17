@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ProgressSpinnerService } from '../../shared/progress-spinner/progress-spinner.service';
@@ -17,15 +17,15 @@ export class LoadingInterceptor {
         private progressSpinnerService: ProgressSpinnerService
     ) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        if (this.activeRequests === 0 && request.headers.has(NO_SPINNER_LOADING_HEADER)) {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if (req.headers.has(NO_SPINNER_LOADING_HEADER) ) {
+          req = this.clearNoSpinnerHeader(req);
+          return next.handle(req);
+        } else {
+          this.activeRequests++;
           this.progressSpinnerService.spin$.next(true);
-        }
 
-        this.activeRequests++;
-
-        return next.handle(request).pipe(
+          return next.handle(req).pipe(
             finalize(() => {
                 this.activeRequests--;
                 if (this.activeRequests === 0) {
@@ -33,5 +33,23 @@ export class LoadingInterceptor {
                 }
             })
         )
-    };
+        }
+    }
+
+  /**
+   * Iterate over httpHeaders from request and delete the NO_LOADER header
+   * @param req Request to analize
+   */
+  private clearNoSpinnerHeader(req: HttpRequest<any>): HttpRequest<any> {
+    let cloneHttpHeaders: HttpHeaders = new HttpHeaders();
+    req.headers.keys().forEach((key: string) => {
+      if (key !== NO_SPINNER_LOADING_HEADER) {
+        cloneHttpHeaders = cloneHttpHeaders.append(key, req.headers.get(key));
+      }
+    });
+    const reqMod = req.clone({
+      headers: cloneHttpHeaders
+    });
+    return reqMod;
+  }
 }

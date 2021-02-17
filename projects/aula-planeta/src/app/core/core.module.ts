@@ -73,10 +73,10 @@ export function httpLoaderFactory(http: HttpClient) {
   ],
   declarations: [],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler }
     // { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],

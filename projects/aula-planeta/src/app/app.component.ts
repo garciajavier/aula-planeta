@@ -1,8 +1,5 @@
 import browser from 'browser-detect';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-
 import { SettingsService } from './core/settings/settings.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwUpdate } from '@angular/service-worker'
@@ -82,7 +79,7 @@ export class AppComponent implements OnInit {
     }
     
     if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-      this.progressSpinnerService.spin$.next(false);
+      setTimeout(()=>{this.progressSpinnerService.spin$.next(false)},3000000);
     }
   }
 }
