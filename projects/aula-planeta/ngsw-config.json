@@ -12,9 +12,9 @@
                     "/manifest.webmanifest",
                     "/*.css",
                     "/*.js",
-                    "/assets/i18n/*.json",
-                    "/assets/i18n/examples/*.json",
-                    "/assets/logo_PLANETA200x200.png",
+                    "**/assets/i18n/*.json",
+                    "**/assets/i18n/examples/*.json",
+                    "**/assets/logo_PLANETA200x200.png",
                     "/libs/*.js"
                 ]
             }

@@ -1,6 +1,15 @@
 @import '../../../styles-variables';
 @import '../../../functions';
 
+body {
+    overscroll-behavior-y: contain;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
 .theme-wrapper {
     height: 100%;
     width: 100%;
@@ -45,7 +54,7 @@
         margin-top: em(64);
 
         @media screen and (max-width: map-get($grid-breakpoints, md)) {
-             ::ng-deep .mat-sidenav-content {
+            ::ng-deep .mat-sidenav-content {
                 margin-left: 0 !important;
             }
         }
@@ -93,10 +102,11 @@
                         padding: em(20) em(10);
                     }
                 }
-                
+
                 @media (max-width: map-get($grid-breakpoints, md)) {
                     a {
                         padding: em(20);
+
                         span {
                             width: 0;
                             padding: 0;
@@ -114,6 +124,7 @@
             @media (min-width: map-get($grid-breakpoints, sm)) {
                 .signature {
                     position: relative;
+
                     a {
                         position: absolute;
                         right: em(15);

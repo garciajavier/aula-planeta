@@ -44,12 +44,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatBottomSheetModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { disableClose: true, hasBackdrop: true } },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
-
   ],
   exports: [
     MatInputModule,
@@ -74,7 +74,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatBottomSheetModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {}

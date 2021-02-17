@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -33,6 +33,8 @@ import { MaterialModule } from '../material/material.module';
 import { DirectivesModule } from './directives/directives.module';
 import { RouteReuseStrategy } from '@angular/router';
 import { RouteReuseService } from './router-reuse/router-reuse.service';
+import { PwaService } from './pwa/pwa.service';
+import { PromptComponent } from './pwa/components/prompt/prompt-component';
 
 export {
   TitleService,
@@ -47,6 +49,8 @@ export {
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/`, '.json');
 }
+
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({
   imports: [
@@ -66,16 +70,17 @@ export function httpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
+        deps: [ HttpClient ]
       }
     })
   ],
-  declarations: [],
+  declarations: [ PromptComponent ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: APP_INITIALIZER, useFactory: initializer, deps: [ PwaService ], multi: true }
     // { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],
   exports: [
