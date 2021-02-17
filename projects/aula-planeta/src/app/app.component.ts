@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
     }
     
     if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-      setTimeout(()=>{this.progressSpinnerService.spin$.next(false)},3000000);
+      this.progressSpinnerService.spin$.next(false);
     }
   }
 }
