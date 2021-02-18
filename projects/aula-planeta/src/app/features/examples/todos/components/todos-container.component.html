@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <ng-container role="list" *ngIf="todosManagementService.todos$ | async as todos">
-            <div class="col-md-6">
+            <div class="offset-md-2 col-md-8">
               <h2 class="dotos-title" rtl>
                 <span>{{ 'aula-planeta.examples.todos.list' | translate }}</span>
                 <button role="button" aria-label="Filtrar" class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter">

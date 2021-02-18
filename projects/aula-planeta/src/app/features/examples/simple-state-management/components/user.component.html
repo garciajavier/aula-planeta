@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="offset-md-2 col-md-8">
             <h1 rtl class="main-heading">
                 {{ 'aula-planeta.examples.simple-state-management.title' | translate }}
             </h1>
         </div>
     </div>
     <div class="row" [ngClass]="routeAnimationsElements" rtl>
-        <div class="col-md-12 col-lg-6">
+        <div class="offset-md-2 col-md-8">
 
             <ng-container role="list" *ngIf="userManagementService.users$ | async as users">
                 <mat-card role="listitem" *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
