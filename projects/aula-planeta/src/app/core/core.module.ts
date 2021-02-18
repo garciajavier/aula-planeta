@@ -36,6 +36,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { RouteReuseService } from './router-reuse/router-reuse.service';
 import { PwaService } from './pwa/pwa.service';
 import { PromptComponent } from './pwa/components/prompt/prompt-component';
+import { ProgressSpinnerService } from './progress-spinner/progress-spinner.service';
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 
 export {
   TitleService,
@@ -51,7 +53,9 @@ export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, `${environment.i18nPrefix}/assets/i18n/`, '.json');
 }
 
-const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
+const initializerPwaService = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
+const initializerProgressSpinnerService = (progressSpinnerService: ProgressSpinnerService) => () =>
+  progressSpinnerService.initProgressSpinnerService();
 
 @NgModule({
   imports: [
@@ -75,14 +79,25 @@ const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt()
       }
     })
   ],
-  declarations: [ PromptComponent ],
+  declarations: [ PromptComponent, ProgressSpinnerComponent ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: APP_INITIALIZER, useFactory: initializer, deps: [ PwaService ], multi: true }
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializerPwaService,
+      deps: [ PwaService ],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializerProgressSpinnerService,
+      deps: [ ProgressSpinnerService ],
+      multi: true
+    }
     // { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],
   exports: [

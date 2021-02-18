@@ -22,10 +22,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
-import {
-  FontAwesomeModule,
-  FaIconLibrary
-} from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import {
   faPlus,
   faEdit,
@@ -50,7 +47,6 @@ import { faMediumM, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { BigInputComponent } from './big-input/big-input/big-input.component';
 import { BigInputActionComponent } from './big-input/big-input-action/big-input-action.component';
 import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
-import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 
 @NgModule({
   imports: [
@@ -77,12 +73,7 @@ import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.co
 
     FontAwesomeModule
   ],
-  declarations: [
-    BigInputComponent,
-    BigInputActionComponent,
-    RtlSupportDirective,
-    ProgressSpinnerComponent
-  ],
+  declarations: [ BigInputComponent, BigInputActionComponent, RtlSupportDirective ],
   exports: [
     CommonModule,
     FormsModule,

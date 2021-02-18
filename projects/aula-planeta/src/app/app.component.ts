@@ -2,20 +2,7 @@ import browser from 'browser-detect';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SettingsService } from './core/settings/settings.service';
 import { TranslateService } from '@ngx-translate/core';
-import { SwUpdate } from '@angular/service-worker';
-import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import {
-  Router,
-  Event as RouterEvent,
-  NavigationStart,
-  NavigationEnd,
-  NavigationCancel,
-  NavigationError
-} from '@angular/router';
-
-import { routeAnimations, LocalStorageService } from './core/core.module';
-import { ProgressSpinnerService } from './shared/progress-spinner/progress-spinner.service';
+import { routeAnimations } from './core/core.module';
 
 @Component({
   selector: 'aula-planeta-root',
@@ -26,22 +13,8 @@ import { ProgressSpinnerService } from './shared/progress-spinner/progress-spinn
 })
 export class AppComponent implements OnInit {
   public showOverlay = true;
-  /**
-   * Use to destroy and prevent memory leaks
-   */
-  private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(
-    public settingsService: SettingsService,
-    private translateService: TranslateService,
-    private router: Router,
-    private swUpdate: SwUpdate,
-    private progressSpinnerService: ProgressSpinnerService
-  ) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.navigationInterceptor(event);
-    });
-  }
+  constructor(public settingsService: SettingsService, private translateService: TranslateService) {}
 
   private static isIEorEdgeOrSafari() {
     console.log('browser name:', browser().name);
@@ -52,17 +25,6 @@ export class AppComponent implements OnInit {
     this.translateService.use('es');
     if (AppComponent.isIEorEdgeOrSafari()) {
       this.settingsService.changeSetting('pageAnimationsDisabled', true);
-    }
-  }
-
-  // Shows and hides the loading spinner during RouterEvent changes
-  navigationInterceptor(event: RouterEvent): void {
-    if (event instanceof NavigationStart) {
-      this.progressSpinnerService.spin$.next(true);
-    }
-
-    if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-      this.progressSpinnerService.spin$.next(false);
     }
   }
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { ProgressSpinnerService } from '../../shared/progress-spinner/progress-spinner.service';
+import { ProgressSpinnerService } from '../progress-spinner/progress-spinner.service';
 
 const NO_SPINNER_LOADING_HEADER = 'NO_LOADER';
 
@@ -10,31 +10,32 @@ const NO_SPINNER_LOADING_HEADER = 'NO_LOADER';
   providedIn: 'root'
 })
 export class LoadingInterceptor {
-
   activeRequests: number = 0;
 
-    constructor(
-        private progressSpinnerService: ProgressSpinnerService
-    ) { }
+  private progressSpinnerService: ProgressSpinnerService;
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.headers.has(NO_SPINNER_LOADING_HEADER) ) {
-          req = this.clearNoSpinnerHeader(req);
-          return next.handle(req);
-        } else {
-          this.activeRequests++;
-          this.progressSpinnerService.spin$.next(true);
+  constructor(private injector: Injector) {
+    this.progressSpinnerService = this.injector.get(ProgressSpinnerService);
+  }
 
-          return next.handle(req).pipe(
-            finalize(() => {
-                this.activeRequests--;
-                if (this.activeRequests === 0) {
-                  this.progressSpinnerService.spin$.next(false);
-                }
-            })
-        )
-        }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.headers.has(NO_SPINNER_LOADING_HEADER)) {
+      req = this.clearNoSpinnerHeader(req);
+      return next.handle(req);
+    } else {
+      this.activeRequests++;
+      this.progressSpinnerService.spin$.next(true);
+
+      return next.handle(req).pipe(
+        finalize(() => {
+          this.activeRequests--;
+          if (this.activeRequests === 0) {
+            this.progressSpinnerService.spin$.next(false);
+          }
+        })
+      );
     }
+  }
 
   /**
    * Iterate over httpHeaders from request and delete the NO_LOADER header
