@@ -1,0 +1,11 @@
+@import '../styles-variables';
+
+@media (max-width: map-get($grid-breakpoints, sm)) {
+    .cdk-overlay-container .cdk-overlay-pane {
+        transform: none !important;
+    }
+    .cdk-overlay-container .cdk-overlay-pane .cdkSelect {
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+}

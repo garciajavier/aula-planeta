@@ -8,16 +8,18 @@
     width: em(390);
 
     form * {
-          margin: 0.75em 0;
+      margin: 0.75em 0;
     }
 
     a {
-        text-align: right;
-        cursor: pointer;
-        &:hover {
-            text-decoration: underline;
-        }
+      text-align: right;
+      cursor: pointer;
+      &:hover {
+          text-decoration: underline;
+      }
     }
   }
+
+
 }
 

@@ -33,7 +33,7 @@
 
                     <mat-form-field class="w-100">
                         <mat-label aria-label="Roles">Roles</mat-label>
-                        <mat-select formControlName="roles" multiple >
+                        <mat-select formControlName="roles" multiple panelClass="cdkSelect">
                             <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role">{{role.description}}</mat-option>
                         </mat-select>
                     </mat-form-field>
