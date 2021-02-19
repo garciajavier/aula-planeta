@@ -12,7 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
     this.authManagementService = this.injector.get(AuthManagementService);
-    const currentUser = this.authManagementService.currentUserValue;
+    const currentUser = this.authManagementService.currentUser;
 
     const isLoggedIn = currentUser && currentUser.jwtToken;
     const isApiUrl = request.url.startsWith(environment.apiUrl);

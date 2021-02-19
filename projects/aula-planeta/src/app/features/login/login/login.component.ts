@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authenticationService: AuthManagementService
   ) {
     // redirect to starship if already logged in
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.currentUser) {
       this.router.navigate([ '/' ]);
     }
   }

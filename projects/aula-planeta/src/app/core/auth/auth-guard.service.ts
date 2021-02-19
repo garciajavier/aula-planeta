@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.authManagementService = this.injector.get(AuthManagementService);
-    if (this.authManagementService.currentUserValue) {
+    if (this.authManagementService.currentUser) {
       if (route.data.roles && !this.authManagementService.userCan(route.data.roles)) {
         this.snackBar.open('No tienes privilegios', 'OK', {
           duration: 2000

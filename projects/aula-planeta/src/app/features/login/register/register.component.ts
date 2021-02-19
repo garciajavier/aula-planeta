@@ -28,12 +28,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private overlayContainer: OverlayContainer,
     public authManagementService: AuthManagementService
-  ) 
-  {
+  ) {
     this.overlayContainer.getContainerElement().classList.add('login-theme');
 
     // redirect to starship if already logged in
-    if (this.authManagementService.currentUserValue) {
+    if (this.authManagementService.currentUser) {
       this.router.navigate([ '/' ]);
     }
   }

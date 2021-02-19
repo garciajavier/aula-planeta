@@ -29,7 +29,6 @@ export class AuthManagementService {
    */
   private _currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
   public currentUser$ = this._currentUser.asObservable();
-  public currentUserValue: User;
 
   /**
    * Contains the isAuthenticated 
@@ -39,7 +38,7 @@ export class AuthManagementService {
 
   constructor(private localStorageService: LocalStorageService, private authDataService: AuthDataService) {
     const currentUser: User = this.localStorageService.getItem(CURRENT_USER);
-    this.currentUser = currentUser;
+    this.currentUserNext(currentUser);
 
     const roles: Role[] = this.localStorageService.getItem(ROLES);
     this.roles =
@@ -60,24 +59,10 @@ export class AuthManagementService {
   }
 
   /**
-   * getter isAuthenticated
-   */
-  private get isAuthenticated() {
-    return this._isAuthenticated.getValue();
-  }
-
-  /**
    * getter currentUser
    */
-  private get currentUser() {
+  get currentUser() {
     return this._currentUser.getValue();
-  }
-
-  /**
-   * getter roles
-   */
-  private get roles() {
-    return this._roles.getValue();
   }
 
   /**
@@ -93,7 +78,7 @@ export class AuthManagementService {
   authLogin(username: string, password: string) {
     return this.authDataService.authenticate(username, password).pipe(
       map((user) => {
-        this.currentUser = user;
+        this.currentUserNext(user);
         this.isAuthenticated = true;
         this.startRefreshTokenTimer();
       })
@@ -104,7 +89,7 @@ export class AuthManagementService {
    * Logout
    */
   authLogout() {
-    this.currentUser = null;
+    this.currentUserNext(null);
     this.isAuthenticated = false;
     this.stopRefreshTokenTimer();
     return this.authDataService.logout();
@@ -113,7 +98,7 @@ export class AuthManagementService {
   refreshToken() {
     return this.authDataService.refreshToken().pipe(
       map((user) => {
-        this.currentUser = user;
+        this.currentUserNext(user);
         this.startRefreshTokenTimer();
         return user;
       })
@@ -133,6 +118,29 @@ export class AuthManagementService {
   }
 
   /**
+   * getter isAuthenticated
+   */
+  private get isAuthenticated() {
+    return this._isAuthenticated.getValue();
+  }
+
+  /**
+   * getter roles
+   */
+  private get roles() {
+    return this._roles.getValue();
+  }
+
+  /**
+   * Emit a roles
+   * @param roles
+   */
+  private set roles(roles: Role[]) {
+    this._roles.next(roles);
+    this.localStorageService.setItem(ROLES, roles);
+  }
+
+  /**
    * Emit a isAuthenticated
    * @param isAuthenticated
    */
@@ -145,26 +153,16 @@ export class AuthManagementService {
    * Emit a user
    * @param user
    */
-  private set currentUser(user: User) {
+  private currentUserNext(user: User) {
     this._currentUser.next(user);
-    this.currentUserValue = this._currentUser.getValue();
     this.localStorageService.setItem(CURRENT_USER, user);
-  }
-
-  /**
-   * Emit a roles
-   * @param roles
-   */
-  private set roles(roles: Role[]) {
-    this._roles.next(roles);
-    this.localStorageService.setItem(ROLES, roles);
   }
 
   private refreshTokenTimeout;
 
   private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    const jwtToken = JSON.parse(atob(this.currentUserValue.jwtToken.split('.')[1]));
+    const jwtToken = JSON.parse(atob(this.currentUser.jwtToken.split('.')[1]));
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);

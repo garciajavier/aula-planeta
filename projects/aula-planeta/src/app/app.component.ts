@@ -12,8 +12,6 @@ import { routeAnimations } from './core/core.module';
   animations: [ routeAnimations ]
 })
 export class AppComponent implements OnInit {
-  public showOverlay = true;
-
   constructor(public settingsService: SettingsService, private translateService: TranslateService) {}
 
   private static isIEorEdgeOrSafari() {
