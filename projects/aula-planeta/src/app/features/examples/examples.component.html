@@ -5,7 +5,7 @@
 </nav>
 
 <nav class="nav-responsive d-sm-none d-flex justify-content-center" role="navigation">
-    <mat-select [placeholder]="'aula-planeta.examples.title' | translate" [value]="'todos'">
+    <mat-select [placeholder]="'aula-planeta.examples.title' | translate" [value]="'todos'" panelClass="cdkSelect">
         <mat-option *ngFor="let e of examples" [value]="e" [routerLink]="e.link" [disabled]="e.auth">
             {{e.label | translate}}
         </mat-option>

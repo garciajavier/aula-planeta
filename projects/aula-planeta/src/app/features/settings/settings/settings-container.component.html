@@ -14,7 +14,7 @@
                         <fa-icon icon="language" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
-                        <mat-select [aria-label]="'aula-planeta.settings.general.placeholder' | translate" [placeholder]="'aula-planeta.settings.general.placeholder' | translate" [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language">
+                        <mat-select [aria-label]="'aula-planeta.settings.general.placeholder' | translate" [placeholder]="'aula-planeta.settings.general.placeholder' | translate" [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language" panelClass="cdkSelect">
                             <ng-container *ngFor="let l of languages">
                                 <!-- ngFor hack of missing ngLet of Angular -->
                                 <mat-option *ngFor="let title of ['aula-planeta.settings.general.language.' + l.value | translate]" [value]="l.value" [title]="title !== l.label
@@ -45,7 +45,7 @@
                         <fa-icon icon="paint-brush" color="accent"></fa-icon>
                     </mat-icon>
                     <mat-form-field>
-                        <mat-select [aria-label]="'aula-planeta.settings.themes.placeholder' | translate" [placeholder]="'aula-planeta.settings.themes.placeholder' | translate" [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes">
+                        <mat-select [aria-label]="'aula-planeta.settings.themes.placeholder' | translate" [placeholder]="'aula-planeta.settings.themes.placeholder' | translate" [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes" panelClass="cdkSelect">
                             <mat-option *ngFor="let t of themes" [value]="t.value">
                                 {{ 'aula-planeta.settings.themes.' + t.label | translate }}
                             </mat-option>

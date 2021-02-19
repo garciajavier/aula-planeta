@@ -30,7 +30,6 @@
                             "projects/aula-planeta/src/manifest.webmanifest"
                         ],
                         "styles": [
-                            "projects/aula-planeta/src/styles-app-loading.scss",
                             "projects/aula-planeta/src/styles.scss"
                         ],
                         "scripts": [

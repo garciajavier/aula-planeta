@@ -1,15 +1,6 @@
 @import '../../../styles-variables';
 @import '../../../functions';
 
-body {
-    overscroll-behavior-y: contain;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-
 .theme-wrapper {
     height: 100%;
     width: 100%;
