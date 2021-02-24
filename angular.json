@@ -29,6 +29,11 @@
                             "projects/aula-planeta/src/assets",
                             "projects/aula-planeta/src/manifest.webmanifest"
                         ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "projects/aula-planeta/src"
+                            ]
+                        },
                         "styles": [
                             "projects/aula-planeta/src/styles.scss"
                         ],
