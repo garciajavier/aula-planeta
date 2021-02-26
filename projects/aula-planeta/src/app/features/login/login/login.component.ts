@@ -4,10 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthManagementService } from '../../../core/auth/auth-management.service';
+import { SocialAuthService, MicrosoftLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: [ './login.component.scss' ]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
   /**
@@ -23,18 +25,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthManagementService
+    private authenticationService: AuthManagementService,
+    private authService: SocialAuthService
   ) {
     // redirect to starship if already logged in
     if (this.authenticationService.currentUser) {
-      this.router.navigate([ '/' ]);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: [ '', Validators.required ],
-      password: [ '', Validators.required ]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
     // get return url from route parameters or default to '/'
@@ -64,12 +67,35 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     this.authenticationService
-      .authLogin(this.f.username.value, this.f.password.value)
+      .authLogin(this.f.email.value, this.f.password.value)
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe(() => {
         this.router.navigateByUrl('/');
       });
   }
+
+  socialLogin(name: string) {
+    switch (name) {
+      case 'google':
+        this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(userGoogle => {
+          this.authenticationService
+            .authLoginGoogle(userGoogle.idToken)
+            .pipe(take(1), takeUntil(this.destroy$))
+            .subscribe(() => {
+              this.router.navigateByUrl('/');
+            });
+        });
+
+        break;
+      case 'microsoft':
+        this.authService.signIn(MicrosoftLoginProvider.PROVIDER_ID);
+        break;
+      default:
+        this.onSubmit();
+        break;
+    }
+  }
+
 
   register() {
     this.router.navigateByUrl('/login/register');

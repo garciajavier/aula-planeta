@@ -8,13 +8,14 @@ import { routeAnimations } from '../../core/animations/route.animations';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models/user.model';
 import { take, takeUntil } from 'rxjs/operators';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'aula-planeta-main',
   templateUrl: './main.component.html',
-  styleUrls: [ './main.component.scss' ],
+  styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [ routeAnimations ]
+  animations: [routeAnimations]
 })
 export class MainComponent implements OnInit, OnDestroy {
   isProd = env.production;
@@ -22,9 +23,9 @@ export class MainComponent implements OnInit, OnDestroy {
   version = env.versions.app;
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
-  languages = [ 'en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he' ];
-  navigation = [ { link: 'examples', label: 'aula-planeta.menu.examples' } ];
-  navigationSideMenu = [ ...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' } ];
+  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
+  navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
+  navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
   isScrolling = false;
 
   sideconf = {
@@ -40,9 +41,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor(
     public authManagementService: AuthManagementService,
+    private authService: SocialAuthService,
     public settingsService: SettingsService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authManagementService.currentUser$.pipe(take(1), takeUntil(this.destroy$)).subscribe((user) => {
@@ -51,7 +53,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onLogoutClick() {
-    this.router.navigate([ '/login' ]);
+    this.router.navigate(['/login']);
+    if (this.user.google) {
+      this.authService.signOut();
+    }
     this.authManagementService.authLogout();
   }
 
@@ -60,7 +65,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  @HostListener('window:scroll', [ '$event' ])
+  @HostListener('window:scroll', ['$event'])
   eventoScroll($event) {
     let scrollOffset = $event.srcElement.children[0].scrollTop;
     this.isScrolling = scrollOffset > 0 ? true : false;

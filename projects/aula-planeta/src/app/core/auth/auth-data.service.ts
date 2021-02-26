@@ -8,25 +8,29 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthDataService {
-  constructor(private http: HttpClient) {}
-  
-  public authenticate(username: string, password: string): Observable<User> {
-    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password });
+  constructor(private http: HttpClient) { }
+
+  public authenticate(email: string, password: string): Observable<User> {
+    return this.http.post<any>(`${environment.apiUrl}/login`, { email, password });
+  }
+
+  public authenticateGoogle(tokenGoogle: string): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/login/google`, { token: tokenGoogle });
   }
 
   public logout(): Observable<User> {
-    return this.http.post<any>(`${environment.apiUrl}/users/revoke-token`, {}, { withCredentials: true });
+    return this.http.post<any>(`${environment.apiUrl}/login/revoke`, {}, { withCredentials: true });
   }
 
   public refreshToken() {
-    return this.http.post<any>(`${environment.apiUrl}/users/refresh-token`, {}, { withCredentials: true });
+    return this.http.post<any>(`${environment.apiUrl}/login/refresh`, {}, { withCredentials: true });
   }
 
   /**
    * Get user
    * @param User User to register
    */
-  public register(user: User): Observable<User> {
+  public register(user: User): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/users/register`, user);
   }
 }

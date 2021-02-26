@@ -12,7 +12,7 @@ import { User } from '../../../../shared/models/user.model';
 @Component({
   selector: 'aula-planeta-user',
   templateUrl: './user.component.html',
-  styleUrls: [ './user.component.scss' ],
+  styleUrls: ['./user.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit {
@@ -20,14 +20,14 @@ export class UserComponent implements OnInit {
   userForm: FormGroup;
   isEdit$: Observable<{ value: boolean }>;
 
-  constructor(public userManagementService: UserManagementService, private fb: FormBuilder) {}
+  constructor(public userManagementService: UserManagementService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
       id: '',
-      username: [ '', [ Validators.required, Validators.minLength(5) ] ],
-      firstName: [ '', [ Validators.required, Validators.minLength(5) ] ],
-      lastName: [ '', [ Validators.required, Validators.minLength(5) ] ]
+      username: ['', [Validators.required, Validators.minLength(5)]],
+      firstName: ['', [Validators.required, Validators.minLength(5)]],
+      lastName: ['', [Validators.required, Validators.minLength(5)]]
     });
 
     this.isEdit$ = this.userForm
@@ -57,6 +57,6 @@ export class UserComponent implements OnInit {
   }
 
   trackByUserId(index: number, user: User): string {
-    return user.id;
+    return user.uuid;
   }
 }

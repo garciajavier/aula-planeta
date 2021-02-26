@@ -6,11 +6,11 @@
         </mat-card-title-group>
 
         <mat-card-content>
-            <form role="form" class="d-flex flex-column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form role="form" class="d-flex flex-column" [formGroup]="loginForm">
                 <fieldset class="d-flex flex-column">
                     <mat-form-field class="w-100">
                         <mat-label>Usuario</mat-label>
-                        <input matInput name="username" type="text" formControlName="username">
+                        <input matInput name="email" type="text" formControlName="email">
                         <mat-error>Campo requerido</mat-error>
                     </mat-form-field>
 
@@ -25,14 +25,14 @@
             
                 <a class="text-center" href="#">¿Has olvidado tu contraseña?</a>
 
-                <button role="button" mat-raised-button color="accent" class="w-100" (click)="register()">Crear cuenta</button>
+                <button type="button" role="button" mat-raised-button color="accent" class="w-100" (click)="register()">Crear cuenta</button>
 
-                <button role="button" mat-raised-button>
+                <button type="button" role="button" mat-raised-button (click)="socialLogin('microsoft')">
                     <fa-icon [icon]="['fab','microsoft']"></fa-icon>
                     Entrar con Office365
                 </button>
 
-                <button role="button" mat-raised-button>
+                <button role="button" mat-raised-button (click)="socialLogin('google')">
                     <fa-icon [icon]="['fab','google']"></fa-icon>
                     Entrar con Google
                 </button>

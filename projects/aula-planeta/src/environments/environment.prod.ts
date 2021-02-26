@@ -4,7 +4,9 @@ export const environment = {
   appName: 'Aula Planeta',
   envName: 'PROD',
   production: true,
-  apiUrl: 'http://aula-planeta/api',
+  apiUrl: 'https://aula-node-backend.herokuapp.com/api',
+  GOOGLE_ID: '926325069712-l2poa3lju094kf75ghrmru3p09n9lr3l.apps.googleusercontent.com',
+  GOOGLE_SECRET: 'MLAh29-wehWvgKdsbFxDr86C',
   test: false,
   i18nPrefix: './',
   versions: {

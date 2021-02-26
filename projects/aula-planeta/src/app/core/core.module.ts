@@ -28,7 +28,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faMediumM, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { JwtInterceptor } from './http-interceptors/jwt.interceptor';
-import { FakeBackendInterceptor } from './http-interceptors/fake-backend.interceptor';
 import { AuthManagementService } from './auth/auth-management.service';
 import { MaterialModule } from '../material/material.module';
 import { DirectivesModule } from './directives/directives.module';
@@ -38,6 +37,7 @@ import { PwaService } from './pwa/pwa.service';
 import { PromptComponent } from './pwa/components/prompt/prompt-component';
 import { ProgressSpinnerService } from './progress-spinner/progress-spinner.service';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+import { GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 
 export {
   TitleService,
@@ -57,6 +57,10 @@ const initializerPwaService = (pwaService: PwaService) => () => pwaService.initP
 const initializerProgressSpinnerService = (progressSpinnerService: ProgressSpinnerService) => () =>
   progressSpinnerService.initProgressSpinnerService();
 
+const googleLoginOptions = {
+  scope: 'profile email openid'
+};
+
 @NgModule({
   imports: [
     // angular
@@ -69,35 +73,55 @@ const initializerProgressSpinnerService = (progressSpinnerService: ProgressSpinn
 
     DirectivesModule,
 
+    SocialLoginModule,
+
     // 3rd party
     FontAwesomeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [ HttpClient ]
+        deps: [HttpClient]
       }
     })
   ],
-  declarations: [ PromptComponent, ProgressSpinnerComponent ],
+  declarations: [PromptComponent, ProgressSpinnerComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     {
       provide: APP_INITIALIZER,
       useFactory: initializerPwaService,
-      deps: [ PwaService ],
+      deps: [PwaService],
       multi: true
     },
     {
       provide: APP_INITIALIZER,
       useFactory: initializerProgressSpinnerService,
-      deps: [ ProgressSpinnerService ],
+      deps: [ProgressSpinnerService],
       multi: true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.GOOGLE_ID, googleLoginOptions
+            )
+          },
+          {
+            id: MicrosoftLoginProvider.PROVIDER_ID,
+            provider: new MicrosoftLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig,
     }
+
     // { provide: RouteReuseStrategy, useClass: RouteReuseService }
   ],
   exports: [

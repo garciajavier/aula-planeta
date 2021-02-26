@@ -10,7 +10,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-register',
   templateUrl: 'register.component.html',
-  styleUrls: [ './register.component.scss' ]
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   /**
@@ -33,17 +33,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     // redirect to starship if already logged in
     if (this.authManagementService.currentUser) {
-      this.router.navigate([ '/' ]);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: [ '', Validators.required ],
-      lastName: [ '', Validators.required ],
-      username: [ '', Validators.required ],
-      roles: [ '', Validators.required ],
-      password: [ '', [ Validators.required, Validators.minLength(4) ] ]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
+      roles: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.snackBar.open('Registro completado', 'OK', {
           duration: 2000
         });
-        this.router.navigate([ '/' ]);
+        this.router.navigate(['/']);
       });
   }
 }

@@ -5,9 +5,9 @@ import { LocalStorageService } from '../../../core/local-storage/local-storage.s
 import { User } from '../../../shared/models/user.model';
 
 const INITIAL_DATA: User[] = [
-  { id: uuid(), username: 'rockets', firstName: 'Elon', lastName: 'Musk' },
-  { id: uuid(), username: 'investing', firstName: 'Nassim', lastName: 'Taleb' },
-  { id: uuid(), username: 'philosophy', firstName: 'Yuval', lastName: 'Harari' }
+  { uuid: uuid(), email: 'elon@musk.com', firstName: 'Elon', lastName: 'Musk' },
+  { uuid: uuid(), email: 'nassim@taleb.com', firstName: 'Nassim', lastName: 'Taleb' },
+  { uuid: uuid(), email: 'yuval@harari', firstName: 'Yuval', lastName: 'Harari' }
 ];
 
 @Injectable()
@@ -25,18 +25,18 @@ export class UserManagementService {
   }
 
   addUser(user: User) {
-    this.users.push({ ...user, id: uuid() } as User);
+    this.users.push({ ...user, uuid: uuid() } as User);
     this.usersNext(this.users);
   }
 
   updateUser(user: User) {
-    const indexToUpdate = this.users.findIndex((u) => u.id === user.id);
+    const indexToUpdate = this.users.findIndex((u) => u.uuid === user.uuid);
     this.users[indexToUpdate] = user;
     this.usersNext(this.users);
   }
 
-  removeUser(id: string) {
-    const indexToRemove = this.users.findIndex((user) => user.id === id);
+  removeUser(uuid: string) {
+    const indexToRemove = this.users.findIndex((user) => user.uuid === uuid);
     this.users.splice(indexToRemove, 1);
     this.usersNext(this.users);
   }

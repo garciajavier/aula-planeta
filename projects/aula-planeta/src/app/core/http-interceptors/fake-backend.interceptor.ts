@@ -54,14 +54,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function register() {
       const user: User = body;
-      user.refreshTokens = [];
-      user.roles = user.roles ? user.roles : [];
+      // user.refreshTokens = [];
+      // user.roles = user.roles ? user.roles : [];
 
-      if (users.find((x) => x.username === user.username)) {
-        return error('El usuario "' + user.username + '" ya existe.');
-      }
+      // if (users.find((x) => x.username === user.username)) {
+      //   return error('El usuario "' + user.username + '" ya existe.');
+      // }
 
-      user.id = (users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1) + '';
+      // user.id = (users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1) + '';
       users.push(user);
       localStorage.setItem('users', JSON.stringify(users));
 
@@ -98,16 +98,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!user) return unauthorized();
 
       // replace old refresh token with a new one and save
-      user.refreshTokens = user.refreshTokens.filter((x) => x !== refreshToken);
-      user.refreshTokens.push(generateRefreshToken());
+      // user.refreshTokens = user.refreshTokens.filter((x) => x !== refreshToken);
+      // user.refreshTokens.push(generateRefreshToken());
       localStorage.setItem(USER_KEY, JSON.stringify(users));
 
       return ok({
-        id: user.id,
-        username: user.username,
+        // id: user.id,
+        // username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
-        roles: user.roles,
+        // roles: user.roles,
         jwtToken: generateJwtToken()
       });
     }
