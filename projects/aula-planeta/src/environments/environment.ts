@@ -11,8 +11,8 @@ export const environment = {
   production: false,
   test: false,
   apiUrl: 'https://aula-node-backend.herokuapp.com/api',
-  GOOGLE_ID: '926325069712-l2poa3lju094kf75ghrmru3p09n9lr3l.apps.googleusercontent.com',
-  GOOGLE_SECRET: 'MLAh29-wehWvgKdsbFxDr86C',
+  GOOGLE_ID: '926325069712-jotjgejnsjlgb1rcjrfolmd7kohdvtv5.apps.googleusercontent.com',
+  GOOGLE_SECRET: '_-1RPoeQfuLpZBo-F4I1yyhN',
   i18nPrefix: '',
   versions: {
     app: packageJson.version,
