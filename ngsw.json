@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614620667225,
+  "timestamp": 1614623141840,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -60,7 +60,7 @@
       "strategy": "performance",
       "maxSize": 1000,
       "maxAge": 15552000000,
-      "timeoutMs": 5000,
+      "timeoutMs": 300000,
       "cacheQueryOptions": {
         "ignoreVary": true
       },
@@ -73,15 +73,15 @@
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?source\\.unsplash\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?cdnjs\\.cloudflare\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?core-js-bundle\\/.*",
-        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/.*",
-        "https:\\/\\/aula-node-backend\\.herokuapp\\.com\\/api\\/.*",
+        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?aula-planeta\\/.*",
+        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?api\\/.*",
         "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
         "https:\\/\\/fonts\\.gstatic\\.com\\/.*"
       ],
       "strategy": "performance",
       "maxSize": 1000,
       "maxAge": 15552000000,
-      "timeoutMs": 5000,
+      "timeoutMs": 300000,
       "cacheQueryOptions": {
         "ignoreVary": true
       },
