@@ -45,7 +45,7 @@ export class LocalCacheService {
       //If it doesnt exist, simply return the observable that has been passed in, caching its value as it passes through
       .pipe(_observableMergeMap((val: CacheStorageRecord | null) => {
         if (!isEmpty(val)) {
-          if (NetworkConnection.status === ConnectionStatusEnum.Online) {
+          if (NetworkConnection.isConnected) {
             return observable.pipe(_observableMergeMap((val: any) => this.value(key, val, expires))); //The result may have 'expires' explicitly set
           } else {
             return _observableOf(val.value);

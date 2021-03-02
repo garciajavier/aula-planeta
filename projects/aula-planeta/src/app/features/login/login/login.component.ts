@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (NetworkConnection.status === ConnectionStatusEnum.Online) {
+    if (NetworkConnection.isConnected) {
       this.authenticationService
         .authLogin(this.f.email.value, this.f.password.value)
         .pipe(take(1), takeUntil(this.destroy$))
@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   socialLogin(name: string) {
     switch (name) {
       case 'google':
-        if (NetworkConnection.status === ConnectionStatusEnum.Offline) {
+        if (!NetworkConnection.isConnected) {
           throw {
             statusText: 'No estás conectado a internet'
           }
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         break;
       case 'microsoft':
-        if (NetworkConnection.status === ConnectionStatusEnum.Offline) {
+        if (!NetworkConnection.isConnected) {
           throw {
             statusText: 'No estás conectado a internet'
           }

@@ -49,6 +49,7 @@ export class AuthManagementService {
   ) {
     this.localStorageService.getItem(CURRENT_USER).subscribe(currentUser => {
       this.currentUserNext(currentUser);
+      this.isAuthenticatedNext(true);
     });
 
     this.localStorageService.getItem(ROLES).subscribe(roles => {
@@ -112,8 +113,8 @@ export class AuthManagementService {
   authLoginOffline() {
     this.localStorageService.getItem(BACKUP_USER).subscribe(backupUser => {
       this.currentUserNext(backupUser);
+      this.isAuthenticatedNext(true);
     });
-    this.isAuthenticatedNext(true);
     // this.startRefreshTokenTimer();
     return of('');
   }
@@ -124,10 +125,10 @@ export class AuthManagementService {
   authLoginGoogle(tokenGoogle: string) {
     return this.authDataService.authenticateGoogle(tokenGoogle).pipe(
       map((data) => {
+        this.isAuthenticatedNext(true);
         this.localStorageService.setItem(JWT, data.token).subscribe();
         this.localStorageService.setItem(BACKUP_USER, data.user).subscribe();
         this.currentUserNext(data.user);
-        this.isAuthenticatedNext(true);
         // this.startRefreshTokenTimer();
       })
     );

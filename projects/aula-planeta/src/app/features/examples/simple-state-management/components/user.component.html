@@ -14,7 +14,7 @@
                     <mat-card-header>
                         <img role="img" aria-label="Avatar" mat-card-avatar [src]="user.img" [alt]="user.email" crossorigin="anonymous"/> 
                         <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
-                        <mat-card-subtitle>@{{ user.email }}</mat-card-subtitle>
+                        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-actions>
                         <button role="button" mat-button (click)="editUser(user)">{{'aula-planeta.examples.crud.tooltip.edit' | translate}}</button>

@@ -8,6 +8,7 @@ export enum ConnectionStatusEnum {
 export class NetworkConnection {
 
   public static status: ConnectionStatusEnum = ConnectionStatusEnum.Offline;
+  public static isConnected: boolean = false;
   private static online$: Observable<Event>;
   private static offline$: Observable<Event>;
 
@@ -16,15 +17,18 @@ export class NetworkConnection {
     NetworkConnection.offline$ = fromEvent(window, 'offline');
 
     NetworkConnection.status = navigator.onLine ? 0 : 1;
+    NetworkConnection.isConnected = navigator.onLine;
 
     NetworkConnection.online$.subscribe(e => {
       console.log('Online');
       NetworkConnection.status = ConnectionStatusEnum.Online;
+      NetworkConnection.isConnected = true;
     });
 
     NetworkConnection.offline$.subscribe(e => {
       console.log('Offline');
       NetworkConnection.status = ConnectionStatusEnum.Offline;
+      NetworkConnection.isConnected = false;
     });
   }
 
