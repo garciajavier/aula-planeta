@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614685324976,
+  "timestamp": 1614685704824,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -49,46 +49,29 @@
         "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.1544e45b56169dd5ea03.png"
       ],
       "patterns": []
+    },
+    {
+      "name": "fonts",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
+        "https:\\/\\/fonts\\.gstatic\\.com\\/.*"
+      ]
     }
   ],
   "dataGroups": [
-    {
-      "name": "aula-api",
-      "patterns": [
-        "https:\\/\\/aula-node-backend\\.herokuapp\\.com\\/api\\/.*"
-      ],
-      "strategy": "performance",
-      "maxSize": 1000,
-      "maxAge": 86400000,
-      "timeoutMs": 300000,
-      "cacheQueryOptions": {
-        "ignoreVary": true
-      },
-      "version": 1
-    },
-    {
-      "name": "aula-web",
-      "patterns": [
-        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/.*"
-      ],
-      "strategy": "performance",
-      "maxSize": 1000,
-      "maxAge": 86400000,
-      "timeoutMs": 300000,
-      "cacheQueryOptions": {
-        "ignoreVary": true
-      },
-      "version": 1
-    },
     {
       "name": "dynamicResources",
       "patterns": [
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?images\\.unsplash\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?source\\.unsplash\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?cdnjs\\.cloudflare\\.com\\/.*",
-        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?core-js-bundle\\/.*",
-        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
-        "https:\\/\\/fonts\\.gstatic\\.com\\/.*"
+        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?core-js-bundle\\/.*"
       ],
       "strategy": "performance",
       "maxSize": 1000,
