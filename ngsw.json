@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614677927661,
+  "timestamp": 1614678333787,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -55,7 +55,7 @@
     {
       "name": "mission-api",
       "patterns": [
-        "https:\\/\\/aula-node-backend\\.herokuapp\\.com\\/api"
+        "\\/api"
       ],
       "strategy": "freshness",
       "maxSize": 1000,
