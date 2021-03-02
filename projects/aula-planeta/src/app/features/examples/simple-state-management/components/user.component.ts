@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.fb.group({
       id: '',
-      username: ['', [Validators.required, Validators.minLength(5)]],
+      email: ['', [Validators.required, Validators.minLength(5)]],
       firstName: ['', [Validators.required, Validators.minLength(5)]],
       lastName: ['', [Validators.required, Validators.minLength(5)]]
     });

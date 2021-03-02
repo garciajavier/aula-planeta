@@ -43,13 +43,15 @@ export class SettingsService implements OnDestroy {
     private translateService: TranslateService,
     private ngZone: NgZone
   ) {
-    let settings = this.localStorageService.getItem(SETTINGS_KEY);
-    settings = settings ? settings : initial;
-    this.setTranslateServiceLanguage(settings.language);
-    this.updateTheme(settings.theme);
-    this.updateRouteAnimationType(settings.pageAnimations, settings.elementsAnimations);
-    this.modeNight();
-    this.settingsNext(settings);
+    this.localStorageService.getItem(SETTINGS_KEY).subscribe(settings => {
+      settings = settings ? settings : initial;
+      this.setTranslateServiceLanguage(settings.language);
+      this.updateTheme(settings.theme);
+      this.updateRouteAnimationType(settings.pageAnimations, settings.elementsAnimations);
+      this.modeNight();
+      this.settingsNext(settings);
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -122,7 +124,7 @@ export class SettingsService implements OnDestroy {
    * @param SomeThink
    */
   private settingsNext(settings: Settings) {
-    this.localStorageService.setItem(SETTINGS_KEY, settings);
+    this.localStorageService.setItem(SETTINGS_KEY, settings).subscribe();
     this._settings.next(settings);
   }
 }

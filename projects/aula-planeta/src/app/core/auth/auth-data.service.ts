@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { environment } from '../../../environments/environment';
@@ -10,8 +10,10 @@ import { environment } from '../../../environments/environment';
 export class AuthDataService {
   constructor(private http: HttpClient) { }
 
-  public authenticate(email: string, password: string): Observable<User> {
-    return this.http.post<any>(`${environment.apiUrl}/login`, { email, password });
+  public authenticate(email: string, password: string): Observable<any> {
+
+    let header = new HttpHeaders().set('email', email).set('password', password);
+    return this.http.get<any>(`${environment.apiUrl}/login`, { headers: header });
   }
 
   public authenticateGoogle(tokenGoogle: string): Observable<any> {

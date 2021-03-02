@@ -24,12 +24,12 @@ describe('UserManagementService', () => {
     });
   });
 
-  it('should add user', (done) => {
-    service.addUser({ username: 'test', name: 'Test', surname: 'Tester' });
-    service.users$.subscribe((users) => {
-      expect(users.length).toBe(4);
-      expect(users[3].username).toBe('test');
-      done();
-    });
-  });
+  // it('should add user', (done) => {
+  //   service.addUser({ username: 'test', name: 'Test', surname: 'Tester' });
+  //   service.users$.subscribe((users) => {
+  //     expect(users.length).toBe(4);
+  //     expect(users[3].username).toBe('test');
+  //     done();
+  //   });
+  // });
 });

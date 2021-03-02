@@ -34,23 +34,26 @@
     ],
     "dataGroups": [
         {
-            "name": "analytics",
-            "cacheConfig": {
-                "maxSize": 1000,
-                "maxAge": "180d",
-                "timeout": "5s",
-                "strategy": "performance"
-            },
+            "name": "aula-api",
             "urls": [
-                "https://www.google-analytics.com/analytics.js"
-            ]
+                "/api/**",
+                "https://lh3.googleusercontent.com/**"
+            ],
+            "cacheConfig": {
+                "strategy": "performance",
+                "maxSize": 1000,
+                "maxAge": "1d"
+            },
+            "cacheQueryOptions": {
+                "ignoreSearch": false
+            }
         },
         {
             "name": "dynamicResources",
             "cacheConfig": {
                 "maxSize": 1000,
                 "maxAge": "180d",
-                "timeout": "5s",
+                "timeout": "5m",
                 "strategy": "performance"
             },
             "urls": [

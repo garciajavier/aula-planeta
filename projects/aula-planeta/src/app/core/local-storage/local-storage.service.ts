@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { from, Observable } from 'rxjs';
+import { NgForage, Driver, NgForageCache, CachedItem } from 'ngforage';
 
 const APP_PREFIX = 'aula-planeta-';
 
@@ -6,36 +8,27 @@ const APP_PREFIX = 'aula-planeta-';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  constructor() {}
+  constructor(private readonly ngf: NgForage, private readonly cache: NgForageCache) { }
 
-  setItem(key: string, value: any) {
-    if (value) {
-      localStorage.setItem(`${APP_PREFIX}${key}`, JSON.stringify(value));
-    } else {
-      localStorage.removeItem(`${APP_PREFIX}${key}`);
-    }
+  public setItem<T>(key: string, value: T): Observable<T> {
+    return from(this.ngf.setItem(`${APP_PREFIX}${key}`, value))
   }
 
-  getItem(key: string) {
-    return JSON.parse(localStorage.getItem(`${APP_PREFIX}${key}`));
+  /**
+   *
+   * @param key
+   * @returns {any}
+   */
+  public getItem(key: string): Observable<any> {
+    return from(this.ngf.getItem(`${APP_PREFIX}${key}`))
   }
 
-  removeItem(key: string) {
-    localStorage.removeItem(`${APP_PREFIX}${key}`);
-  }
-
-  /** Tests that localStorage exists, can be written to, and read from. */
-  testLocalStorage() {
-    const testValue = 'testValue';
-    const testKey = 'testKey';
-    const errorMessage = 'localStorage did not return expected value';
-
-    this.setItem(testKey, testValue);
-    const retrievedValue = this.getItem(testKey);
-    this.removeItem(testKey);
-
-    if (retrievedValue !== testValue) {
-      throw new Error(errorMessage);
-    }
+  /**
+   *
+   * @param key
+   * @returns {any}
+   */
+  public removeItem(key: string): Observable<void> {
+    return from(this.ngf.removeItem(`${APP_PREFIX}${key}`))
   }
 }

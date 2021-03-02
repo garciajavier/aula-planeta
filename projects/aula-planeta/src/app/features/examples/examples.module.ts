@@ -14,6 +14,7 @@ import { TodosContainerComponent } from './todos/components/todos-container.comp
 import { UserComponent } from './simple-state-management/components/user.component';
 import { TodosPipe } from '../../services/data/pipes/todos.pipe';
 import { UserManagementService } from './simple-state-management/user-management.service';
+import { UserDataService } from '../../services/data/user/user-data.service';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -44,8 +45,8 @@ export function httpLoaderFactory(http: HttpClient) {
     UserComponent,
     TodosPipe
   ],
-  providers: [UserManagementService]
+  providers: [UserManagementService, UserDataService]
 })
 export class ExamplesModule {
-  constructor() {}
+  constructor() { }
 }

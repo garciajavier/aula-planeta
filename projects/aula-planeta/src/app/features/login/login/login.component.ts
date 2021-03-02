@@ -2,11 +2,15 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { AuthManagementService } from '../../../core/auth/auth-management.service';
 import { SocialAuthService, MicrosoftLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { NetworkConnection } from '../../../core/network-connection/network-connection.service';
 
-
+export enum ConnectionStatusEnum {
+  Online,
+  Offline
+}
 @Component({
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss']
@@ -66,17 +70,39 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.authenticationService
-      .authLogin(this.f.email.value, this.f.password.value)
-      .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.router.navigateByUrl('/');
-      });
+    if (NetworkConnection.status === ConnectionStatusEnum.Online) {
+      this.authenticationService
+        .authLogin(this.f.email.value, this.f.password.value)
+        .pipe(take(1), takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.router.navigateByUrl('/');
+        }, error => {
+          alert(JSON.stringify(error))
+        });
+    } else {
+      this.authenticationService
+        .authLoginOffline()
+        .pipe(take(1), takeUntil(this.destroy$))
+        .subscribe(() => {
+          setTimeout(() => {
+            this.router.navigateByUrl('/');
+          }, 1000);
+        }, error => {
+          alert(JSON.stringify(error))
+        });
+
+    }
   }
 
   socialLogin(name: string) {
     switch (name) {
       case 'google':
+        if (NetworkConnection.status === ConnectionStatusEnum.Offline) {
+          throw {
+            statusText: 'No estás conectado a internet'
+          }
+          return;
+        }
         this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(userGoogle => {
           this.authenticationService
             .authLoginGoogle(userGoogle.idToken)
@@ -88,6 +114,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         break;
       case 'microsoft':
+        if (NetworkConnection.status === ConnectionStatusEnum.Offline) {
+          throw {
+            statusText: 'No estás conectado a internet'
+          }
+          return;
+        }
         this.authService.signIn(MicrosoftLoginProvider.PROVIDER_ID);
         break;
       default:

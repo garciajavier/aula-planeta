@@ -30,10 +30,13 @@ export class TodosManagementService {
   filter$ = this._filter.asObservable();
 
   constructor(private localStorageService: LocalStorageService) {
-    const todos = this.localStorageService.getItem(TODOS_KEY);
-    this.todoNext(todos ? todos : []);
-    const todosFilter = this.localStorageService.getItem(TODOS_FILTER_KEY);
-    this._filter.next(todosFilter ? todosFilter : 'ALL');
+    this.localStorageService.getItem(TODOS_KEY).subscribe(todos => {
+      this.todoNext(todos ? todos : []);
+      this.localStorageService.getItem(TODOS_FILTER_KEY).subscribe(todosFilter => {
+        this._filter.next(todosFilter ? todosFilter : 'ALL');
+      });
+
+    });
   }
 
   get todos() {
@@ -97,7 +100,7 @@ export class TodosManagementService {
    * @param todos
    */
   private todoNext(todos: Todo[]) {
-    this.localStorageService.setItem(TODOS_KEY, todos);
+    this.localStorageService.setItem(TODOS_KEY, todos).subscribe();
     this._todos.next(todos);
     this.isRemoveDoneDisabled();
   }
@@ -107,7 +110,7 @@ export class TodosManagementService {
    * @param todos
    */
   private filterNext(filter: TodosFilter) {
-    this.localStorageService.setItem(TODOS_FILTER_KEY, filter);
+    this.localStorageService.setItem(TODOS_FILTER_KEY, filter).subscribe();
     this._filter.next(filter);
   }
 }

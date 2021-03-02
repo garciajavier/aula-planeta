@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from '../../../core/local-storage/local-storage.service';
 import { User } from '../../../shared/models/user.model';
+import { UserDataService } from '../../../services/data/user/user-data.service';
 
 const INITIAL_DATA: User[] = [
-  { uuid: uuid(), email: 'elon@musk.com', firstName: 'Elon', lastName: 'Musk' },
-  { uuid: uuid(), email: 'nassim@taleb.com', firstName: 'Nassim', lastName: 'Taleb' },
-  { uuid: uuid(), email: 'yuval@harari', firstName: 'Yuval', lastName: 'Harari' }
+  new User('Elon', 'Musk', 'elon@musk.com', uuid()),
+  new User('Nassim', 'Taleb', 'nassim@taleb.com', uuid()),
+  new User('Yuval', 'Harari', 'yuval@harari', uuid())
 ];
 
 @Injectable()
@@ -15,13 +16,24 @@ export class UserManagementService {
   private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   users$ = this._users.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) {
-    const users = this.localStorageService.getItem('EXAMPLES.USERS');
-    this.usersNext(users ? users : INITIAL_DATA);
+  constructor(
+    private localStorageService: LocalStorageService,
+    private userDataService: UserDataService
+  ) {
+    // const users = this.localStorageService.getItem('EXAMPLES.USERS');
+    this.getUsers();
   }
 
   get users() {
     return this._users.getValue();
+  }
+
+  getUsers() {
+    return this.userDataService.getUsers().subscribe(
+      res => {
+        this.usersNext(res.users);
+      }
+    );
   }
 
   addUser(user: User) {

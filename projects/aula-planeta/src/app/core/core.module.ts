@@ -38,6 +38,9 @@ import { PromptComponent } from './pwa/components/prompt/prompt-component';
 import { ProgressSpinnerService } from './progress-spinner/progress-spinner.service';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 import { GoogleLoginProvider, MicrosoftLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { NetworkConnection } from './network-connection/network-connection.service';
+import { DEFAULT_CONFIG, NgForageOptions, NgForageConfig, Driver } from 'ngforage';
+import { LocalCacheService } from './load-cache/load-cache.service';
 
 export {
   TitleService,
@@ -87,6 +90,8 @@ const googleLoginOptions = {
   ],
   declarations: [PromptComponent, ProgressSpinnerComponent],
   providers: [
+    LocalCacheService,
+    NetworkConnection,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -120,6 +125,16 @@ const googleLoginOptions = {
           }
         ]
       } as SocialAuthServiceConfig,
+    },
+    {
+      provide: DEFAULT_CONFIG,
+      useValue: {
+        name: 'aula-planeta',
+        driver: [ // defaults to indexedDB -> webSQL -> localStorage
+          Driver.INDEXED_DB,
+          Driver.LOCAL_STORAGE
+        ]
+      } as NgForageOptions
     }
 
     // { provide: RouteReuseStrategy, useClass: RouteReuseService }

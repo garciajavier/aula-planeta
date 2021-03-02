@@ -54,9 +54,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onLogoutClick() {
     this.router.navigate(['/login']);
-    if (this.user.google) {
-      this.authService.signOut();
-    }
     this.authManagementService.authLogout();
   }
 

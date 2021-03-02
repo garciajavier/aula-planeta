@@ -36,7 +36,7 @@ import { MainComponent } from './features/main/main.component';
       registrationStrategy: 'registerImmediately'
     })
   ],
-  declarations: [ AppComponent, SettingsPipe, MainComponent ],
-  bootstrap: [ AppComponent ]
+  declarations: [AppComponent, SettingsPipe, MainComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
