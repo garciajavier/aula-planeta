@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614691584313,
+  "timestamp": 1614693041661,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -55,7 +55,7 @@
     {
       "name": "aula-api",
       "patterns": [
-        "https:\\/\\/aula-node-backend\\.herokuapp\\.com\\/api\\/.*",
+        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?api\\/.*",
         "https:\\/\\/lh3\\.googleusercontent\\.com\\/.*"
       ],
       "strategy": "performance",
@@ -63,21 +63,8 @@
       "maxAge": 86400000,
       "timeoutMs": 300000,
       "cacheQueryOptions": {
-        "ignoreVary": true
-      },
-      "version": 1
-    },
-    {
-      "name": "aula-web",
-      "patterns": [
-        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/.*"
-      ],
-      "strategy": "performance",
-      "maxSize": 1000,
-      "maxAge": 86400000,
-      "timeoutMs": 300000,
-      "cacheQueryOptions": {
-        "ignoreVary": true
+        "ignoreVary": true,
+        "ignoreSearch": false
       },
       "version": 1
     },
