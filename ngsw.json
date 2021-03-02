@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614686058939,
+  "timestamp": 1614687022738,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -21,8 +21,8 @@
         "https://garciajavier.github.io/aula-planeta/8-es5.dd74f82969f3628d56fd.js",
         "https://garciajavier.github.io/aula-planeta/favicon.ico",
         "https://garciajavier.github.io/aula-planeta/index.html",
-        "https://garciajavier.github.io/aula-planeta/main-es2015.734353830ceccaaad1db.js",
-        "https://garciajavier.github.io/aula-planeta/main-es5.734353830ceccaaad1db.js",
+        "https://garciajavier.github.io/aula-planeta/main-es2015.6a849f9d0400e4adf1ed.js",
+        "https://garciajavier.github.io/aula-planeta/main-es5.6a849f9d0400e4adf1ed.js",
         "https://garciajavier.github.io/aula-planeta/manifest.webmanifest",
         "https://garciajavier.github.io/aula-planeta/polyfills-es2015.4eed069ac6afd56882b8.js",
         "https://garciajavier.github.io/aula-planeta/polyfills-es5.bf46cd8cd6a27d1a0c6e.js",
@@ -99,10 +99,10 @@
     "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA200x200.png": "8f5355c3cc71280281412ea537199d0afbb4964a",
     "https://garciajavier.github.io/aula-planeta/assets/logo_PLANETA72x72.png": "66f1b241a1c8c82d459665f738d24d6434a1670c",
     "https://garciajavier.github.io/aula-planeta/favicon.ico": "1f6f35ae0123719726eb574e318da3bbf57849f9",
-    "https://garciajavier.github.io/aula-planeta/index.html": "3f3655fd40201377d515f0727e9a7703c24ebbc4",
+    "https://garciajavier.github.io/aula-planeta/index.html": "f3b8e680b19c8a4f3289ed305fd9b60f0e445d87",
     "https://garciajavier.github.io/aula-planeta/logo_PLANETA72x72.1544e45b56169dd5ea03.png": "66f1b241a1c8c82d459665f738d24d6434a1670c",
-    "https://garciajavier.github.io/aula-planeta/main-es2015.734353830ceccaaad1db.js": "0c7a127374cd101e2378ee0a1c3ae080ceb1c121",
-    "https://garciajavier.github.io/aula-planeta/main-es5.734353830ceccaaad1db.js": "6d0eb80a934f59109644176ad9e1ec9e5230073c",
+    "https://garciajavier.github.io/aula-planeta/main-es2015.6a849f9d0400e4adf1ed.js": "65b8c36b831fc2a523926829327ac2e717c34f1c",
+    "https://garciajavier.github.io/aula-planeta/main-es5.6a849f9d0400e4adf1ed.js": "625dec92bdcea9d6aa9d5e5255ad11ac2d748e0d",
     "https://garciajavier.github.io/aula-planeta/manifest.webmanifest": "41f6490843c1cd7e153c2f2af47d03a4b4d00066",
     "https://garciajavier.github.io/aula-planeta/polyfills-es2015.4eed069ac6afd56882b8.js": "9b70b605674812d5d904143897d89b6c01ba5c4e",
     "https://garciajavier.github.io/aula-planeta/polyfills-es5.bf46cd8cd6a27d1a0c6e.js": "3a191abacbde1fc0ce1d8f9bb22daf4ee662bdf8",
