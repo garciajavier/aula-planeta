@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614685704824,
+  "timestamp": 1614686058939,
   "index": "https://garciajavier.github.io/aula-planeta/index.html",
   "assetGroups": [
     {
@@ -71,7 +71,8 @@
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?images\\.unsplash\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?source\\.unsplash\\.com\\/.*",
         "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?cdnjs\\.cloudflare\\.com\\/.*",
-        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?core-js-bundle\\/.*"
+        "https:\\/\\/garciajavier\\.github\\.io\\/aula-planeta\\/(?:.+\\/)?core-js-bundle\\/.*",
+        "https:\\/\\/lh3\\.googleusercontent\\.com"
       ],
       "strategy": "performance",
       "maxSize": 1000,
