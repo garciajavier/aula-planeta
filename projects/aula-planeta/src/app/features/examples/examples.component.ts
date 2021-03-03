@@ -5,6 +5,21 @@ import { routeAnimations } from '../../core/core.module';
 import { SettingsService } from '../../core/settings/settings.service';
 import { AuthManagementService } from '../../core/auth/auth-management.service';
 
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { OnDestroy } from '@angular/core'
+
+
+
+
+
+
+
+
+
+
+
+
 @Component({
   selector: 'aula-planeta-examples',
   templateUrl: './examples.component.html',
@@ -12,7 +27,10 @@ import { AuthManagementService } from '../../core/auth/auth-management.service';
   animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExamplesComponent implements OnInit {
+export class ExamplesComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<void> = new Subject<void>();
+
   examples = [];
 
   constructor(
@@ -22,7 +40,9 @@ export class ExamplesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.settingsService.settings$.subscribe(({ language }) => this.translateService.use(language));
+    this.settingsService.settings$.pipe(
+      takeUntil(this.destroy$))
+      .subscribe(({ language }) => this.translateService.use(language));
     this.examples = [
       { link: 'todos', label: 'aula-planeta.examples.menu.todos' },
       {
@@ -31,5 +51,10 @@ export class ExamplesComponent implements OnInit {
         // auth: !this.authManagementService.userCan(['PROFESOR_ROLE'])
       }
     ];
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

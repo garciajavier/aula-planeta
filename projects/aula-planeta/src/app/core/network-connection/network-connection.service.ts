@@ -1,3 +1,6 @@
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { OnDestroy, Injectable } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 
 export enum ConnectionStatusEnum {
@@ -5,8 +8,13 @@ export enum ConnectionStatusEnum {
   Offline
 }
 
-export class NetworkConnection {
 
+@Injectable({
+  providedIn: 'root'
+})
+export class NetworkConnection implements OnDestroy {
+
+  private static destroy$: Subject<void> = new Subject<void>();
   public static status: ConnectionStatusEnum = ConnectionStatusEnum.Offline;
   public static isConnected: boolean = false;
   private static online$: Observable<Event>;
@@ -19,17 +27,24 @@ export class NetworkConnection {
     NetworkConnection.status = navigator.onLine ? 0 : 1;
     NetworkConnection.isConnected = navigator.onLine;
 
-    NetworkConnection.online$.subscribe(e => {
-      console.log('Online');
-      NetworkConnection.status = ConnectionStatusEnum.Online;
-      NetworkConnection.isConnected = true;
-    });
+    NetworkConnection.online$.pipe(
+      takeUntil(NetworkConnection.destroy$)).subscribe(e => {
+        console.log('Online');
+        NetworkConnection.status = ConnectionStatusEnum.Online;
+        NetworkConnection.isConnected = true;
+      });
 
-    NetworkConnection.offline$.subscribe(e => {
-      console.log('Offline');
-      NetworkConnection.status = ConnectionStatusEnum.Offline;
-      NetworkConnection.isConnected = false;
-    });
+    NetworkConnection.offline$.pipe(
+      takeUntil(this.destroy$)).subscribe(e => {
+        console.log('Offline');
+        NetworkConnection.status = ConnectionStatusEnum.Offline;
+        NetworkConnection.isConnected = false;
+      });
+  }
+
+  ngOnDestroy() {
+    NetworkConnection.destroy$.next();
+    NetworkConnection.destroy$.complete();
   }
 
   constructor() {

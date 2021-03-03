@@ -5,14 +5,13 @@ import { LocalStorageService } from '../../../core/local-storage/local-storage.s
 import { User } from '../../../shared/models/user.model';
 import { UserDataService } from '../../../services/data/user/user-data.service';
 
-const INITIAL_DATA: User[] = [
-  new User('Elon', 'Musk', 'elon@musk.com', uuid()),
-  new User('Nassim', 'Taleb', 'nassim@taleb.com', uuid()),
-  new User('Yuval', 'Harari', 'yuval@harari', uuid())
-];
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { OnDestroy } from '@angular/core'
 
 @Injectable()
-export class UserManagementService {
+export class UserManagementService implements OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
   private _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   users$ = this._users.asObservable();
 
@@ -22,34 +21,51 @@ export class UserManagementService {
     this.getUsers();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   get users() {
     return this._users.getValue();
   }
 
   getUsers() {
-    return this.userDataService.getUsers().subscribe(
-      res => {
-        this.usersNext(res.users);
-      }
-    );
+    this.userDataService.getUsers().pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(
+        res => {
+          this.usersNext(res.users);
+        }
+      );
   }
 
   createUser(user: User) {
-    this.userDataService.createUser(user).subscribe(() => {
-      this.getUsers();
-    });
+    this.userDataService.createUser(user).pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getUsers();
+      });
   }
 
   updateUser(user: User) {
-    this.userDataService.updateUser(user).subscribe(() => {
-      this.getUsers();
-    });
+    this.userDataService.updateUser(user).pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getUsers();
+      });
   }
 
   deleteUser(user: User) {
-    this.userDataService.deleteUser(user).subscribe(() => {
-      this.getUsers();
-    });
+    this.userDataService.deleteUser(user).pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getUsers();
+      });
   }
 
   private usersNext(users: User[]) {

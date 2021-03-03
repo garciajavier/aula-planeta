@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { LocalStorageService } from '../local-storage/local-storage.service';
@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 
 import { SocialAuthService } from 'angularx-social-login';
 import { MicrosoftLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 
 export const AUTH_KEY = 'AUTH';
@@ -23,7 +25,7 @@ export interface AuthState {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthManagementService {
+export class AuthManagementService implements OnDestroy {
   /**
    * Contains the isAuthenticated 
    */
@@ -42,33 +44,46 @@ export class AuthManagementService {
   private _roles: BehaviorSubject<Role[]> = new BehaviorSubject(null);
   public roles$ = this._roles.asObservable();
 
+  private destroy$: Subject<void> = new Subject<void>();
+
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   constructor(
     private localStorageService: LocalStorageService,
     private authDataService: AuthDataService
   ) {
-    this.localStorageService.getItem(CURRENT_USER).subscribe(currentUser => {
-      this.currentUserNext(currentUser);
-      this.isAuthenticatedNext(true);
-    });
+    this.localStorageService.getItem(CURRENT_USER).pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(currentUser => {
+        this.currentUserNext(currentUser);
+        this.isAuthenticatedNext(true);
+      });
 
-    this.localStorageService.getItem(ROLES).subscribe(roles => {
-      this.roles =
-        roles && roles.length > 0
-          ? roles
-          : [
-            {
-              _id: '6038f369abb1c30015c62ece',
-              desc: 'Alumno',
-              name: 'ALUMNO_ROLE'
-            },
-            {
-              _id: '603f54851225b56b007d726b',
-              desc: 'Profesor',
-              name: 'PROFESOR_ROLE'
-            }
-          ];
-    });
+    this.localStorageService.getItem(ROLES).pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(roles => {
+        this.roles =
+          roles && roles.length > 0
+            ? roles
+            : [
+              {
+                _id: '6038f369abb1c30015c62ece',
+                desc: 'Alumno',
+                name: 'ALUMNO_ROLE'
+              },
+              {
+                _id: '603f54851225b56b007d726b',
+                desc: 'Profesor',
+                name: 'PROFESOR_ROLE'
+              }
+            ];
+      });
 
   }
 
@@ -85,7 +100,9 @@ export class AuthManagementService {
   register(user: User) {
     return this.authDataService.register(user).pipe(
       map((data) => {
-        this.localStorageService.setItem(JWT, data.token).subscribe();
+        this.localStorageService.setItem(JWT, data.token).pipe(
+          take(1),
+          takeUntil(this.destroy$)).subscribe();
         return data.user;
 
       })
@@ -99,8 +116,12 @@ export class AuthManagementService {
   authLogin(email: string, password: string) {
     return this.authDataService.authenticate(email, password).pipe(
       map((data) => {
-        this.localStorageService.setItem(JWT, data.token).subscribe();
-        this.localStorageService.setItem(BACKUP_USER, data.user).subscribe();
+        this.localStorageService.setItem(JWT, data.token).pipe(
+          take(1),
+          takeUntil(this.destroy$)).subscribe();
+        this.localStorageService.setItem(BACKUP_USER, data.user).pipe(
+          take(1),
+          takeUntil(this.destroy$)).subscribe();
         this.currentUserNext(data.user);
         this.isAuthenticatedNext(true);
         // this.startRefreshTokenTimer();
@@ -111,10 +132,12 @@ export class AuthManagementService {
    * Login
    */
   authLoginOffline() {
-    this.localStorageService.getItem(BACKUP_USER).subscribe(backupUser => {
-      this.currentUserNext(backupUser);
-      this.isAuthenticatedNext(true);
-    });
+    this.localStorageService.getItem(BACKUP_USER).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe(backupUser => {
+        this.currentUserNext(backupUser);
+        this.isAuthenticatedNext(true);
+      });
     // this.startRefreshTokenTimer();
     return of('');
   }
@@ -126,8 +149,12 @@ export class AuthManagementService {
     return this.authDataService.authenticateGoogle(tokenGoogle).pipe(
       map((data) => {
         this.isAuthenticatedNext(true);
-        this.localStorageService.setItem(JWT, data.token).subscribe();
-        this.localStorageService.setItem(BACKUP_USER, data.user).subscribe();
+        this.localStorageService.setItem(JWT, data.token).pipe(
+          take(1),
+          takeUntil(this.destroy$)).subscribe();
+        this.localStorageService.setItem(BACKUP_USER, data.user).pipe(
+          take(1),
+          takeUntil(this.destroy$)).subscribe();
         this.currentUserNext(data.user);
         // this.startRefreshTokenTimer();
       })
@@ -141,7 +168,9 @@ export class AuthManagementService {
     this.currentUserNext(null);
     this.isAuthenticatedNext(false);
     this.stopRefreshTokenTimer();
-    // this.authDataService.logout().subscribe();
+    // this.authDataService.logout().pipe(
+    // take(1),
+    // takeUntil(this.destroy$)).subscribe();
   }
 
   refreshToken() {
@@ -188,7 +217,9 @@ export class AuthManagementService {
    */
   private set roles(roles: Role[]) {
     this._roles.next(roles);
-    this.localStorageService.setItem(ROLES, roles).subscribe();
+    this.localStorageService.setItem(ROLES, roles).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe();
   }
 
   /**
@@ -197,7 +228,9 @@ export class AuthManagementService {
    */
   private isAuthenticatedNext(isAuthenticated: boolean) {
     this._isAuthenticated.next(isAuthenticated);
-    this.localStorageService.setItem(AUTH_KEY, { isAuthenticated }).subscribe();
+    this.localStorageService.setItem(AUTH_KEY, { isAuthenticated }).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe();
   }
 
   /**
@@ -206,7 +239,9 @@ export class AuthManagementService {
    */
   private currentUserNext(user: User) {
     this._currentUser.next(user);
-    this.localStorageService.setItem(CURRENT_USER, user).subscribe();
+    this.localStorageService.setItem(CURRENT_USER, user).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe();
   }
 
   private refreshTokenTimeout;
@@ -221,7 +256,8 @@ export class AuthManagementService {
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);
     const timeout = expires.getTime() - Date.now() - 60 * 1000;
-    this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+    this.refreshTokenTimeout = setTimeout(() => this.refreshToken().pipe(
+      takeUntil(this.destroy$)).subscribe(), timeout);
   }
 
   private stopRefreshTokenTimer() {

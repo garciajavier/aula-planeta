@@ -1,3 +1,6 @@
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { OnDestroy } from '@angular/core'
 import { Directive, TemplateRef, ViewContainerRef, Input, OnInit } from '@angular/core';
 import { AuthManagementService } from '../../auth/auth-management.service';
 import { User } from '../../../shared/models/user.model';
@@ -6,7 +9,7 @@ import { User } from '../../../shared/models/user.model';
 @Directive({
   selector: '[hasPermission]'
 })
-export class PermissionDirective implements OnInit {
+export class PermissionDirective implements OnInit, OnDestroy {
   /**
    * Current user to inspect his privileges
    */
@@ -23,6 +26,8 @@ export class PermissionDirective implements OnInit {
    * Determinates if viewContainer is hidden or not
    */
   private isHidden = true;
+
+  private destroy$: Subject<void> = new Subject<void>();
   /**
    * 
    * @param templateRef 
@@ -35,11 +40,19 @@ export class PermissionDirective implements OnInit {
     private authManagementService: AuthManagementService
   ) { }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   ngOnInit() {
-    this.authManagementService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-      this.updateView();
-    });
+    this.authManagementService.currentUser$.pipe(
+      take(1),
+      takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.currentUser = user;
+        this.updateView();
+      });
   }
 
   @Input()

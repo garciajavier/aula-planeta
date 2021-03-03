@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription, interval } from 'rxjs';
 import { NIGHT_MODE_THEME, Settings } from '../../shared/models/settings.model';
@@ -26,8 +28,10 @@ export const SETTINGS_KEY = 'SETTINGS';
   providedIn: 'root'
 })
 export class SettingsService implements OnDestroy {
-  private subscription: Subscription;
+
+  private destroy$: Subject<void> = new Subject<void>();
   hour = new Date().getHours();
+
   /**
    * Contains the SomeThink list
    */
@@ -43,20 +47,24 @@ export class SettingsService implements OnDestroy {
     private translateService: TranslateService,
     private ngZone: NgZone
   ) {
-    this.localStorageService.getItem(SETTINGS_KEY).subscribe(settings => {
-      settings = settings ? settings : initial;
-      this.setTranslateServiceLanguage(settings.language);
-      this.updateTheme(settings.theme);
-      this.updateRouteAnimationType(settings.pageAnimations, settings.elementsAnimations);
-      this.modeNight();
-      this.settingsNext(settings);
-    });
+    this.localStorageService.getItem(SETTINGS_KEY).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe(settings => {
+        settings = settings ? settings : initial;
+        this.setTranslateServiceLanguage(settings.language);
+        this.updateTheme(settings.theme);
+        this.updateRouteAnimationType(settings.pageAnimations, settings.elementsAnimations);
+        this.modeNight();
+        this.settingsNext(settings);
+      });
 
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
+
 
   get settings() {
     return this._settings.getValue();
@@ -64,17 +72,18 @@ export class SettingsService implements OnDestroy {
 
   modeNight() {
     this.ngZone.runOutsideAngular(() => {
-      this.subscription = interval(60000).subscribe(() => {
-        const hour = new Date().getHours();
-        if (hour !== this.hour) {
-          this.hour = hour;
-          this.ngZone.run(() => {
-            if (this.settings.autoNightMode && (hour >= 21 || hour <= 7)) {
-              this.settingsNext({ ...this.settings });
-            }
-          });
-        }
-      });
+      interval(60000).pipe(
+        takeUntil(this.destroy$)).subscribe(() => {
+          const hour = new Date().getHours();
+          if (hour !== this.hour) {
+            this.hour = hour;
+            this.ngZone.run(() => {
+              if (this.settings.autoNightMode && (hour >= 21 || hour <= 7)) {
+                this.settingsNext({ ...this.settings });
+              }
+            });
+          }
+        });
     });
   }
 
@@ -124,7 +133,9 @@ export class SettingsService implements OnDestroy {
    * @param SomeThink
    */
   private settingsNext(settings: Settings) {
-    this.localStorageService.setItem(SETTINGS_KEY, settings).subscribe();
+    this.localStorageService.setItem(SETTINGS_KEY, settings).pipe(
+      take(1),
+      takeUntil(this.destroy$)).subscribe();
     this._settings.next(settings);
   }
 }

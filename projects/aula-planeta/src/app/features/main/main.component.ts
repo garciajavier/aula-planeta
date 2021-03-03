@@ -47,9 +47,11 @@ export class MainComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.authManagementService.currentUser$.pipe(take(1), takeUntil(this.destroy$)).subscribe((user) => {
-      this.user = user;
-    });
+    this.authManagementService.currentUser$
+      .pipe(take(1), takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.user = user;
+      });
   }
 
   onLogoutClick() {
