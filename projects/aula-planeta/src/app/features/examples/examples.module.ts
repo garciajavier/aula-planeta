@@ -15,6 +15,7 @@ import { UserComponent } from './simple-state-management/components/user.compone
 import { TodosPipe } from '../../services/data/pipes/todos.pipe';
 import { UserManagementService } from './simple-state-management/user-management.service';
 import { UserDataService } from '../../services/data/user/user-data.service';
+import { DirectivesModule } from '../../core/directives/directives.module';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -30,6 +31,7 @@ export function httpLoaderFactory(http: HttpClient) {
     LazyElementsModule,
     SharedModule,
     ExamplesRoutingModule,
+    DirectivesModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

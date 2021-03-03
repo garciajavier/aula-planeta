@@ -17,77 +17,79 @@
                         <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-actions>
-                        <button role="button" mat-button (click)="editUser(user)">{{'aula-planeta.examples.crud.tooltip.edit' | translate}}</button>
-                        <button role="button" mat-button (click)="deleteUser(user)">{{'aula-planeta.examples.crud.title' | translate}}</button>
+                        <button role="button" mat-button (click)="editUser(user)" *hasPermission="['PROFESOR_ROLE']">{{'aula-planeta.examples.crud.tooltip.edit' | translate}}</button>
+                        <button role="button" mat-button (click)="deleteUser(user)" *hasPermission="['PROFESOR_ROLE']">{{'aula-planeta.examples.crud.title' | translate}}</button>
                     </mat-card-actions>
                 </mat-card>
             </ng-container>
 
-            <ng-container *ngIf="isEdit$ | async as isEdit">
-                <h2 *ngIf="!isEdit.value">{{'aula-planeta.examples.simple-state-management.form.add.title' | translate}}</h2>
-                <h2 *ngIf="isEdit.value">{{'aula-planeta.examples.simple-state-management.form.edit.title' | translate}}</h2>
+            <ng-container *hasPermission="['PROFESOR_ROLE']">
+                <ng-container *ngIf="isEdit$ | async as isEdit">
+                    <h2 *ngIf="!isEdit.value">{{'aula-planeta.examples.simple-state-management.form.add.title' | translate}}</h2>
+                    <h2 *ngIf="isEdit.value">{{'aula-planeta.examples.simple-state-management.form.edit.title' | translate}}</h2>
 
-                <form role="form" [formGroup]="userForm" #userFormRef="ngForm" (ngSubmit)="onSubmit(userFormRef)">
-                    <fieldset>
+                    <form role="form" [formGroup]="userForm" #userFormRef="ngForm" (ngSubmit)="onSubmit(userFormRef)">
+                        <fieldset>
 
-                        <mat-form-field>
-                            <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.email' | translate) + '*'" formControlName="email" />
-                            <mat-error *ngIf="userForm.get('email').hasError('minlength')">
-                                {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('email').errors.minlength.requiredLength} }}
-                            </mat-error>
-                            <mat-error *ngIf="userForm.get('email').hasError('required')">
-                                {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput type="password" [placeholder]="('aula-planeta.examples.simple-state-management.password' | translate) + '*'" formControlName="password" [readonly]="isEdit.value" />
-                            <mat-error *ngIf="userForm.get('password').hasError('minlength')">
-                                {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('password').errors.minlength.requiredLength} }}
-                            </mat-error>
-                            <mat-error *ngIf="userForm.get('password').hasError('required')">
-                                {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
-                            </mat-error>
-                        </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.email' | translate) + '*'" formControlName="email" />
+                                <mat-error *ngIf="userForm.get('email').hasError('minlength')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('email').errors.minlength.requiredLength} }}
+                                </mat-error>
+                                <mat-error *ngIf="userForm.get('email').hasError('required')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput type="password" [placeholder]="('aula-planeta.examples.simple-state-management.password' | translate) + '*'" formControlName="password" [readonly]="isEdit.value" />
+                                <mat-error *ngIf="userForm.get('password').hasError('minlength')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('password').errors.minlength.requiredLength} }}
+                                </mat-error>
+                                <mat-error *ngIf="userForm.get('password').hasError('required')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
-                            <mat-error *ngIf="userForm.get('firstName').hasError('minlength')">
-                                {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('firstName').errors.minlength.requiredLength} }}
-                            </mat-error>
-                            <mat-error *ngIf="userForm.get('firstName').hasError('required')">
-                                {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
-                            </mat-error>
-                        </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
+                                <mat-error *ngIf="userForm.get('firstName').hasError('minlength')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('firstName').errors.minlength.requiredLength} }}
+                                </mat-error>
+                                <mat-error *ngIf="userForm.get('firstName').hasError('required')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
-                            <mat-error *ngIf="userForm.get('lastName').hasError('minlength')">
-                                {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('lastName').errors.minlength.requiredLength} }}
-                            </mat-error>
-                            <mat-error *ngIf="userForm.get('lastName').hasError('required')">
-                                {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
-                            </mat-error>
-                        </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
+                                <mat-error *ngIf="userForm.get('lastName').hasError('minlength')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('lastName').errors.minlength.requiredLength} }}
+                                </mat-error>
+                                <mat-error *ngIf="userForm.get('lastName').hasError('required')">
+                                    {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                                </mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field class="w-100">
-                            <mat-label aria-label="Roles">Roles</mat-label>
-                            <mat-select formControlName="role" multiple panelClass="cdkSelect">
-                                <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role._id">{{role.desc}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <mat-label aria-label="Roles">Roles</mat-label>
+                                <mat-select formControlName="role" multiple panelClass="cdkSelect">
+                                    <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role._id">{{role.desc}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
 
-                        <div>
-                            <button role="button" *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
+                            <div>
+                                <button role="button" *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
                                     {{'aula-planeta.examples.simple-state-management.form.add.submit' | translate}}
                             </button>
-                            <button role="button" *ngIf="isEdit.value" type="submit" mat-raised-button color="primary">
+                                <button role="button" *ngIf="isEdit.value" type="submit" mat-raised-button color="primary">
                                 {{'aula-planeta.examples.simple-state-management.form.edit.submit' | translate}}
                             </button>
-                            <button role="button" type="reset" mat-button color="warn">{{'aula-planeta.examples.form.reset' | translate}}</button>
-                        </div>
+                                <button role="button" type="reset" mat-button color="warn">{{'aula-planeta.examples.form.reset' | translate}}</button>
+                            </div>
 
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                </ng-container>
             </ng-container>
         </div>
     </div>

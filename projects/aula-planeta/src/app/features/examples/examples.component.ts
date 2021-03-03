@@ -28,7 +28,7 @@ export class ExamplesComponent implements OnInit {
       {
         link: 'simple-state-management',
         label: 'aula-planeta.examples.menu.simple-state-management',
-        auth: !this.authManagementService.userCan(['PROFESOR_ROLE'])
+        // auth: !this.authManagementService.userCan(['PROFESOR_ROLE'])
       }
     ];
   }
