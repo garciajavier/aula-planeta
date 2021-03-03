@@ -17,10 +17,8 @@ export class UserManagementService {
   users$ = this._users.asObservable();
 
   constructor(
-    private localStorageService: LocalStorageService,
     private userDataService: UserDataService
   ) {
-    // const users = this.localStorageService.getItem('EXAMPLES.USERS');
     this.getUsers();
   }
 
@@ -36,21 +34,22 @@ export class UserManagementService {
     );
   }
 
-  addUser(user: User) {
-    this.users.push({ ...user, uuid: uuid() } as User);
-    this.usersNext(this.users);
+  createUser(user: User) {
+    this.userDataService.createUser(user).subscribe(() => {
+      this.getUsers();
+    });
   }
 
   updateUser(user: User) {
-    const indexToUpdate = this.users.findIndex((u) => u.uuid === user.uuid);
-    this.users[indexToUpdate] = user;
-    this.usersNext(this.users);
+    this.userDataService.updateUser(user).subscribe(() => {
+      this.getUsers();
+    });
   }
 
-  removeUser(uuid: string) {
-    const indexToRemove = this.users.findIndex((user) => user.uuid === uuid);
-    this.users.splice(indexToRemove, 1);
-    this.usersNext(this.users);
+  deleteUser(user: User) {
+    this.userDataService.deleteUser(user).subscribe(() => {
+      this.getUsers();
+    });
   }
 
   private usersNext(users: User[]) {

@@ -5,7 +5,6 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 import { Observable, of as _observableOf } from 'rxjs';
 import { mergeMap as _observableMergeMap, catchError as _observableCatch, map } from 'rxjs/operators';
 import { NetworkConnection } from '../network-connection/network-connection.service';
-import { ConnectionStatusEnum } from "../../features/login/login/login.component";
 
 @Injectable()
 export class LocalCacheService {
@@ -15,7 +14,7 @@ export class LocalCacheService {
    *
    * @type {number}
    */
-  defaultExpires: number = 86400; //24Hrs
+  defaultExpires: number = 7776000; // 7776000s=90d  86400s = 24Hrs
 
   constructor(private localstorage: LocalStorageService) { }
 

@@ -12,13 +12,13 @@
             <ng-container role="list" *ngIf="userManagementService.users$ | async as users">
                 <mat-card role="listitem" *ngFor="let user of users; trackBy: trackByUserId" [ngClass]="routeAnimationsElements">
                     <mat-card-header>
-                        <img role="img" aria-label="Avatar" mat-card-avatar [src]="user.img" [alt]="user.email" crossorigin="anonymous"/> 
+                        <img role="img" aria-label="Avatar" mat-card-avatar [src]="user.img" [alt]="user.email" crossorigin="anonymous" onerror="this.style.display='none'" />
                         <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
                         <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-actions>
                         <button role="button" mat-button (click)="editUser(user)">{{'aula-planeta.examples.crud.tooltip.edit' | translate}}</button>
-                        <button role="button" mat-button (click)="removeUser(user.id)">{{'aula-planeta.examples.crud.title' | translate}}</button>
+                        <button role="button" mat-button (click)="deleteUser(user)">{{'aula-planeta.examples.crud.title' | translate}}</button>
                     </mat-card-actions>
                 </mat-card>
             </ng-container>
@@ -29,13 +29,22 @@
 
                 <form role="form" [formGroup]="userForm" #userFormRef="ngForm" (ngSubmit)="onSubmit(userFormRef)">
                     <fieldset>
-                        
+
                         <mat-form-field>
                             <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.email' | translate) + '*'" formControlName="email" />
                             <mat-error *ngIf="userForm.get('email').hasError('minlength')">
                                 {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('email').errors.minlength.requiredLength} }}
                             </mat-error>
                             <mat-error *ngIf="userForm.get('email').hasError('required')">
+                                {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput type="password" [placeholder]="('aula-planeta.examples.simple-state-management.password' | translate) + '*'" formControlName="password" [readonly]="isEdit.value" />
+                            <mat-error *ngIf="userForm.get('password').hasError('minlength')">
+                                {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: userForm.get('password').errors.minlength.requiredLength} }}
+                            </mat-error>
+                            <mat-error *ngIf="userForm.get('password').hasError('required')">
                                 {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
                             </mat-error>
                         </mat-form-field>
@@ -60,6 +69,13 @@
                             </mat-error>
                         </mat-form-field>
 
+                        <mat-form-field class="w-100">
+                            <mat-label aria-label="Roles">Roles</mat-label>
+                            <mat-select formControlName="role" multiple panelClass="cdkSelect">
+                                <mat-option *ngFor="let role of (authManagementService.roles$ | async)" [value]="role._id">{{role.desc}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
                         <div>
                             <button role="button" *ngIf="!isEdit.value" type="submit" mat-raised-button color="primary">
                                     {{'aula-planeta.examples.simple-state-management.form.add.submit' | translate}}
@@ -69,6 +85,7 @@
                             </button>
                             <button role="button" type="reset" mat-button color="warn">{{'aula-planeta.examples.form.reset' | translate}}</button>
                         </div>
+
                     </fieldset>
                 </form>
             </ng-container>

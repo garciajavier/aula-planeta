@@ -8,8 +8,8 @@ import { AuthManagementService } from '../../core/auth/auth-management.service';
 @Component({
   selector: 'aula-planeta-examples',
   templateUrl: './examples.component.html',
-  styleUrls: [ './examples.component.scss' ],
-  animations: [ routeAnimations ],
+  styleUrls: ['./examples.component.scss'],
+  animations: [routeAnimations],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExamplesComponent implements OnInit {
@@ -19,7 +19,7 @@ export class ExamplesComponent implements OnInit {
     private translateService: TranslateService,
     private settingsService: SettingsService,
     private authManagementService: AuthManagementService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.settingsService.settings$.subscribe(({ language }) => this.translateService.use(language));
@@ -28,7 +28,7 @@ export class ExamplesComponent implements OnInit {
       {
         link: 'simple-state-management',
         label: 'aula-planeta.examples.menu.simple-state-management',
-        auth: !this.authManagementService.userCan([ 'PROFESOR' ])
+        auth: !this.authManagementService.userCan(['PROFESOR_ROLE'])
       }
     ];
   }

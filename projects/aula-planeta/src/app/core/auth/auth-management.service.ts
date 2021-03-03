@@ -58,14 +58,14 @@ export class AuthManagementService {
           ? roles
           : [
             {
-              id: 0,
-              description: 'Alumno',
-              code: 'ALUMNO'
+              _id: '6038f369abb1c30015c62ece',
+              desc: 'Alumno',
+              name: 'ALUMNO_ROLE'
             },
             {
-              id: 1,
-              description: 'Profesor',
-              code: 'PROFESOR'
+              _id: '603f54851225b56b007d726b',
+              desc: 'Profesor',
+              name: 'PROFESOR_ROLE'
             }
           ];
     });
@@ -161,10 +161,10 @@ export class AuthManagementService {
    */
   userCan(hasRoles: string[]): boolean {
     return hasRoles.some((role) => {
-      return this.currentUser.roles = role;
-      // return this.currentUser.roles.some((currentRole) => {
-      //   return currentRole.code === role;
-      // });
+      // return this.currentUser.role = role;
+      return this.currentUser.role.some((currentRole) => {
+        return currentRole.name === role;
+      });
     });
   }
 

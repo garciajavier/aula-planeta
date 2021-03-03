@@ -47,7 +47,7 @@ export class PermissionDirective implements OnInit {
     this.privileges = val;
     this.updateView();
   }
-  
+
   @Input()
   set hasPermissionOperation(permop) {
     this.logicalOperation = permop;
@@ -59,7 +59,7 @@ export class PermissionDirective implements OnInit {
    */
   private updateView() {
     if (this.checkPermission()) {
-      if(this.isHidden) {
+      if (this.isHidden) {
         this.viewContainer.createEmbeddedView(this.templateRef);
         this.isHidden = false;
       }
@@ -75,7 +75,7 @@ export class PermissionDirective implements OnInit {
    */
   private checkPermission(): boolean {
     let hasPermission = false;
-    if (this.currentUser && this.currentUser.roles && this.currentUser.roles.length) {
+    if (this.currentUser && this.currentUser.role && this.currentUser.role.length) {
       for (const checkPrivilege of this.privileges) {
         const permissionFound = this.authManagementService.userCan([checkPrivilege]);
         if (permissionFound) {

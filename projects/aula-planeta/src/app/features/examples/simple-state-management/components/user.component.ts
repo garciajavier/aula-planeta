@@ -6,6 +6,8 @@ import { map, startWith } from 'rxjs/operators';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/animations/route.animations';
 import { UserManagementService } from '../user-management.service';
 import { User } from '../../../../shared/models/user.model';
+import { AuthManagementService } from '../../../../core/core.module';
+import { Role } from '../../../../shared/models/role.model';
 
 
 
@@ -19,37 +21,41 @@ export class UserComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   userForm: FormGroup;
   isEdit$: Observable<{ value: boolean }>;
+  role: Role;
 
-  constructor(public userManagementService: UserManagementService, private fb: FormBuilder) { }
+  constructor(public userManagementService: UserManagementService, private fb: FormBuilder, public authManagementService: AuthManagementService) { }
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      id: '',
+      uuid: '',
       email: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
       firstName: ['', [Validators.required, Validators.minLength(5)]],
-      lastName: ['', [Validators.required, Validators.minLength(5)]]
+      lastName: ['', [Validators.required, Validators.minLength(5)]],
+      role: [[], [Validators.required]]
     });
 
     this.isEdit$ = this.userForm
-      .get('id')
-      .valueChanges.pipe(startWith(''), map((id) => ({ value: (id || '').length > 0 })));
+      .get('uuid')
+      .valueChanges.pipe(startWith(''), map((uuid) => ({ value: (uuid || '').length > 0 })));
   }
 
-  removeUser(id: string) {
-    this.userManagementService.removeUser(id);
+  deleteUser(user: User) {
+    this.userManagementService.deleteUser(user);
   }
 
   editUser(user: User) {
-    this.userForm.patchValue({ ...user });
+    const roles = user.role.map(role => role._id);
+    this.userForm.patchValue({ ...user, role: roles });
   }
 
   onSubmit(userFormRef: FormGroupDirective) {
     if (this.userForm.valid) {
       const data = this.userForm.getRawValue();
-      if (data.id && data.id.length) {
+      if (data.uuid && data.uuid.length) {
         this.userManagementService.updateUser(data);
       } else {
-        this.userManagementService.addUser({ ...data });
+        this.userManagementService.createUser({ ...data });
       }
       userFormRef.resetForm();
       this.userForm.reset();

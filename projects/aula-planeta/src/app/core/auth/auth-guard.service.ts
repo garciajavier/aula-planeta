@@ -8,12 +8,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthGuardService implements CanActivate {
   private authManagementService: AuthManagementService;
-  constructor(private injector: Injector, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private injector: Injector, private router: Router, private snackBar: MatSnackBar) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.authManagementService = this.injector.get(AuthManagementService);
     if (this.authManagementService.currentUser) {
-      if (route.data.roles && !this.authManagementService.userCan(route.data.roles)) {
+      if (route.data.role && !this.authManagementService.userCan(route.data.role)) {
         this.snackBar.open('No tienes privilegios', 'OK', {
           duration: 2000
         });
@@ -23,7 +23,7 @@ export class AuthGuardService implements CanActivate {
     }
 
     // not logged in so redirect to login page with the return url
-    this.router.navigate([ '/login' ]);
+    this.router.navigate(['/login']);
     return false;
   }
 }
