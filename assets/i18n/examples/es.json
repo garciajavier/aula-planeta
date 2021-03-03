@@ -124,6 +124,8 @@
     "aula-planeta.examples.simple-state-management.form.edit.submit": "Editar usuario",
     "aula-planeta.examples.simple-state-management.form.reset": "Reestablecer",
     "aula-planeta.examples.simple-state-management.username": "Nombre de usuario",
+    "aula-planeta.examples.simple-state-management.email": "Correo electrónico",
+    "aula-planeta.examples.simple-state-management.password": "Contraseña",
     "aula-planeta.examples.simple-state-management.name": "Nombre",
     "aula-planeta.examples.simple-state-management.surname": "Apellido",
     "aula-planeta.examples.simple-state-management.validator.required": "Valor requerido",
