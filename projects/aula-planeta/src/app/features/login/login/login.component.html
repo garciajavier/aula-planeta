@@ -1,44 +1,50 @@
 ﻿<div class="login-theme d-flex flex-row justify-content-center align-items-center">
-    <mat-card>
 
-        <mat-card-title-group>
-            <mat-card-title>Ingresa a aulaPlaneta</mat-card-title>
-        </mat-card-title-group>
+    <section id="login" class="d-flex mat-elevation-z4">
+        <div class="img-container d-flex">
+            <img src="https://www.aulaplaneta.com/wp-content/uploads/2017/05/shutterstock_554621557.jpg" alt="MDN">
+        </div>
 
-        <mat-card-content>
-            <form role="form" class="d-flex flex-column" [formGroup]="loginForm">
-                <fieldset class="d-flex flex-column">
-                    <mat-form-field class="w-100">
-                        <mat-label>Usuario</mat-label>
-                        <input matInput name="email" type="text" formControlName="email">
-                        <mat-error>Campo requerido</mat-error>
-                    </mat-form-field>
+        <mat-card>
+            <mat-card-title-group>
+                <mat-card-title>Ingresa a aulaPlaneta</mat-card-title>
+            </mat-card-title-group>
 
-                    <mat-form-field class="w-100">
-                        <mat-label>Contraseña</mat-label>
-                        <input matInput name="password" type="password" formControlName="password">
-                        <mat-error>Campo requerido</mat-error>
-                    </mat-form-field>
+            <mat-card-content>
+                <form role="form" class="d-flex flex-column" [formGroup]="loginForm">
+                    <fieldset class="d-flex flex-column">
+                        <mat-form-field class="w-100">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput name="email" type="text" formControlName="email">
+                            <mat-error>Campo requerido</mat-error>
+                        </mat-form-field>
 
-                    <button role="button" (click)="onSubmit()" type="submit" mat-raised-button color="primary" class="w-100" [disabled]="loginForm.invalid">Entrar</button>
-                </fieldset>
-            
-                <a class="text-center" href="#">¿Has olvidado tu contraseña?</a>
+                        <mat-form-field class="w-100">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput name="password" type="password" formControlName="password">
+                            <mat-error>Campo requerido</mat-error>
+                        </mat-form-field>
 
-                <button type="button" role="button" mat-raised-button color="accent" class="w-100" (click)="register()">Crear cuenta</button>
+                        <button role="button" (click)="onSubmit()" type="submit" mat-raised-button color="primary" class="w-100" [disabled]="loginForm.invalid">Entrar</button>
+                    </fieldset>
+                
+                    <a class="text-center" href="#">¿Has olvidado tu contraseña?</a>
 
-                <button type="button" role="button" mat-raised-button (click)="socialLogin('microsoft')">
-                    <fa-icon [icon]="['fab','microsoft']"></fa-icon>
-                    Entrar con Office365
-                </button>
+                    <button type="button" role="button" mat-raised-button color="accent" class="w-100" (click)="register()">Crear cuenta</button>
 
-                <button role="button" mat-raised-button (click)="socialLogin('google')">
-                    <fa-icon [icon]="['fab','google']"></fa-icon>
-                    Entrar con Google
-                </button>
-            </form>
-        </mat-card-content>
-    </mat-card>
+                    <button type="button" role="button" mat-raised-button (click)="socialLogin('microsoft')">
+                        <fa-icon [icon]="['fab','microsoft']"></fa-icon>
+                        Entrar con Office365
+                    </button>
+
+                    <button role="button" mat-raised-button (click)="socialLogin('google')">
+                        <fa-icon [icon]="['fab','google']"></fa-icon>
+                        Entrar con Google
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </section>
 
     <button role="button" aria-label="Alumno" mat-mini-fab color="primary">
         <mat-icon>school</mat-icon>
