@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ExamplesComponent } from './examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
 import { UserComponent } from './simple-state-management/components/user.component';
-import { AuthGuardService } from '../../core/auth/auth-guard.service';
+import { AuthGuardService } from '../../../core/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -37,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ExamplesRoutingModule {}
+export class ExamplesRoutingModule { }

@@ -11,11 +11,11 @@
 
                 <span class="spacer d-inline">aulaPlaneta</span>
 
-                <button id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu">
+                <button *ngIf="authManagementService.currentUser$ |async as user" id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu">
                     <mat-icon class="mr-0 mr-sm-2">account_circle</mat-icon>
-                    <span *ngIf="user" class="d-none d-sm-inline">Hola, {{user.firstName}} {{user.lastName}}</span>
+                    <span *ngIf="user" class="d-none d-sm-inline">{{user.firstName}} {{user.lastName}}</span>
                 </button>
-                
+
 
                 <mat-menu #toolbarUserMenu="matMenu">
                     <button role="button" mat-menu-item routerLink="settings">
@@ -32,7 +32,7 @@
         </header>
 
         <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
-            
+
             <mat-sidenav-container role="main">
                 <mat-sidenav #sidenav mode="side" role="navigation">
                     <mat-nav-list>
@@ -46,33 +46,33 @@
             </mat-sidenav-container>
 
             <div class="footer" role="region">
-                    <div class="row">
-                        <div class="col-sm-12 links">
-                            <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
-                                <fa-icon [icon]="['fab','twitter']"></fa-icon>
-                                <span>Twitter</span>
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCR_vBgIJw21LQoSadb16tvA" target="_blank" rel="noopener noreferrer">
-                                <fa-icon [icon]="['fab','youtube']"></fa-icon>
-                                <span>Youtube</span>
-                            </a>
-                            <a href="https://www.instagram.com/aulaplaneta/?hl=es" target="_blank" rel="noopener noreferrer">
-                                <fa-icon [icon]="['fab','instagram']"></fa-icon>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 signature">
-                            &#169; <span class="year">{{year}}</span> Planeta
-                            <br class="d-block d-sm-none">
-                            <a [matTooltip]="'aula-planeta.footer.changelog' | translate" matTooltipPosition="before" href="https://www.googles.es">
-                                <fa-icon icon="rocket"></fa-icon>
-                                {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
-                            </a>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-12 links">
+                        <a href="https://twitter.com/aulaplaneta?lang=es" target="_blank" rel="noopener noreferrer">
+                            <fa-icon [icon]="['fab','twitter']"></fa-icon>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCR_vBgIJw21LQoSadb16tvA" target="_blank" rel="noopener noreferrer">
+                            <fa-icon [icon]="['fab','youtube']"></fa-icon>
+                            <span>Youtube</span>
+                        </a>
+                        <a href="https://www.instagram.com/aulaplaneta/?hl=es" target="_blank" rel="noopener noreferrer">
+                            <fa-icon [icon]="['fab','instagram']"></fa-icon>
+                            <span>Instagram</span>
+                        </a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 signature">
+                        &#169; <span class="year">{{year}}</span> Planeta
+                        <br class="d-block d-sm-none">
+                        <a [matTooltip]="'aula-planeta.footer.changelog' | translate" matTooltipPosition="before" href="https://www.googles.es">
+                            <fa-icon icon="rocket"></fa-icon>
+                            {{version}} <span *ngIf="!isProd">[{{envName}}]</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

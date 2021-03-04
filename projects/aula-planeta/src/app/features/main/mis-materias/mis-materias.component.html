@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" *ngIf="authManagementService.currentUser$ |async as user">
+            <h1 rtl>{{ 'aula-planeta.usuario.hola' | translate }}, {{user.firstName}} {{user.lastName}}</h1>
+            <h2 rtl class="main-heading">{{ 'aula-planeta.menu.mis-materias' | translate }}</h2>
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div *ngFor="let materia of materias" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+            <mat-card>
+                <mat-card-title>
+                    {{materia.curso | translate}}
+                </mat-card-title>
+                <mat-card-subtitle rtl>
+                    {{ materia.asignatura | translate }}
+                </mat-card-subtitle>
+            </mat-card>
+        </div>
+    </div>
+</div>

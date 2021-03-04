@@ -4,16 +4,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 
 
-import { ROUTE_ANIMATIONS_ELEMENTS, NotificationService } from '../../../../core/core.module';
+import { ROUTE_ANIMATIONS_ELEMENTS, NotificationService } from '../../../../../core/core.module';
 
 import { TodosManagementService } from '../services/todos-management.service';
-import { Todo, TodosFilter } from '../../../../shared/models/todos.model';
+import { Todo, TodosFilter } from '../../../../../shared/models/todos.model';
 
 @Component({
   selector: 'aula-planeta-todos',
   templateUrl: './todos-container.component.html',
-  styleUrls: [ './todos-container.component.scss' ],
-  providers: [ TodosManagementService ],
+  styleUrls: ['./todos-container.component.scss'],
+  providers: [TodosManagementService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosContainerComponent implements OnInit {
@@ -25,9 +25,9 @@ export class TodosContainerComponent implements OnInit {
     public translateService: TranslateService,
     public todosManagementService: TodosManagementService,
     private notificationService: NotificationService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   get isAddTodoDisabled() {
     return this.newTodo.length < 4;

@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/animations/route.animations';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../../core/animations/route.animations';
 import { UserManagementService } from '../user-management.service';
-import { User } from '../../../../shared/models/user.model';
-import { AuthManagementService } from '../../../../core/core.module';
-import { Role } from '../../../../shared/models/role.model';
+import { User } from '../../../../../shared/models/user.model';
+import { AuthManagementService } from '../../../../../core/core.module';
+import { Role } from '../../../../../shared/models/role.model';
 
 
 

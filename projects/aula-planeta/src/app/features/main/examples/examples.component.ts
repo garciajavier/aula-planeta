@@ -1,23 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { routeAnimations } from '../../core/core.module';
-import { SettingsService } from '../../core/settings/settings.service';
-import { AuthManagementService } from '../../core/auth/auth-management.service';
+import { routeAnimations } from '../../../core/core.module';
+import { SettingsService } from '../../../core/settings/settings.service';
+import { AuthManagementService } from '../../../core/auth/auth-management.service';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
-
-
-
-
-
-
-
-
-
-
 
 
 @Component({

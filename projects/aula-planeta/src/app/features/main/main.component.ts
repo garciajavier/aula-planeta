@@ -24,7 +24,7 @@ export class MainComponent implements OnInit, OnDestroy {
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
+  navigation = [{ link: 'inicio', label: 'aula-planeta.menu.mis-materias' }];
   navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
   isScrolling = false;
 
@@ -37,21 +37,14 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  user: User;
-
   constructor(
     public authManagementService: AuthManagementService,
-    private authService: SocialAuthService,
     public settingsService: SettingsService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.authManagementService.currentUser$
-      .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe((user) => {
-        this.user = user;
-      });
+
   }
 
   onLogoutClick() {

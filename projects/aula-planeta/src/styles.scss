@@ -1,17 +1,15 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap';
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-
 @import 'styles-variables';
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import 'styles-reset';
 @import '~@angular/material/theming';
 @import 'functions';
-
-
 @include mat-core();
 
 /** THEMES **/
+
 @import './themes/default-theme';
 @import './themes/light-theme';
 @import './themes/black-theme';
@@ -19,12 +17,12 @@
 @import './themes/login-theme';
 
 /** COMPONENTS **/
+
 @import './app/app.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/examples/todos/components/todos-container.component.scss-theme';
-@import './app/features/examples/examples.component.scss-theme';
+@import './app/features/main/examples/todos/components/todos-container.component.scss-theme';
+@import './app/features/main/examples/examples.component.scss-theme';
 @import './app/features/login/login.component.scss-theme.scss';
-
 @mixin custom-components-theme($theme) {
     @include aula-planeta-app-component-theme($theme);
     @include aula-planeta-big-input-component-theme($theme);

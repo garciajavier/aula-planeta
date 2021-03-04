@@ -19,66 +19,63 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
   imports: [
-    MatInputModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
     MatBottomSheetModule,
-    MatListModule,
-    MatSelectModule,
-    MatFormFieldModule,
+    MatButtonModule,
     MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatPaginatorModule,
-    MatBottomSheetModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { disableClose: true, hasBackdrop: true } },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   exports: [
-    MatInputModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
     MatBottomSheetModule,
-    MatListModule,
-    MatSelectModule,
-    MatFormFieldModule,
+    MatButtonModule,
     MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatPaginatorModule,
-    MatBottomSheetModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

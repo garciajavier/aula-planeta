@@ -4,15 +4,8 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
+
 import { FormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { environment } from '../../environments/environment';
 
@@ -24,15 +17,12 @@ import { LocalStorageService } from './local-storage/local-storage.service';
 import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
 import { LoadingInterceptor } from './http-interceptors/loading.interceptor';
 import { NotificationService } from './notifications/notification.service';
-import { MatButtonModule } from '@angular/material/button';
 import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faMediumM, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { JwtInterceptor } from './http-interceptors/jwt.interceptor';
 import { AuthManagementService } from './auth/auth-management.service';
 import { MaterialModule } from '../material/material.module';
 import { DirectivesModule } from './directives/directives.module';
-import { RouteReuseStrategy } from '@angular/router';
-import { RouteReuseService } from './router-reuse/router-reuse.service';
 import { PwaService } from './pwa/pwa.service';
 import { PromptComponent } from './pwa/components/prompt/prompt-component';
 import { ProgressSpinnerService } from './progress-spinner/progress-spinner.service';
@@ -143,16 +133,7 @@ const googleLoginOptions = {
     // angular
     FormsModule,
 
-    // material
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatButtonModule,
+    MaterialModule,
     DirectivesModule,
 
     // 3rd party
