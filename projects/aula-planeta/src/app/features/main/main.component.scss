@@ -13,8 +13,55 @@
     z-index: 10;
     transition: all .3s ease-in-out;
 
-    .spacer {
-        flex: 1 1 auto;
+    .logo-container {
+        width: em(160);
+        height: em(28);
+        display: block;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: em(35);
+        }
+    }
+
+    #toolbarUserMenu {
+        mat-icon {
+            transition: all .3s ease-in-out;
+
+            &.open {
+                transform: rotate(180deg);
+            }
+        }
+
+        .avatar {
+            display: inline-block;
+            width: em(35);
+            height: em(35);
+            line-height: em(35);
+            text-align: center;
+            border-radius: 50%;
+            margin-right: em(10);
+
+            &.border {
+                border-width: em(2);
+                border-style: solid;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                vertical-align: initial;
+            }
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: normal;
+            }
+        }
     }
 
     mat-select {

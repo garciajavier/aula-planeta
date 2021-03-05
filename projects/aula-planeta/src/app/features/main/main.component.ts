@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { User } from '../../shared/models/user.model';
 import { take, takeUntil } from 'rxjs/operators';
 import { SocialAuthService } from 'angularx-social-login';
+import { callbackify } from 'util';
 
 @Component({
   selector: 'aula-planeta-main',
@@ -30,8 +31,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   sideconf = {
     fixed: false,
-    open: true
+    open: false
   };
+
+  userMenu = false;
 
   settings$: Observable<Settings>;
 
@@ -51,6 +54,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe((user) => {
         this.user = user;
+        console.log(this.user)
       });
   }
 
@@ -62,6 +66,16 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  toggleSidenav(sidenav) {
+    sidenav.toggle()
+    this.sideconf.open = !this.sideconf.open;
+    console.log(this.sideconf)
+  }
+
+  toggleMenu(val) {
+    this.userMenu = val; 
   }
 
   @HostListener('window:scroll', ['$event'])

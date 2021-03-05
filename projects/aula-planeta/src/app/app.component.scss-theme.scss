@@ -1,3 +1,5 @@
+@import 'styles-variables';
+
 @mixin aula-planeta-app-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -9,6 +11,20 @@
         color: mat-color($accent, default-contrast);
         background-color: mat-color($accent);
       }
+    }
+
+    a {
+      text-decoration: none;
+      color: map-get($link-colors, default);
+      
+      &:hover {
+          text-decoration: underline;
+          color: map-get($link-colors, active);
+      }
+    }
+
+    .avatar {
+      border-color: map-get($link-colors, default);
     }
 
     .link {

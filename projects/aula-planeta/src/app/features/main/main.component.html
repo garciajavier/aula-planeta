@@ -3,31 +3,49 @@
 
         <header role="heading" class="toolbar" [style.position]="(settingsService.settings$  | async | settings: 'stickyHeader') ? 'fixed' : 'inherit'" (window.scroll)="eventoScroll($event)" [class.mat-elevation-z3]="isScrolling">
 
-            <mat-toolbar color="primary">
-
-                <button role="button" mat-icon-button aria-label="Menú" (click)="sidenav.toggle()">
-                    <mat-icon>menu</mat-icon>
-                </button>
-
-                <span class="spacer d-inline">aulaPlaneta</span>
-
-                <button id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu">
-                    <mat-icon class="mr-0 mr-sm-2">account_circle</mat-icon>
-                    <span *ngIf="user" class="d-none d-sm-inline">Hola, {{user.firstName}} {{user.lastName}}</span>
-                </button>
-                
-
-                <mat-menu #toolbarUserMenu="matMenu">
-                    <button role="button" mat-menu-item routerLink="settings">
-                        <mat-icon>settings</mat-icon>
-                        <span>{{ 'aula-planeta.menu.settings' | translate }}</span>
+            <mat-toolbar color="primary" class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button role="button" mat-icon-button aria-label="Menú" (click)="toggleSidenav(sidenav)">
+                        <mat-icon [hidden]="sideconf.open">menu</mat-icon>
+                        <mat-icon [hidden]="!sideconf.open">menu_open</mat-icon>
                     </button>
-                    <button role="button" mat-menu-item (click)="onLogoutClick()">
-                        <mat-icon>exit_to_app</mat-icon>
-                        <span>{{ 'aula-planeta.menu.logout' | translate }}</span>
-                    </button>
-                </mat-menu>
 
+                    <a routerLink="/" class="d-inline title">aulaPlaneta</a>
+                </div>
+
+                <div class="logo-container">
+                    <img src="/assets/logo-grupo-planeta.png" alt="Logo Banner" />
+                </div>
+          
+                <div>
+                    <button id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu" (menuOpened)="toggleMenu(true)" (menuClosed)="toggleMenu(false)">
+                        <!-- <mat-icon class="mr-0 mr-sm-2">account_circle</mat-icon> -->
+                        <div class="avatar" [ngClass]="{'border': !user.img}">
+                            <img *ngIf="user.img" [src]="user.img" alt="Profile Avatar" loading="eager"/>
+                            <span *ngIf="!user.img">
+                                {{user.firstName.charAt(0)}}{{user.lastName.charAt(0)}}
+                            </span>
+                        </div>
+                        <span *ngIf="user" class="d-none d-sm-inline">Hola, {{user.firstName}} {{user.lastName}}</span>
+                        <mat-icon [ngClass]="{'open': userMenu, 'close': !userMenu}">keyboard_arrow_down</mat-icon>
+                    </button>
+                    
+
+                    <mat-menu #toolbarUserMenu="matMenu">
+                        <button role="button" mat-menu-item routerLink="settings">
+                            <mat-icon>account_box</mat-icon>
+                            <span>{{ 'aula-planeta.menu.profile' | translate }}</span>
+                        </button>
+                        <button role="button" mat-menu-item routerLink="settings">
+                            <mat-icon>settings</mat-icon>
+                            <span>{{ 'aula-planeta.menu.school-settings' | translate }}</span>
+                        </button>
+                        <button role="button" mat-menu-item (click)="onLogoutClick()">
+                            <mat-icon>exit_to_app</mat-icon>
+                            <span>{{ 'aula-planeta.menu.logout' | translate }}</span>
+                        </button>
+                    </mat-menu>
+                </div>
             </mat-toolbar>
         </header>
 

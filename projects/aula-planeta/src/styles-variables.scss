@@ -19,6 +19,11 @@ $success-colors: mat-palette($mat-green, 400);
 $warning-colors: mat-palette($mat-amber, 400);
 $error-colors: mat-palette($mat-red, 400);
 
+$link-colors: (
+  default: #000,
+  active: #00e
+);
+
 $custom-typography: mat-typography-config(
   $font-family: 'Roboto, "Helvetica Neue", sans-serif'
 );
