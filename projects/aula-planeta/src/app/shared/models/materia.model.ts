@@ -1,9 +1,10 @@
 export class Materia {
     constructor(
-        nombre: string,
-        curso: string,
-        asignatura: string,
-        norma: string,
-        organizacion: string
+        public _id: string,
+        public nombre: string,
+        public curso: string,
+        public asignatura: string,
+        public norma: string,
+        public organizacion: string
     ) { }
 }

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
-import { SettingsService } from '../../../core/settings/settings.service';
-import { Settings } from '../../../shared/models/settings.model';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
+import { SettingsService } from '../../../../core/settings/settings.service';
+import { Settings } from '../../../../shared/models/settings.model';
 
 @Component({
   selector: 'aula-planeta-settings',
-  templateUrl: './settings-container.component.html',
-  styleUrls: [ './settings-container.component.scss' ]
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
-export class SettingsContainerComponent implements OnInit {
+export class SettingsComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   settings$: Observable<Settings>;
 
@@ -31,9 +31,9 @@ export class SettingsContainerComponent implements OnInit {
     { value: 'he', label: 'עברית' }
   ];
 
-  constructor(public settingsService: SettingsService) {}
+  constructor(public settingsService: SettingsService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onLanguageSelect({ value: language }) {
     this.settingsService.changeSetting('language', language);

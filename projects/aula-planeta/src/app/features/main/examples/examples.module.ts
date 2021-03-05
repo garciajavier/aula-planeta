@@ -10,12 +10,14 @@ import { environment } from '../../../../environments/environment';
 import { ExamplesRoutingModule } from './examples-routing.module';
 import { ExamplesComponent } from './examples.component';
 import { TodosContainerComponent } from './todos/components/todos-container.component';
-import { UserComponent } from './simple-state-management/components/user.component';
-import { TodosPipe } from '../../../services/data/pipes/todos.pipe';
-import { UserManagementService } from './simple-state-management/user-management.service';
+
+import { TodosPipe } from '../../../services/pipes/todos.pipe';
+
 import { UserDataService } from '../../../services/data/user/user-data.service';
 import { DirectivesModule } from '../../../core/directives/directives.module';
 import { MaterialModule } from '../../../material/material.module';
+import { UserManagementService } from '../../../services/data/user/user-management.service';
+import { UserComponent } from '../../perfil/components/users/user.component';
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(
@@ -44,7 +46,7 @@ export function httpLoaderFactory(http: HttpClient) {
   declarations: [
     ExamplesComponent,
     TodosContainerComponent,
-    UserComponent,
+    // UserComponent,
     TodosPipe
   ],
   providers: [UserManagementService, UserDataService]

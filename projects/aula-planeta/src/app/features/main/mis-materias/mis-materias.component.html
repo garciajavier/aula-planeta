@@ -6,13 +6,13 @@
         </div>
     </div>
     <div class="row align-items-end">
-        <div *ngFor="let materia of materias" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
+        <div *ngFor="let materia of materiaManagementService.materias$ | async" class="col-md-6 col-lg-4" [ngClass]="routeAnimationsElements">
             <mat-card>
                 <mat-card-title>
                     {{materia.curso | translate}}
                 </mat-card-title>
                 <mat-card-subtitle rtl>
-                    {{ materia.asignatura | translate }}
+                    {{ materia.nombre | translate }}
                 </mat-card-subtitle>
             </mat-card>
         </div>

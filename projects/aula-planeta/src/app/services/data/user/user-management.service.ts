@@ -1,13 +1,12 @@
 import { v4 as uuid } from 'uuid';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LocalStorageService } from '../../../../core/local-storage/local-storage.service';
-import { User } from '../../../../shared/models/user.model';
-import { UserDataService } from '../../../../services/data/user/user-data.service';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
+import { UserDataService } from './user-data.service';
+import { User } from '../../../shared/models/user.model';
 
 @Injectable()
 export class UserManagementService implements OnDestroy {

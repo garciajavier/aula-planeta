@@ -18,8 +18,8 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'settings',
-        loadChildren: () => import('./features/settings/settings.module').then((m) => m.SettingsModule),
+        path: 'perfil',
+        loadChildren: () => import('./features/perfil/perfil.module').then((m) => m.PerfilModule),
         canActivate: [AuthGuardService],
       },
       {

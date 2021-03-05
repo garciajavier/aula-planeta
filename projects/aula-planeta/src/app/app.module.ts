@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SettingsPipe } from './services/data/pipes/settings.pipe';
+import { SettingsPipe } from './services/pipes/settings.pipe';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';

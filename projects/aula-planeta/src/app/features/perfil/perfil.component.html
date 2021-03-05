@@ -1,0 +1,22 @@
+<div class="container">
+
+    <h1 rtl class="main-heading">{{ 'aula-planeta.menu.mis-materias' | translate }}</h1>
+
+    <nav mat-tab-nav-bar class="d-none d-sm-flex" role="tab">
+        <a mat-tab-link *ngFor="let e of tabs" [routerLink]="e.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="e.auth">
+        {{e.label | translate}}
+      </a>
+    </nav>
+
+    <nav class="nav-responsive d-sm-none d-flex justify-content-center" role="navigation">
+        <mat-select [placeholder]="'aula-planeta.perfil.title' | translate" [value]="'todos'" panelClass="cdkSelect">
+            <mat-option *ngFor="let e of tabs" [value]="e" [routerLink]="e.link" [disabled]="e.auth">
+                {{e.label | translate}}
+            </mat-option>
+        </mat-select>
+    </nav>
+
+    <div [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.path">
+        <router-outlet #o="outlet"></router-outlet>
+    </div>
+</div>

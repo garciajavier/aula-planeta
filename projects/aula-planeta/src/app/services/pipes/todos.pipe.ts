@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Todo, TodosFilter } from '../../../shared/models/todos.model';
+import { Todo, TodosFilter } from '../../shared/models/todos.model';
 
 @Pipe({
   name: 'todos'

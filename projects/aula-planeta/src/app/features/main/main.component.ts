@@ -25,7 +25,7 @@ export class MainComponent implements OnInit, OnDestroy {
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [{ link: 'inicio', label: 'aula-planeta.menu.mis-materias' }];
-  navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
+  navigationSideMenu = [...this.navigation];
   isScrolling = false;
 
   sideconf = {
