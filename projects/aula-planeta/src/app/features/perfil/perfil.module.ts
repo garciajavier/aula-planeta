@@ -13,10 +13,12 @@ import { ActivacionComponent } from './components/activacion/activacion.componen
 import { VincularComponent } from './components/vincular/vincular.component';
 import { UserManagementService } from '../../services/data/user/user-management.service';
 import { DirectivesModule } from '../../core/directives/directives.module';
+import { PerfilService } from './services/perfil.service';
+import { SafePipe } from '../../core/safe/safe.service';
 
 @NgModule({
-  declarations: [SettingsComponent, PerfilComponent, UserComponent, DatosComponent, TutoresComponent, ContrasenaComponent, ActivacionComponent, VincularComponent],
+  declarations: [SettingsComponent, PerfilComponent, UserComponent, DatosComponent, TutoresComponent, ContrasenaComponent, ActivacionComponent, VincularComponent, SafePipe],
   imports: [CommonModule, SharedModule, PerfilRoutingModule, MaterialModule, DirectivesModule],
-  providers: [UserManagementService]
+  providers: [UserManagementService, PerfilService]
 })
 export class PerfilModule { }

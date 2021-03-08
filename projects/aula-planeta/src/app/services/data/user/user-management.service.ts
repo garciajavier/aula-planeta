@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { take, takeUntil, map } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
 import { UserDataService } from './user-data.service';
 import { User } from '../../../shared/models/user.model';
@@ -49,13 +49,15 @@ export class UserManagementService implements OnDestroy {
       });
   }
 
-  updateUser(user: User) {
-    this.userDataService.updateUser(user).pipe(
+  updateUser(user: User): Observable<any> {
+    return this.userDataService.updateUser(user).pipe(
       take(1),
-      takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.getUsers();
-      });
+      takeUntil(this.destroy$),
+      map(() => {
+        this.getUsers()
+      })
+
+    );
   }
 
   deleteUser(user: User) {

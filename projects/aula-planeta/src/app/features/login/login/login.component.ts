@@ -76,8 +76,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         .pipe(take(1), takeUntil(this.destroy$))
         .subscribe(() => {
           this.router.navigateByUrl('/');
-        }, error => {
-          alert(JSON.stringify(error))
         });
     } else {
       this.authenticationService
@@ -87,8 +85,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             this.router.navigateByUrl('/');
           }, 1000);
-        }, error => {
-          alert(JSON.stringify(error))
         });
 
     }

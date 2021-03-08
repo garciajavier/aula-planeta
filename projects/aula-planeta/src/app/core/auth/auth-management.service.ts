@@ -81,6 +81,11 @@ export class AuthManagementService implements OnDestroy {
                 _id: '603f54851225b56b007d726b',
                 desc: 'Profesor',
                 name: 'PROFESOR_ROLE'
+              },
+              {
+                _id: '6042017e1225b56b007d726e',
+                desc: 'Administrador',
+                name: 'ADMIN_ROLE'
               }
             ];
       });
@@ -176,7 +181,7 @@ export class AuthManagementService implements OnDestroy {
   refreshToken() {
     return this.authDataService.refreshToken().pipe(
       map((user) => {
-        this.currentUserNext(user);
+        this.currentUserNext(user.user);
         // this.startRefreshTokenTimer();
         return user;
       })

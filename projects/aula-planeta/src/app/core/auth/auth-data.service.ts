@@ -25,7 +25,7 @@ export class AuthDataService {
   }
 
   public refreshToken() {
-    return this.http.post<any>(`${environment.apiUrl}/login/refresh`, {}, { withCredentials: true });
+    return this.http.get<any>(`${environment.apiUrl}/login/refresh`, {});
   }
 
   /**

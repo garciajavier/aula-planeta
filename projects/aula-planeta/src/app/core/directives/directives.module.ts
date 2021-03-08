@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NumbersOnlyDirective } from './numbers-only/numbers-only.directive';
 import { UppercaseDirective } from './uppercase/uppercase.directive';
 import { PermissionDirective } from './permission/permission.directive';
+import { DropZoneDirective } from './dropZone/drop-zone.directive';
+
 
 @NgModule({
   imports: [
@@ -11,11 +13,13 @@ import { PermissionDirective } from './permission/permission.directive';
   declarations: [
     NumbersOnlyDirective,
     UppercaseDirective,
-    PermissionDirective
+    PermissionDirective,
+    DropZoneDirective,
   ],
   exports: [
     NumbersOnlyDirective,
     UppercaseDirective,
+    DropZoneDirective,
     PermissionDirective
   ]
 })

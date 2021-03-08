@@ -1,17 +1,18 @@
-<div class="container">
+<div class="mt-3 ml-3">
+    <h1 class="ml-5" rtl class="main-heading">
 
-    <h1 rtl class="main-heading">{{ 'aula-planeta.menu.mis-materias' | translate }}</h1>
+        {{ 'aula-planeta.menu.mi-perfil' | translate }}</h1>
 
     <nav mat-tab-nav-bar class="d-none d-sm-flex" role="tab">
-        <a mat-tab-link *ngFor="let e of tabs" [routerLink]="e.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="e.auth">
-        {{e.label | translate}}
+        <a mat-tab-link *ngFor="let tab of tabs" [routerLink]="tab.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="tab.auth">
+        {{tab.label | translate}}
       </a>
     </nav>
 
     <nav class="nav-responsive d-sm-none d-flex justify-content-center" role="navigation">
-        <mat-select [placeholder]="'aula-planeta.perfil.title' | translate" [value]="'todos'" panelClass="cdkSelect">
-            <mat-option *ngFor="let e of tabs" [value]="e" [routerLink]="e.link" [disabled]="e.auth">
-                {{e.label | translate}}
+        <mat-select [placeholder]="'aula-planeta.perfil.title' | translate" [value]="'datos'" panelClass="cdkSelect">
+            <mat-option *ngFor="let tab of tabs" [value]="tab" [routerLink]="tab.link" [disabled]="tab.auth">
+                {{tab.label | translate}}
             </mat-option>
         </mat-select>
     </nav>

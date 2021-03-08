@@ -1,1 +1,81 @@
-<p>datos works!</p>
+<form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
+                    <mat-error *ngIf="form.get('firstName').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('firstName').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('firstName').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
+                    <mat-error *ngIf="form.get('lastName').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('lastName').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('lastName').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.email' | translate) + '*'" formControlName="email" />
+                    <mat-error *ngIf="form.get('email').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('email').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-2 p-0">
+                <div class="fileupload" (dropZone)="onDrop($event)" (click)="fileField.click()">
+                    <span class="ddinfo">Choose a file or drag here</span>
+                    <input type="file" name="img" #fileField (change)="onDrop($event.target.files)" hidden multiple>
+                    <button role="button" type="reset" mat-raised-button color="primary" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
+                </div>
+            </div>
+
+            <div class="col-md-2  p-0">
+                <div class="profile">
+                    <img [src]="form.get('img').value | safe:'url'" alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </fieldset>
+
+    <div class="terminos">
+        <p>EDITORIAL PLANETA, S.A.U. ("aulaPlaneta"), tratará sus datos personales para tramitar su alta en la plataforma aulaPlaneta y que pueda disponer de sus servicios, así como para remitirle periódicamente la Newsletter de aulaPlaneta.</p>
+        <p>Ud. podrá ejercer los derechos de acceso, supresión, rectificación, oposición, limitación y portabilidad, mediante carta a EDITORIAL PLANETA, S.A.U. ("aulaPlaneta"), Avda. Diagonal 662-664, 08034 Barcelona o remitiendo un email a atencionalcliente@planeta.es.
+            Asimismo, cuando lo considere oportuno podrá presentar una reclamación ante la Agencia Española de protección de datos.</p>
+        <mat-checkbox id="terminos" type="checkbox" id="cb" ngControl="cb" formControlName="terminos" required>Declaro leídas y aceptadas las condiciones</mat-checkbox>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="acciones">
+        <button role="button" type="reset" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
+        <button role="button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid"> {{'aula-planeta.examples.simple-state-management.form.edit.submit' | translate}}
+            </button>
+    </div>
+</form>

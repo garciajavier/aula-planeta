@@ -19,14 +19,11 @@ export class PerfilComponent implements OnInit, OnDestroy {
 
   constructor(
     private translateService: TranslateService,
-    // private settingsService: SettingsService,
     private authManagementService: AuthManagementService
   ) { }
 
   ngOnInit(): void {
-    // this.settingsService.settings$.pipe(
-    //   takeUntil(this.destroy$))
-    //   .subscribe(({ language }) => this.translateService.use(language));
+
     this.tabs = [
       {
         link: 'datos',

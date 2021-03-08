@@ -53,7 +53,8 @@ export class UserComponent implements OnInit {
     if (this.userForm.valid) {
       const data = this.userForm.getRawValue();
       if (data.uuid && data.uuid.length) {
-        this.userManagementService.updateUser(data);
+        delete data.password;
+        this.userManagementService.updateUser(data).subscribe();
       } else {
         this.userManagementService.createUser({ ...data });
       }

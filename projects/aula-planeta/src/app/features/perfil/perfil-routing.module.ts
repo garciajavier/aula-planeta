@@ -12,6 +12,11 @@ import { VincularComponent } from './components/vincular/vincular.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: '/perfil/datos'
+  },
+  {
+    path: '',
     component: PerfilComponent,
     data: { title: 'aula-planeta.menu.perfil' },
     children: [
