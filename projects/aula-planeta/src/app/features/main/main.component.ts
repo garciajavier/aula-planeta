@@ -54,7 +54,6 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe((user) => {
         this.user = user;
-        console.log(this.user)
       });
   }
 
@@ -71,7 +70,6 @@ export class MainComponent implements OnInit, OnDestroy {
   toggleSidenav(sidenav) {
     sidenav.toggle()
     this.sideconf.open = !this.sideconf.open;
-    console.log(this.sideconf)
   }
 
   toggleMenu(val) {

@@ -104,14 +104,12 @@
         text-align: center;
         position: relative;
         bottom: 0;
-        // width: 100%;
         min-height: em(64);
         transition-duration: 400ms;
         transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
         transition-property: margin-left;
 
         &.shorten {
-            // width: calc(100% - #{em(200)});
             margin-left: em(200);
         }
 
