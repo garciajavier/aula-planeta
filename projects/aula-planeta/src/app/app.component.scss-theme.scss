@@ -39,6 +39,12 @@
       border-right: 0;
     }
 
+    .secondaryMenu {
+      a {
+        font-weight: 400;
+      }
+    }
+
     .mat-list-item {
       color: mat-color($primary) !important;
       font-weight: bold;
@@ -52,6 +58,11 @@
         border-right: em(4) solid mat-color($primary);
       }
     }
+  }
+
+  mat-divider {
+    border-top-color: mat-color($primary) !important;
+    opacity: .6;
   }
 
   footer {

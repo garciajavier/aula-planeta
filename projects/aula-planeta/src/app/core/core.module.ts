@@ -25,7 +25,7 @@ import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor
 import { LoadingInterceptor } from './http-interceptors/loading.interceptor';
 import { NotificationService } from './notifications/notification.service';
 import { MatButtonModule } from '@angular/material/button';
-import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle, faSearch, faQuestionCircle, faChalkboardTeacher, faNewspaper, faUsers, faBook, faHome, faCheckCircle, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faMediumM, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { JwtInterceptor } from './http-interceptors/jwt.interceptor';
 import { AuthManagementService } from './auth/auth-management.service';
@@ -177,6 +177,15 @@ export class CoreModule {
       faPowerOff,
       faUserCircle,
       faPlayCircle,
+      faSearch,
+      faQuestionCircle,
+      faChalkboardTeacher,
+      faNewspaper,
+      faUsers,
+      faBook,
+      faHome,
+      faCheckCircle,
+      faHourglassHalf,
       faGithub,
       faMediumM,
       faTwitter,

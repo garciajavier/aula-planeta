@@ -18,7 +18,7 @@
                 </div>
           
                 <div>
-                    <button id="toolbarUserMenu" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu" (menuOpened)="toggleMenu(true)" (menuClosed)="toggleMenu(false)">
+                    <button id="toolbarUserMenu"  class="d-flex" role="button" aria-label="Menú de usuario" mat-button [matMenuTriggerFor]="toolbarUserMenu" (menuOpened)="toggleMenu(true)" (menuClosed)="toggleMenu(false)">
                         <div class="avatar" [ngClass]="{'border': !user.img}">
                             <img *ngIf="user.img" [src]="user.img" alt="Profile Avatar" loading="eager"/>
                             <span *ngIf="!user.img">
@@ -49,11 +49,25 @@
         </header>
 
         <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
-
             <mat-sidenav-container role="main">
                 <mat-sidenav #sidenav mode="side" role="navigation">
-                    <mat-nav-list>
+                    <mat-nav-list class="primaryMenu">
                         <a mat-list-item *ngFor="let item of navigationSideMenu" [routerLink]="[item.link]" routerLinkActive="active">
+                            <fa-icon [icon]="item.icon"></fa-icon>
+                            {{item.label | translate}}
+                        </a>
+                        <!-- <div *ngIf="item.submenu">
+                            <a mat-list-item *ngFor="let subItem of item.submenu" [routerLink]="[subItem.link]" routerLinkActive="active">
+                                - {{subItem.label | translate}}
+                            </a>
+                        </div> -->
+                    </mat-nav-list>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-nav-list class="secondaryMenu">
+                        <a mat-list-item *ngFor="let item of secondaryMenu" [routerLink]="[item.link]" routerLinkActive="active">
+                            <fa-icon class="d-flex" [icon]="item.icon"></fa-icon>
                             {{item.label | translate}}
                         </a>
                     </mat-nav-list>

@@ -25,8 +25,105 @@ export class MainComponent implements OnInit, OnDestroy {
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
-  navigationSideMenu = [...this.navigation, { link: 'settings', label: 'aula-planeta.menu.settings' }];
+  // navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
+  navigationSideMenu = null;
+  teacherMenu = [
+    {
+      icon: ['fas','book'],
+      link: 'examples',
+      label: 'aula-planeta.menu.subjects',
+      submenu: null
+    },
+    {
+      icon: ['fas','users'],
+      link: 'settings',
+      label: 'aula-planeta.menu.evaluation',
+      submenu: [
+        {
+          link: 'settings',
+          label: 'aula-planeta.menu.homework',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.menu.student-work',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.menu.student-management',
+          submenu: null
+        }
+      ]
+    }
+  ]
+
+  studentMenu = [
+    {
+      icon: ['fas','home'],
+      link: '/',
+      label: 'aula-planeta.student-menu.home',
+      submenu: null
+    },
+    {
+      icon: ['fas','book'],
+      link: 'examples',
+      label: 'aula-planeta.student-menu.my-work',
+      submenu: [
+        {
+          link: 'settings',
+          label: 'aula-planeta.student-menu.homework',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.student-menu.regions-works',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.menu.student-management',
+          submenu: null
+        }
+      ]
+    },
+    {
+      icon: ['fas', 'check-circle'],
+      link: '/',
+      label: 'aula-planeta.student-menu.notes',
+      submenu: null
+    },
+    {
+      icon: ['fas', 'hourglass-half'],
+      link: '/',
+      label: 'aula-planeta.student-menu.previous-courses',
+      submenu: null
+    }
+  ]
+
+  secondaryMenu = [
+    {
+      icon: ['fas','newspaper'],
+      link: '#',
+      label: 'aula-planeta.other-menu.inquiry-environment'
+    },
+    {
+      icon: ['fas','search'],
+      link: '#',
+      label: 'aula-planeta.other-menu.search'
+    },
+    {
+      icon: ['fas','question-circle'],
+      link: '#',
+      label: 'aula-planeta.other-menu.help'
+    },
+    {
+      icon: ['fas','chalkboard-teacher'],
+      link: '#',
+      label: 'aula-planeta.other-menu.teaching-material'
+    }
+  ]
+
   isScrolling = false;
 
   sideconf = {
@@ -54,6 +151,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(take(1), takeUntil(this.destroy$))
       .subscribe((user) => {
         this.user = user;
+        this.navigationSideMenu = this.user.role.some(e => e.name === '"ALUMNO_ROLE"') ? this.studentMenu : this.teacherMenu;
       });
   }
 

@@ -24,6 +24,10 @@
             object-fit: cover;
             max-height: em(35);
         }
+
+        span {
+            text-transform: uppercase;
+        }
     }
 
     #toolbarUserMenu {
@@ -37,9 +41,9 @@
 
         .avatar {
             display: inline-block;
-            width: em(35);
-            height: em(35);
-            line-height: em(35);
+            width: em(34);
+            height: em(34);
+            line-height: 1.8;
             text-align: center;
             border-radius: 50%;
             margin-right: em(10);
@@ -59,7 +63,6 @@
             span {
                 display: inline-block;
                 vertical-align: middle;
-                line-height: normal;
             }
         }
     }
@@ -158,5 +161,42 @@ mat-sidenav-container {
         height: calc(100vh - #{em(64)});
         top: em(64);
         width: em(200);
+        padding-top: em(5);
+
+        ::ng-deep .mat-list-item-content {
+            padding: 0 em(8);
+        }
+
+        .mat-list-item {
+            min-height: em(48);
+            padding-bottom: em(5);
+            padding-top: em(5);
+            height: auto;
+            display: flex;
+        }
+
+        .primaryMenu {
+            margin-bottom: em(10);
+
+            ::ng-deep svg {
+                font-size: em(28);
+                width: em(20);
+                margin-right: em(5);
+            }
+        }
+
+        .secondaryMenu {
+            a {
+                font-size: em(14);
+                margin-bottom: 0;
+
+                ::ng-deep svg {
+                    font-size: em(18);
+                    width: em(20);
+                    height: auto;
+                    margin-right: em(10);
+                }
+            }
+        }
     }
 }
