@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
 import { PerfilService } from '../../services/perfil.service';
+import { environment } from '../../../../../environments/environment';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { PerfilService } from '../../services/perfil.service';
 })
 export class DatosComponent implements OnInit, OnDestroy {
 
-  file = '';
+  environment = environment;
+
+  file;
   img = '';
   fileObj = '';
   msg: string;
@@ -59,8 +62,8 @@ export class DatosComponent implements OnInit, OnDestroy {
       currentUser => {
         if (currentUser) {
           const roles = currentUser.role.map(role => role._id);
-          this.img = currentUser.img;
-          this.form.patchValue({ ...currentUser, role: roles });
+          this.img = (currentUser.google) ? currentUser.img : `${environment.apiUrl}/upload/user/${currentUser.img}`;
+          this.form.patchValue({ ...currentUser, img: this.img, role: roles });
         }
       }
     );
@@ -75,6 +78,7 @@ export class DatosComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       const data = this.form.getRawValue();
       delete data.terminos;
+      data.img = this.file;
       this.perfilService.updateCurrentUser(data);
     }
   }
@@ -85,8 +89,8 @@ export class DatosComponent implements OnInit, OnDestroy {
 
   onDrop(e) {
 
-    const file = (e as HTMLInputElement);
-    const url = URL.createObjectURL(file);
+    this.file = (e as HTMLInputElement);
+    const url = URL.createObjectURL(this.file);
 
     // Set files form control
     this.form.patchValue({

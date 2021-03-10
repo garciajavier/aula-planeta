@@ -60,6 +60,12 @@ export class UserManagementService implements OnDestroy {
     );
   }
 
+  uploadImgUser(user: User, imagen: any): Observable<any> {
+    return this.userDataService.uploadImgUser(user, imagen).pipe(
+      take(1),
+      takeUntil(this.destroy$));
+  }
+
   deleteUser(user: User) {
     this.userDataService.deleteUser(user).pipe(
       take(1),

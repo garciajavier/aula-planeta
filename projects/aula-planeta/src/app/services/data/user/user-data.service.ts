@@ -27,5 +27,10 @@ export class UserDataService {
   public deleteUser(user: User): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/users/${user.uuid}`);
   }
+  public uploadImgUser(user: User, imagen: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('imagen', imagen);
+    return this.http.put<any>(`${environment.apiUrl}/upload/user/${user.uuid}`, formData);
+  }
 
 }

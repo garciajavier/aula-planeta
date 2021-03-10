@@ -1,3 +1,4 @@
+import { C } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { AuthManagementService } from '../../../core/core.module';
 import { UserManagementService } from '../../../services/data/user/user-management.service';
@@ -15,11 +16,32 @@ export class PerfilService {
   }
 
   updateCurrentUser(user: User) {
-    this.userManagementServiceUser.updateUser(user).subscribe(
-      user => {
-        this.authManagementService.refreshToken().subscribe();
-      }
-    );
+    if (this.authManagementService.currentUser.google) {
+      this.userManagementServiceUser.updateUser(user).subscribe(
+        user => {
+          this.authManagementService.refreshToken().subscribe();
+        }
+      );
+    } else {
 
+      if (user.img) {
+        this.userManagementServiceUser.uploadImgUser(user, user.img).subscribe(res => {
+          user.img = res.nombreArchivo;
+          this.userManagementServiceUser.updateUser(user).subscribe(
+            user => {
+              this.authManagementService.refreshToken().subscribe();
+            }
+          );
+        })
+      } else {
+        this.userManagementServiceUser.updateUser(user).subscribe(
+          user => {
+            this.authManagementService.refreshToken().subscribe();
+          }
+        );
+
+      }
+
+    }
   }
 }
