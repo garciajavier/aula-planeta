@@ -7,6 +7,7 @@ import { take, takeUntil, map } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
 import { UserDataService } from './user-data.service';
 import { User } from '../../../shared/models/user.model';
+import { Tutor } from '../../../shared/models/tutor.model';
 
 @Injectable()
 export class UserManagementService implements OnDestroy {
@@ -51,6 +52,16 @@ export class UserManagementService implements OnDestroy {
 
   updateUser(user: User): Observable<any> {
     return this.userDataService.updateUser(user).pipe(
+      take(1),
+      takeUntil(this.destroy$),
+      map(() => {
+        this.getUsers()
+      })
+
+    );
+  }
+  updateTutorUser(user: User, tutor: Tutor): Observable<any> {
+    return this.userDataService.updateTutorUser(user, tutor).pipe(
       take(1),
       takeUntil(this.destroy$),
       map(() => {

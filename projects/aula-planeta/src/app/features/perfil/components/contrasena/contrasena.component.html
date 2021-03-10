@@ -1,1 +1,56 @@
-<p>contrasena works!</p>
+<h3 class="titulo">{{'aula-planeta.perfil.tutores.subtitulo' | translate}}</h3>
+
+<form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.perfil.contrasena.old' | translate) + '*'" formControlName="oldPassword" />
+                    <mat-error *ngIf="form.get('oldPassword').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('oldPassword').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.perfil.contrasena.new' | translate) + '*'" formControlName="newPassword" />
+                    <mat-error *ngIf="form.get('newPassword').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('newPassword').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.perfil.contrasena.confirm' | translate) + '*'" formControlName="repeatNewPassword" />
+                    <mat-error *ngIf="form.errors?.mismatch && (form.controls['repeatNewPassword'].dirty || form.controls['repeatNewPassword'].touched)">
+                        Las contraseñas no
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+
+    </fieldset>
+
+    <mat-divider></mat-divider>
+
+    <div class="acciones">
+        <button role="button" type="reset" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
+        <button role="button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid"> {{'aula-planeta.examples.form.save' | translate}}</button>
+    </div>
+</form>

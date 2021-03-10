@@ -1,3 +1,5 @@
+<h3 class="titulo">{{'aula-planeta.perfil.datos.subtitulo' | translate}}</h3>
+
 <form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <fieldset>
 
@@ -46,12 +48,13 @@
 
 
         <div class="row">
-
             <div class="col-md-2 p-0" *ngIf="!authManagementService.currentUser.google">
                 <div class="fileupload" (dropZone)="onDrop($event)" (click)="fileField.click()">
-                    <span class="ddinfo">Choose a file or drag here</span>
-                    <input type="file" name="img" #fileField (change)="onDrop($event.target.files)" hidden multiple>
-                    <button role="button" type="reset" mat-raised-button color="primary" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
+                    <div class="ddinfo">
+                        <p>{{'aula-planeta.perfil.datos.dropzone' | translate}}</p>
+                        <input type="file" name="img" #fileField (change)="onDrop($event.target.files[0])" hidden multiple>
+                        <button role="button" mat-raised-button color="primary" mat-button>{{'aula-planeta.perfil.datos.select' | translate}}</button>
+                    </div>
                 </div>
             </div>
 
@@ -66,16 +69,15 @@
     </fieldset>
 
     <div class="terminos">
-        <p>EDITORIAL PLANETA, S.A.U. ("aulaPlaneta"), tratará sus datos personales para tramitar su alta en la plataforma aulaPlaneta y que pueda disponer de sus servicios, así como para remitirle periódicamente la Newsletter de aulaPlaneta.</p>
-        <p>Ud. podrá ejercer los derechos de acceso, supresión, rectificación, oposición, limitación y portabilidad, mediante carta a EDITORIAL PLANETA, S.A.U. ("aulaPlaneta"), Avda. Diagonal 662-664, 08034 Barcelona o remitiendo un email a atencionalcliente@planeta.es.
-            Asimismo, cuando lo considere oportuno podrá presentar una reclamación ante la Agencia Española de protección de datos.</p>
-        <mat-checkbox id="terminos" type="checkbox" id="cb" ngControl="cb" formControlName="terminos" required>Declaro leídas y aceptadas las condiciones</mat-checkbox>
+        <p>{{'aula-planeta.perfil.datos.condiciones1' | translate}}</p>
+        <p>{{'aula-planeta.perfil.datos.condiciones1' | translate}}</p>
+
+        <mat-checkbox id="terminos" type="checkbox" id="cb" ngControl="cb" formControlName="terminos" required>{{'aula-planeta.perfil.datos.condiciones3' | translate}}</mat-checkbox>
     </div>
     <mat-divider></mat-divider>
 
     <div class="acciones">
         <button role="button" type="reset" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
-        <button role="button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid"> {{'aula-planeta.examples.simple-state-management.form.edit.submit' | translate}}
-            </button>
+        <button role="button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid"> {{'aula-planeta.examples.form.save' | translate}}</button>
     </div>
 </form>

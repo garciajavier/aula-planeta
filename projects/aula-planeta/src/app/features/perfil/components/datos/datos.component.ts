@@ -79,12 +79,8 @@ export class DatosComponent implements OnInit, OnDestroy {
       const data = this.form.getRawValue();
       delete data.terminos;
       data.img = this.file;
-      this.perfilService.updateCurrentUser(data);
+      this.perfilService.updateDatosCurrentUser(data);
     }
-  }
-
-  trackByUserId(index: number, user: User): string {
-    return user.uuid;
   }
 
   onDrop(e) {

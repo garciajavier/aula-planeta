@@ -28,6 +28,10 @@ export class AuthDataService {
     return this.http.get<any>(`${environment.apiUrl}/login/refresh`, {});
   }
 
+  public changePassword(oldPassword: string, newPassword) {
+    return this.http.post<any>(`${environment.apiUrl}/renewPassword`, { newPassword, oldPassword });
+  }
+
   /**
    * Get user
    * @param User User to register

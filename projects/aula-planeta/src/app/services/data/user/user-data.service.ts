@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { LocalCacheService } from '../../../core/load-cache/load-cache.service';
 import { map } from 'rxjs/operators';
 import { User } from '../../../shared/models/user.model';
+import { Tutor } from '../../../shared/models/tutor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class UserDataService {
   }
   public updateUser(user: User): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/users/${user.uuid}`, user);
+  }
+
+  public updateTutorUser(user: User, tutor: Tutor): Observable<any> {
+    return this.http.put<any>(`${environment.apiUrl}/users/tutor/${user.uuid}`, user);
   }
   public deleteUser(user: User): Observable<any> {
     return this.http.delete<any>(`${environment.apiUrl}/users/${user.uuid}`);

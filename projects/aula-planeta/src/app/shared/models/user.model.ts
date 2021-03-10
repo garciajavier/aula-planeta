@@ -1,6 +1,5 @@
 import { Role } from './role.model';
-import { environment } from '../../../environments/environment.prod';
-const apiUrl = environment.apiUrl;
+import { Tutor } from './tutor.model';
 
 export class User {
   constructor(
@@ -13,7 +12,7 @@ export class User {
     public img?: string,
     public google?: boolean,
     public role?: Role[],
-    // public role?: Role,
+    public tutor?: Tutor
   ) {
     this.username = `${firstName} ${lastName}`;
   }

@@ -188,6 +188,10 @@ export class AuthManagementService implements OnDestroy {
     );
   }
 
+  changePassword(oldPassword, newPassword) {
+    return this.authDataService.changePassword(oldPassword, newPassword);
+  }
+
 
   /**
    * Check if user has roles

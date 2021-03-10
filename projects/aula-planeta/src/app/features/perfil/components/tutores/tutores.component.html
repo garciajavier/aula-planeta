@@ -1,1 +1,62 @@
-<p>tutores works!</p>
+<h3 class="titulo">{{'aula-planeta.perfil.tutores.subtitulo' | translate}}</h3>
+
+<form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.name' | translate) + '*'" formControlName="firstName" />
+                    <mat-error *ngIf="form.get('firstName').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('firstName').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('firstName').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.surname' | translate) + '*'" formControlName="lastName" />
+                    <mat-error *ngIf="form.get('lastName').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('lastName').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('lastName').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput [placeholder]="('aula-planeta.examples.simple-state-management.email' | translate) + '*'" formControlName="email" />
+                    <mat-error *ngIf="form.get('email').hasError('minlength')">
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('email').errors.minlength.requiredLength} }}
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('required')">
+                        {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+
+    </fieldset>
+
+    <div class="terminos">
+        <mat-checkbox id="terminos" type="checkbox" id="cb" ngControl="cb" formControlName="terminos" required>{{'aula-planeta.perfil.datos.condiciones3' | translate}}</mat-checkbox>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="acciones">
+        <button role="button" type="reset" mat-button>{{'aula-planeta.examples.form.reset' | translate}}</button>
+        <button role="button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid"> {{'aula-planeta.examples.form.save' | translate}}</button>
+    </div>
+</form>
