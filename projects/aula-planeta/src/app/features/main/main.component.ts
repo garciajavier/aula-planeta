@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { User } from '../../shared/models/user.model';
 import { take, takeUntil } from 'rxjs/operators';
 import { SocialAuthService } from 'angularx-social-login';
+import { callbackify } from 'util';
 
 @Component({
   selector: 'aula-planeta-main',
@@ -25,13 +26,116 @@ export class MainComponent implements OnInit, OnDestroy {
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [{ link: 'inicio', label: 'aula-planeta.menu.mis-materias' }];
-  navigationSideMenu = [...this.navigation];
+  navigationSideMenu = null;
+  user: User;
+  imgProfile: string;
+
+  //TODO: RouterLinkActive in submenu.
+  teacherMenu = [
+    {
+      icon: ['fas', 'book'],
+      link: '',
+      label: 'aula-planeta.menu.subjects',
+      submenu: null
+    },
+    {
+      icon: ['fas', 'users'],
+      link: 'perfil',
+      label: 'aula-planeta.menu.evaluation',
+      submenu: [
+        {
+          link: '/',
+          label: 'aula-planeta.menu.homework',
+          submenu: null
+        },
+        {
+          link: '#',
+          label: 'aula-planeta.menu.student-work',
+          submenu: null
+        },
+        {
+          link: '#',
+          label: 'aula-planeta.menu.student-management',
+          submenu: null
+        }
+      ]
+    }
+  ]
+
+  studentMenu = [
+    {
+      icon: ['fas', 'home'],
+      link: '/',
+      label: 'aula-planeta.student-menu.home',
+      submenu: null
+    },
+    {
+      icon: ['fas', 'book'],
+      link: 'examples',
+      label: 'aula-planeta.student-menu.my-work',
+      submenu: [
+        {
+          link: 'settings',
+          label: 'aula-planeta.student-menu.homework',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.student-menu.regions-works',
+          submenu: null
+        },
+        {
+          link: 'settings',
+          label: 'aula-planeta.menu.student-management',
+          submenu: null
+        }
+      ]
+    },
+    {
+      icon: ['fas', 'check-circle'],
+      link: '/',
+      label: 'aula-planeta.student-menu.notes',
+      submenu: null
+    },
+    {
+      icon: ['fas', 'hourglass-half'],
+      link: '/',
+      label: 'aula-planeta.student-menu.previous-courses',
+      submenu: null
+    }
+  ]
+
+  secondaryMenu = [
+    {
+      icon: ['fas', 'newspaper'],
+      link: '#',
+      label: 'aula-planeta.other-menu.inquiry-environment'
+    },
+    {
+      icon: ['fas', 'search'],
+      link: '#',
+      label: 'aula-planeta.other-menu.search'
+    },
+    {
+      icon: ['fas', 'question-circle'],
+      link: '#',
+      label: 'aula-planeta.other-menu.help'
+    },
+    {
+      icon: ['fas', 'chalkboard-teacher'],
+      link: '#',
+      label: 'aula-planeta.other-menu.teaching-material'
+    }
+  ]
+
   isScrolling = false;
 
   sideconf = {
     fixed: false,
-    open: true
+    open: false
   };
+
+  userMenu = false;
 
   settings$: Observable<Settings>;
 
@@ -45,6 +149,13 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.authManagementService.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        this.user = user;
+        this.imgProfile = (this.user.google) ? this.user.img : `${env.apiUrl}/upload/user/${this.user.img}`;
+        this.navigationSideMenu = this.user.role.some(e => e.name === '"ALUMNO_ROLE"') ? this.studentMenu : this.teacherMenu;
+      });
   }
 
   onLogoutClick() {
@@ -55,6 +166,15 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  toggleSidenav(sidenav) {
+    sidenav.toggle()
+    this.sideconf.open = !this.sideconf.open;
+  }
+
+  toggleMenu(val) {
+    this.userMenu = val;
   }
 
   @HostListener('window:scroll', ['$event'])

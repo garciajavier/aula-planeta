@@ -13,8 +13,58 @@
     z-index: 10;
     transition: all .3s ease-in-out;
 
-    .spacer {
-        flex: 1 1 auto;
+    .logo-container {
+        width: em(160);
+        height: em(28);
+        display: block;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: em(35);
+        }
+
+        span {
+            text-transform: uppercase;
+        }
+    }
+
+    #toolbarUserMenu {
+        mat-icon {
+            transition: all .3s ease-in-out;
+
+            &.open {
+                transform: rotate(180deg);
+            }
+        }
+
+        .avatar {
+            display: inline-block;
+            width: em(34);
+            height: em(34);
+            line-height: 1.8;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: em(10);
+
+            &.border {
+                border-width: em(2);
+                border-style: solid;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                vertical-align: initial;
+            }
+
+            span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
     }
 
     mat-select {
@@ -51,74 +101,39 @@
         }
     }
 
-    .footer {
+    footer {
         flex: 0 0 auto;
         padding: 0 em(15);
         text-align: center;
         position: relative;
         bottom: 0;
-        width: 100%;
+        min-height: em(64);
+        transition-duration: 400ms;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition-property: margin-left;
 
-        .row {
-            padding: em(10) 0;
+        &.shorten {
+            margin-left: em(200);
+        }
 
-            .links {
-                a {
-                    transition: padding 0.5s;
-                    display: inline-block;
-                    padding: em(20) em(5);
+        div {
+            text-align: left;
 
-                    &:hover {
-                        text-decoration: none;
-                    }
-
-                    fa-icon {
-                        font-size: em(30);
-                        width: em(35);
-                    }
-
-                    span {
-                        display: inline-block;
-                        width: em(75);
-                        padding: 0 0 0 em(3);
-                        overflow: hidden;
-                        text-align: left;
-                        white-space: nowrap;
-                        transition: width 0.5s;
-                    }
-                }
-
-                @media (min-width: map-get($grid-breakpoints, lg)) {
-                    a {
-                        padding: em(20) em(10);
-                    }
-                }
-
-                @media (max-width: map-get($grid-breakpoints, md)) {
-                    a {
-                        padding: em(20);
-
-                        span {
-                            width: 0;
-                            padding: 0;
-                        }
-                    }
-                }
-
-                @media (max-width: map-get($grid-breakpoints, sm)) {
-                    a {
-                        padding: em(20) em(5);
-                    }
-                }
+            h3 {
+                margin-bottom: 0;
             }
 
-            @media (min-width: map-get($grid-breakpoints, sm)) {
-                .signature {
-                    position: relative;
+            ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
 
-                    a {
-                        position: absolute;
-                        right: em(15);
+                li {
+                    margin-right: em(15);
+
+                    &:last-child {
+                        margin-right: 0;
                     }
                 }
             }
@@ -133,7 +148,7 @@
 }
 
 mat-sidenav-container {
-    min-height: calc(100vh - #{em(213)});
+    min-height: calc(100vh - #{em(128)});
     width: 100%;
     padding-bottom: em(50);
 
@@ -146,5 +161,54 @@ mat-sidenav-container {
         height: calc(100vh - #{em(64)});
         top: em(64);
         width: em(200);
+        padding-top: em(5);
+
+        ::ng-deep .mat-list-item-content {
+            padding: 0 em(8);
+        }
+
+        .mat-list-item {
+            min-height: em(48);
+            padding-bottom: em(5);
+            padding-top: em(5);
+            height: auto;
+            display: flex;
+            align-items: center;
+            white-space: initial;
+        }
+
+        .primaryMenu {
+            margin-bottom: em(10);
+
+            .submenu-item {
+                font-size: em(14);
+                padding: 0 0 0 em(50);
+                min-height: em(38);
+
+                &:before {
+                    content: "-";
+                }
+            }
+
+            ::ng-deep svg {
+                font-size: em(28);
+                width: em(20);
+                margin-right: em(5);
+            }
+        }
+
+        .secondaryMenu {
+            a {
+                font-size: em(14);
+                margin-bottom: 0;
+
+                ::ng-deep svg {
+                    font-size: em(18);
+                    width: em(20);
+                    height: auto;
+                    margin-right: em(10);
+                }
+            }
+        }
     }
 }

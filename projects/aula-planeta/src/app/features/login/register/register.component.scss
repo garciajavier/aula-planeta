@@ -3,23 +3,49 @@
 .login-theme {
   width: 100vw;
   height: 100vh;
+  background-image: url('/assets/aula-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: lighten;
+  background-color: hsla(0,0%,100%,.75);
 
-  mat-card {
-    width: em(390);
+  #register {
+    .img-container {
+      max-width: em(200);
 
-    form * {
-      margin: 0.75em 0;
+      img {
+        width: 100%;
+        height: auto;
+        border-top-left-radius: em(4);
+        border-bottom-left-radius: em(4);
+        object-fit: cover;
+      }
     }
 
-    a {
-      text-align: right;
-      cursor: pointer;
-      &:hover {
-          text-decoration: underline;
+    mat-card {
+      width: em(390);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      box-shadow: none;
+
+      mat-card-title {
+        margin-bottom: 0;
+      }
+
+      button {
+        margin-bottom: em(25);
+      }
+
+      fieldset {
+        mat-form-field {
+          margin: em(10) 0;
+        }
+
+        button {
+          margin-top: em(15);
+          margin-bottom: em(0);
+        }
       }
     }
   }
-
-
 }
-
