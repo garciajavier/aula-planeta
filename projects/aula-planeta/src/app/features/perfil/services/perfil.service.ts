@@ -4,7 +4,7 @@ import { AuthManagementService } from '../../../core/core.module';
 import { UserManagementService } from '../../../services/data/user/user-management.service';
 import { User } from '../../../shared/models/user.model';
 import { Tutor } from '../../../shared/models/tutor.model';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { OnDestroy } from '@angular/core'
 
@@ -32,6 +32,22 @@ export class PerfilService implements OnDestroy {
         take(1),
         takeUntil(this.destroy$))
       .subscribe();
+  }
+
+  activarCodigo(codigo: string) {
+    // this.userservicio.activarCodigo(codigo)
+    //   .pipe(
+    //     take(1),
+    //     takeUntil(this.destroy$))
+    //   .subscribe();
+  }
+
+  vincularCuenta(plataforma: string) {
+    // this.userservicio.vincularCuenta(plataforma)
+    //   .pipe(
+    //     take(1),
+    //     takeUntil(this.destroy$))
+    //   .subscribe();
   }
 
   updateDatosCurrentUser(user: User) {

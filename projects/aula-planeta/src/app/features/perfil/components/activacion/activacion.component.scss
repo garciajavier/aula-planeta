@@ -1,0 +1,52 @@
+@import 'functions';
+.main-heading {
+    text-transform: uppercase;
+    margin: 0 0 em(20) 0;
+}
+
+mat-card {
+    margin: 0 0 em(20) 0;
+    display: flex;
+    mat-card-header {
+        flex: 1 0 auto;
+    }
+}
+
+form {
+    margin: em(20) 0;
+    mat-form-field {
+        width: 100%;
+    }
+    button {
+        margin: em(20) em(10) 0 0;
+    }
+}
+
+.terminos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    p {
+        margin: 1em;
+        max-width: 600px;
+    }
+    .mat-checkbox {
+        margin: 2em 1em;
+    }
+}
+
+.acciones {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    button:last-of-type {
+        margin-left: 1em;
+    }
+}
+
+@media(max-width: 767px) {
+    .container {
+        width: 280px;
+        // margin-top: 20px 0 0 100px;
+    }
+}

@@ -12,7 +12,10 @@ export class User {
     public img?: string,
     public google?: boolean,
     public role?: Role[],
-    public tutor?: Tutor
+    public tutor?: Tutor,
+    public licencias?: any,
+    public centro?: string,
+    public codigoCentro?: string,
   ) {
     this.username = `${firstName} ${lastName}`;
   }

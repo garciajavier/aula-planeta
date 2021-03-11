@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/animations/route.animations';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { take, takeUntil } from 'rxjs/operators';
   styleUrls: ['./contrasena.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContrasenaComponent implements OnInit {
+export class ContrasenaComponent implements OnInit, OnDestroy {
 
 
   private destroy$: Subject<void> = new Subject<void>();
@@ -41,6 +41,7 @@ export class ContrasenaComponent implements OnInit {
     frm.controls['repeatNewPassword'].setErrors(error);
     return error;
   }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();

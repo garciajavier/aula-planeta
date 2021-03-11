@@ -1,1 +1,19 @@
-<p>vincular works!</p>
+<h3 class="titulo">{{'aula-planeta.perfil.tutores.subtitulo' | translate}}</h3>
+
+<div class="row mt-3">
+    <div class="col-md-3">
+        <button class="m-2 w-100" role="button" mat-raised-button (click)="vincular('google')">
+            <fa-icon class="pr-3" [icon]="['fab','google']"></fa-icon>
+            {{'aula-planeta.perfil.vincular.google' | translate}}
+        </button>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-3">
+        <button class="m-2 w-100" type="button" role="button" mat-raised-button (click)="vincular('microsoft')">
+            <fa-icon class="pr-3" [icon]="['fab','microsoft']"></fa-icon>
+            {{'aula-planeta.perfil.vincular.microsoft' | translate}}
+        </button>
+    </div>
+</div>
