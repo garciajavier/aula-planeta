@@ -8,7 +8,7 @@
                 <mat-form-field>
                     <input matInput [placeholder]="('aula-planeta.perfil.contrasena.old' | translate) + '*'" formControlName="oldPassword" />
                     <mat-error *ngIf="form.get('oldPassword').hasError('minlength')">
-                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate }}
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength'| translate:{minlength: form.get('oldPassword').errors.minlength.requiredLength} }}
                     </mat-error>
                     <mat-error *ngIf="form.get('oldPassword').hasError('required')">
                         {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
@@ -23,7 +23,7 @@
                 <mat-form-field>
                     <input matInput [placeholder]="('aula-planeta.perfil.contrasena.new' | translate) + '*'" formControlName="newPassword" />
                     <mat-error *ngIf="form.get('newPassword').hasError('minlength')">
-                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate }}
+                        {{'aula-planeta.examples.simple-state-management.validator.minlength' | translate:{minlength: form.get('newPassword').errors.minlength.requiredLength} }}
                     </mat-error>
                     <mat-error *ngIf="form.get('newPassword').hasError('required')">
                         {{'aula-planeta.examples.simple-state-management.validator.required' | translate}}
@@ -37,7 +37,7 @@
                 <mat-form-field>
                     <input matInput [placeholder]="('aula-planeta.perfil.contrasena.confirm' | translate) + '*'" formControlName="repeatNewPassword" />
                     <mat-error *ngIf="form.errors?.mismatch && (form.controls['repeatNewPassword'].dirty || form.controls['repeatNewPassword'].touched)">
-                        Las contraseñas no
+                        Las contraseñas no coinciden
                     </mat-error>
                 </mat-form-field>
             </div>

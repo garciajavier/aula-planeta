@@ -37,7 +37,9 @@ export class ContrasenaComponent implements OnInit {
   }
 
   passwordMatchValidator(frm: FormGroup) {
-    return frm.controls['newPassword'].value === frm.controls['repeatNewPassword'].value ? null : { 'mismatch': true };
+    const error = frm.controls['newPassword'].value === frm.controls['repeatNewPassword'].value ? null : { 'mismatch': true };
+    frm.controls['repeatNewPassword'].setErrors(error);
+    return error;
   }
   ngOnDestroy() {
     this.destroy$.next();

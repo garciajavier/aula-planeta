@@ -152,9 +152,11 @@ export class MainComponent implements OnInit, OnDestroy {
     this.authManagementService.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe((user) => {
-        this.user = user;
-        this.imgProfile = (this.user.google) ? this.user.img : `${env.apiUrl}/upload/user/${this.user.img}`;
-        this.navigationSideMenu = this.user.role.some(e => e.name === '"ALUMNO_ROLE"') ? this.studentMenu : this.teacherMenu;
+        if (user) {
+          this.user = user;
+          this.imgProfile = (this.user.google) ? this.user.img : `${env.apiUrl}/upload/user/${this.user.img}`;
+          this.navigationSideMenu = this.user.role.some(e => e.name === '"ALUMNO_ROLE"') ? this.studentMenu : this.teacherMenu;
+        }
       });
   }
 
