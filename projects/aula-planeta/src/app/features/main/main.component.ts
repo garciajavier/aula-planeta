@@ -25,8 +25,9 @@ export class MainComponent implements OnInit, OnDestroy {
   year = new Date().getFullYear();
   logo = require('../../../assets/logo_PLANETA72x72.png').default;
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
-  // navigation = [{ link: 'examples', label: 'aula-planeta.menu.examples' }];
   navigationSideMenu = null;
+  
+  //TODO: RouterLinkActive in submenu.
   teacherMenu = [
     {
       icon: ['fas','book'],
@@ -40,17 +41,17 @@ export class MainComponent implements OnInit, OnDestroy {
       label: 'aula-planeta.menu.evaluation',
       submenu: [
         {
-          link: 'settings',
+          link: '/',
           label: 'aula-planeta.menu.homework',
           submenu: null
         },
         {
-          link: 'settings',
+          link: '#',
           label: 'aula-planeta.menu.student-work',
           submenu: null
         },
         {
-          link: 'settings',
+          link: '#',
           label: 'aula-planeta.menu.student-management',
           submenu: null
         }

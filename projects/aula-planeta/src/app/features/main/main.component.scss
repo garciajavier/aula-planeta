@@ -173,10 +173,22 @@ mat-sidenav-container {
             padding-top: em(5);
             height: auto;
             display: flex;
+            align-items: center;
+            white-space: initial;
         }
 
         .primaryMenu {
             margin-bottom: em(10);
+
+            .submenu-item {
+                font-size: em(14);
+                padding: 0 0 0 em(50);
+                min-height: em(38);
+
+                &:before {
+                    content: "-";
+                }
+            }
 
             ::ng-deep svg {
                 font-size: em(28);

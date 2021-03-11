@@ -49,18 +49,22 @@
         </header>
 
         <div class="content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+            
             <mat-sidenav-container role="main">
                 <mat-sidenav #sidenav mode="side" role="navigation">
                     <mat-nav-list class="primaryMenu">
-                        <a mat-list-item *ngFor="let item of navigationSideMenu" [routerLink]="[item.link]" routerLinkActive="active">
-                            <fa-icon [icon]="item.icon"></fa-icon>
-                            {{item.label | translate}}
-                        </a>
-                        <!-- <div *ngIf="item.submenu">
-                            <a mat-list-item *ngFor="let subItem of item.submenu" [routerLink]="[subItem.link]" routerLinkActive="active">
-                                - {{subItem.label | translate}}
+                        <div *ngFor="let item of navigationSideMenu">
+                            <a mat-list-item [routerLink]="[item.link]" routerLinkActive="active">
+                                <fa-icon [icon]="item.icon"></fa-icon>
+                                {{item.label | translate}}
                             </a>
-                        </div> -->
+
+                            <ng-container *ngIf="item.submenu !== null">
+                                <a mat-list-item class="submenu-item" *ngFor="let subitem of item.submenu" [routerLink]="[subitem.link]">
+                                    {{subitem.label | translate}}
+                                </a>
+                            </ng-container>
+                        </div>
                     </mat-nav-list>
 
                     <mat-divider></mat-divider>
