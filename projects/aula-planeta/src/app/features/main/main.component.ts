@@ -125,6 +125,11 @@ export class MainComponent implements OnInit, OnDestroy {
       icon: ['fas', 'chalkboard-teacher'],
       link: '#',
       label: 'aula-planeta.other-menu.teaching-material'
+    },
+    {
+      icon: ['fas', 'window-maximize'],
+      link: 'inicio/dialogos',
+      label: 'aula-planeta.other-menu.dialogs'
     }
   ]
 

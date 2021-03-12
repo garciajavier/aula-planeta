@@ -30,6 +30,7 @@ import { BigInputComponent } from './big-input/big-input/big-input.component';
 import { BigInputActionComponent } from './big-input/big-input-action/big-input-action.component';
 import { RtlSupportDirective } from './rtl-support/rtl-support.directive';
 import { MaterialModule } from '../material/material.module';
+import { CreateNewThemeComponent } from './dialogs/create-new-theme/create-new-theme.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { MaterialModule } from '../material/material.module';
     FontAwesomeModule,
     MaterialModule
   ],
-  declarations: [BigInputComponent, BigInputActionComponent, RtlSupportDirective],
+  declarations: [BigInputComponent, BigInputActionComponent, RtlSupportDirective, CreateNewThemeComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -48,6 +49,7 @@ import { MaterialModule } from '../material/material.module';
     FontAwesomeModule,
     BigInputComponent,
     BigInputActionComponent,
+    CreateNewThemeComponent,
     RtlSupportDirective
   ]
 })

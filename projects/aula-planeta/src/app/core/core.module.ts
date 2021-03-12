@@ -17,7 +17,7 @@ import { LocalStorageService } from './local-storage/local-storage.service';
 import { HttpErrorInterceptor } from './http-interceptors/http-error.interceptor';
 import { LoadingInterceptor } from './http-interceptors/loading.interceptor';
 import { NotificationService } from './notifications/notification.service';
-import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle, faSearch, faQuestionCircle, faChalkboardTeacher, faNewspaper, faUsers, faBook, faHome, faCheckCircle, faHourglassHalf } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faBars, faRocket, faPowerOff, faUserCircle, faPlayCircle, faSearch, faQuestionCircle, faChalkboardTeacher, faNewspaper, faUsers, faBook, faHome, faCheckCircle, faHourglassHalf, faWindowMaximize } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faMediumM, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { JwtInterceptor } from './http-interceptors/jwt.interceptor';
 import { AuthManagementService } from './auth/auth-management.service';
@@ -167,6 +167,7 @@ export class CoreModule {
       faHome,
       faCheckCircle,
       faHourglassHalf,
+      faWindowMaximize,
       faGithub,
       faMediumM,
       faTwitter,
